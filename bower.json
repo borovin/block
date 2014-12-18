@@ -1,0 +1,36 @@
+{
+  "name": "block",
+  "main": "block.js",
+  "version": "0.0.1",
+  "authors": [
+    "a@borovin.com"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tools",
+    "test",
+    "tests",
+    "coverage",
+    "index.html",
+    "require.config.js",
+    "package.json",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "deepExtend": "https://borovin@bitbucket.org/borovin/deepextend.git",
+    "makeClass": "https://borovin@bitbucket.org/borovin/makeclass.git",
+    "get": "https://borovin@bitbucket.org/borovin/get.git",
+
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.1",
+    "lodash": "~2.4.1",
+    "rivets": "~0.7.1",
+    "requirejs": "~2.1.15"
+  }
+}
