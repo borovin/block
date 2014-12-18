@@ -23,9 +23,9 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "deepExtend": "https://borovin@bitbucket.org/borovin/deepextend.git",
-    "makeClass": "https://borovin@bitbucket.org/borovin/makeclass.git",
-    "get": "https://borovin@bitbucket.org/borovin/get.git",
+    "deepExtend": "https://github.com/borovin/deepExtend.git",
+    "makeClass": "https://github.com/borovin/makeClass.git",
+    "get": "https://github.com/borovin/get.git",
 
     "backbone": "~1.1.2",
     "jquery": "~2.1.1",
