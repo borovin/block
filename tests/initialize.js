@@ -19,6 +19,24 @@ define(function(require, exports, module) {
             expect(block.array).toEqual([1, 2, 3]);
         });
 
+        it('Даже если метод initialize был переопределен', function(){
+
+            var Block1 = Block.extend({
+                count: 0,
+                initialize: function(){
+                    this.count++;
+                }
+            });
+
+            var block = new Block1;
+
+            block.initialize({
+                count: 10
+            });
+
+            expect(block.count).toBe(11)
+        });
+
         it('Класс может быть проинициализирован без ключевого слова new', function(){
 
             var block = Block({
