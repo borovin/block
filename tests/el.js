@@ -2,7 +2,7 @@ define(function(require, exports, module) {
     //requirements
     var Block = require('../block');
 
-    describe('HTML - элемент блока', function(){
+    describe('HTML-элемент блока', function(){
 
         it('По умолчанию элемент блока - пустой div', function(){
 
@@ -13,7 +13,7 @@ define(function(require, exports, module) {
 
         });
 
-        it('Элемент может быть создан из строки', function(){
+        it('Элемент может быть создан из строки...', function(){
 
             var block = new Block({
                 el: '<span>text</span>'
@@ -23,7 +23,7 @@ define(function(require, exports, module) {
             expect(block.el.textContent).toEqual('text');
         });
 
-        it('Или быть ссылкой на существующий элемент', function(){
+        it('...или быть ссылкой на существующий элемент', function(){
 
             var block = new Block({
                 el: document.createElement('b')
@@ -41,12 +41,22 @@ define(function(require, exports, module) {
             expect(block.$el[0].textContent).toEqual('');
         });
 
-        it('Элемент может быть создан из template-функции', function(){
+        it('Элемент может быть создан из template-функции...', function(){
 
             var block = new Block({
                 template: function(){
                     return '<span>text</span>'
                 }
+            });
+
+            expect(block.el.tagName).toEqual('SPAN');
+            expect(block.el.textContent).toEqual('text');
+        });
+
+        it('...или из template-строки', function(){
+
+            var block = new Block({
+                template: '<span>text</span>'
             });
 
             expect(block.el.tagName).toEqual('SPAN');

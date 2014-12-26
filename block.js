@@ -59,18 +59,16 @@ define(function(require, exports, module) {
 
             var block = this;
 
-            if (typeof block.template !== 'function') {
+            if (!block.template) {
                 this.delegateEvents();
                 return;
             }
-
-            block.removeBlocks();
 
             if (block.bindings){
                 block.bindings.unbind();
             }
 
-            block.setElement($(block.template(block)).replaceAll(block.el));
+            block.setElement($(block.get('template', [block])).replaceAll(block.el));
 
             block.bindings = rivets.bind(block.el, block);
 
@@ -102,27 +100,23 @@ define(function(require, exports, module) {
             var block = this,
                 $blocks = block.$('[block]');
 
-            block.__blocks = {};
+            block.__blocks = block.__blocks || _.clone(block.blocks);
+
+            block.removeBlocks();
 
             $blocks.each(function() {
                 var placeholder = this,
                     blockName = placeholder.getAttribute('block'),
                     params = _.extend({}, placeholder.dataset, {el: placeholder});
 
-                var __block = block.get('blocks.' + blockName, [params]);
+                var __block = block.__blocks[blockName](params);
 
-                if (__block && __block.el) {
-
+                if (__block && __block.el){
                     __block.el.removeAttribute('block');
-
-                    block.__blocks[blockName] = block.__blocks[blockName] || [];
-
-                    block.__blocks[blockName].push(__block);
-
-                    if (!block.$(__block.el).length && block.$(placeholder).length) {
-                        __block.$el.replaceAll(placeholder);
-                    }
                 }
+
+                block.blocks[blockName].push(__block);
+
             });
         },
 
@@ -147,7 +141,7 @@ define(function(require, exports, module) {
 
             var block = this;
 
-            _.each(block.__blocks, function(blockList, blockName) {
+            _.each(block.blocks, function(blockList, blockName) {
 
                 _.each(blockList, function(blockToRemove) {
                     if (blockToRemove && typeof blockToRemove.remove === 'function') {
@@ -155,9 +149,9 @@ define(function(require, exports, module) {
                     }
                 });
 
-            });
+                block.blocks[blockName] = [];
 
-            block.__blocks = {};
+            });
         },
 
         trigger: function(event, data) {
