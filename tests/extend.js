@@ -60,29 +60,6 @@ define(function(require, exports, module) {
             expect(block1.number).toEqual(4);
         });
 
-        it('Создание дочерних классов не влияет на класс родителя', function() {
-
-            var Block1 = Block.extend({
-                    number: 1,
-                    string: 'string1',
-                    bool: true,
-                    array: [1, 2, 3]
-                }),
-                Block2 = Block1.extend({
-                    number: 2,
-                    string: 'string2',
-                    bool: false,
-                    array: [3, 2, 1]
-                });
-
-            var block1 = new Block1;
-
-            expect(block1.number).toEqual(1);
-            expect(block1.string).toEqual('string1');
-            expect(block1.bool).toEqual(true);
-            expect(block1.array).toEqual([1, 2, 3]);
-        });
-
         it('Вложенные объекты наследуются рекурсивно (deep extend)', function() {
 
             var Block1 = Block.extend({

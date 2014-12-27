@@ -5,7 +5,6 @@ define(function(require, exports, module) {
         makeClass = require('bower_components/makeClass/makeClass'),
 
         Backbone = require('bower_components/backbone/backbone'),
-        rivets = require('bower_components/rivets/dist/rivets.bundled.min'),
         _ = require('bower_components/lodash/dist/lodash'),
         $ = require('jquery');
 
@@ -51,7 +50,6 @@ define(function(require, exports, module) {
             block.delegateGlobalEvents();
         },
 
-        bindings: null,
         globalEvents: {},
         events: {},
 
@@ -64,13 +62,7 @@ define(function(require, exports, module) {
                 return;
             }
 
-            if (block.bindings){
-                block.bindings.unbind();
-            }
-
             block.setElement($(block.get('template', [block])).replaceAll(block.el));
-
-            block.bindings = rivets.bind(block.el, block);
 
             block.initBlocks();
 
@@ -127,10 +119,6 @@ define(function(require, exports, module) {
             block.stopListening();
             block.undelegateEvents();
             $(document).off('.' + block.cid);
-
-            if (block.bindings){
-                block.bindings.unbind();
-            }
 
             block.removeBlocks();
 

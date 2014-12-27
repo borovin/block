@@ -8,7 +8,7 @@ define(function(require, exports, module) {
 
             var blockConstructor = jasmine.createSpy('blockConstructor');
 
-            var block = new Block({
+            new Block({
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
@@ -24,7 +24,7 @@ define(function(require, exports, module) {
 
             var blockConstructor = jasmine.createSpy('blockConstructor');
 
-            var block = new Block({
+            new Block({
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
@@ -40,7 +40,7 @@ define(function(require, exports, module) {
 
             var blockConstructor = jasmine.createSpy('blockConstructor');
 
-            var block = new Block({
+            new Block({
                 template: function(){
                     return '<div><span data-text="text" data-id="id" block="block1"></span></div>';
                 },

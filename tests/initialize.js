@@ -56,7 +56,7 @@ define(function(require, exports, module) {
 
             spyOn(Block.prototype, 'initialize');
 
-            var block = new Block;
+            new Block;
 
             expect(Block.prototype.initialize).toHaveBeenCalled();
         });
@@ -65,7 +65,7 @@ define(function(require, exports, module) {
 
             spyOn(Block.prototype, 'initialize');
 
-            var block = new Block({a: 1}, 2, 'string');
+            new Block({a: 1}, 2, 'string');
 
             expect(Block.prototype.initialize).toHaveBeenCalledWith({a: 1}, 2, 'string');
         });
