@@ -1,6 +1,6 @@
 {
   "name": "block",
-  "description": "jquery ui block",
+  "description": "extended backbone view",
   "repository": {
     "type": "git",
     "url": "https://github.com/borovin/block.git"

@@ -2,6 +2,7 @@
   "name": "block",
   "main": "block.js",
   "version": "0.0.1",
+  "description": "extended backbone view",
   "authors": [
     "a@borovin.com"
   ],

@@ -16,7 +16,7 @@ module.exports = function(config) {
             'require.config.js',
             'tools/require.config.test.js',
             'tools/karma.main.js',
-            {pattern: 'block.js', included: false},
+            {pattern: '*.js', included: false},
             {pattern: 'bower_components/**/*', included: false},
             {pattern: 'tests/**/*', included: false}
         ],
