@@ -12,7 +12,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                blocks: {
+                Blocks: {
                     block1: blockConstructor
                 }
             });
@@ -28,7 +28,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                blocks: {
+                Blocks: {
                     block1: blockConstructor
                 }
             });
@@ -44,7 +44,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span data-text="text" data-id="id" block="block1"></span></div>';
                 },
-                blocks: {
+                Blocks: {
                     block1: blockConstructor
                 }
             });
@@ -59,7 +59,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                blocks: {
+                Blocks: {
                     block1: Block.extend({
                         template: function(){
                             return '<b class="block1">text</b>'
@@ -77,7 +77,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                blocks: {
+                Blocks: {
                     block1: Block.extend({
                         template: function(){
                             return '<b class="block1">text</b>'

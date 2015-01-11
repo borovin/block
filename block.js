@@ -52,6 +52,8 @@ define(function(require, exports, module) {
 
         globalEvents: {},
         events: {},
+        Blocks: {},
+        blocks: {},
 
         render: function() {
 
@@ -92,8 +94,6 @@ define(function(require, exports, module) {
             var block = this,
                 $blocks = block.$('[block]');
 
-            block.__blocks = block.__blocks || _.clone(block.blocks);
-
             block.removeBlocks();
 
             $blocks.each(function() {
@@ -101,11 +101,13 @@ define(function(require, exports, module) {
                     blockName = placeholder.getAttribute('block'),
                     params = _.extend({}, placeholder.dataset, {el: placeholder});
 
-                var __block = block.__blocks[blockName](params);
+                var __block = block.Blocks[blockName](params);
 
                 if (__block && __block.el){
                     __block.el.removeAttribute('block');
                 }
+
+                block.blocks[blockName] = block.blocks[blockName] || [];
 
                 block.blocks[blockName].push(__block);
 
