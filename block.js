@@ -52,15 +52,33 @@ define(function(require, exports, module) {
 
         globalEvents: {},
         events: {},
+
         Blocks: {},
         blocks: {},
+
+        Models: {},
+        models: {},
+
+        Collections: {},
+        collections: {},
+
+        Model: function(){},
+        Collection: function(){},
+
+        initialize: function(){
+
+            var block = this;
+
+            block.initCollections();
+            block.initModels();
+        },
 
         render: function() {
 
             var block = this;
 
             if (!block.template) {
-                this.delegateEvents();
+                block.delegateEvents();
                 return;
             }
 
@@ -112,6 +130,28 @@ define(function(require, exports, module) {
                 block.blocks[blockName].push(__block);
 
             });
+        },
+
+        initModels: function(){
+
+            var block = this;
+
+            block.models = _.mapValues(block.Models, function(constructor){
+                return constructor();
+            });
+
+            block.model = block.Model();
+        },
+
+        initCollections: function(){
+
+            var block = this;
+
+            block.collections = _.mapValues(block.Collections, function(constructor){
+                return constructor();
+            });
+
+            block.collection = block.Collection();
         },
 
         remove: function() {

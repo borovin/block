@@ -83,5 +83,35 @@ define(function(require, exports, module) {
             expect(typeof block1.initialize().then).toBe('function');
         });
 
+        it('Инициализация моделей и коллекций', function(){
+
+            var Block1 = Block.extend({
+                Models: {
+                    model1: function(){
+                        return 'model1';
+                    }
+                },
+                Model: function(){
+                    return 'model';
+                },
+                Collections: {
+                    collection1: function(){
+                        return 'collection1';
+                    }
+                },
+                Collection: function(){
+                    return 'collection';
+                }
+            });
+
+            var block1 = new Block1;
+
+            expect(block1.models.model1).toBe('model1');
+            expect(block1.model).toBe('model');
+
+            expect(block1.collections.collection1).toBe('collection1');
+            expect(block1.collection).toBe('collection');
+        });
+
     });
 });
