@@ -12,7 +12,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                Blocks: {
+                blocks: {
                     block1: blockConstructor
                 }
             });
@@ -28,7 +28,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                Blocks: {
+                blocks: {
                     block1: blockConstructor
                 }
             });
@@ -44,7 +44,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span data-text="text" data-id="id" block="block1"></span></div>';
                 },
-                Blocks: {
+                blocks: {
                     block1: blockConstructor
                 }
             });
@@ -59,7 +59,7 @@ define(function(require, exports, module) {
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                Blocks: {
+                blocks: {
                     block1: Block.extend({
                         template: function(){
                             return '<b class="block1">text</b>'
@@ -71,13 +71,13 @@ define(function(require, exports, module) {
             expect(block.el.querySelector('.block1').tagName).toEqual('B');
         });
 
-        it('Все вложенные блоки доступны через свойство blocks после инициализации', function(){
+        it('Все вложенные блоки доступны через свойство children после инициализации', function(){
 
             var block = new Block({
                 template: function(){
                     return '<div><span block="block1"></span></div>';
                 },
-                Blocks: {
+                blocks: {
                     block1: Block.extend({
                         template: function(){
                             return '<b class="block1">text</b>'
@@ -86,7 +86,7 @@ define(function(require, exports, module) {
                 }
             });
 
-            expect(block.blocks.block1[0].el.tagName).toEqual('B');
+            expect(block.children.block1[0].el.tagName).toEqual('B');
         });
 
     });

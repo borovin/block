@@ -83,23 +83,23 @@ define(function(require, exports, module) {
             expect(typeof block1.initialize().then).toBe('function');
         });
 
-        it('Инициализация моделей и коллекций', function(){
+        it('Инициализация дефолтных моделей и коллекций', function(){
 
             var Block1 = Block.extend({
-                Models: {
+                models: {
                     model1: function(){
                         return 'model1';
                     }
                 },
-                Model: function(){
+                model: function(){
                     return 'model';
                 },
-                Collections: {
+                collections: {
                     collection1: function(){
                         return 'collection1';
                     }
                 },
-                Collection: function(){
+                collection: function(){
                     return 'collection';
                 }
             });
@@ -111,6 +111,45 @@ define(function(require, exports, module) {
 
             expect(block1.collections.collection1).toBe('collection1');
             expect(block1.collection).toBe('collection');
+        });
+
+        it('Создание моделей и коллекций при инициализации', function(){
+
+            var Block1 = Block.extend({
+                models: {
+                    model1: function(){
+                        return 'model1';
+                    }
+                },
+                model: function(){
+                    return 'model';
+                },
+                collections: {
+                    collection1: function(){
+                        return 'collection1';
+                    }
+                },
+                collection: function(){
+                    return 'collection';
+                }
+            });
+
+            var block1 = new Block1({
+                models: {
+                    model1: 'customModel1'
+                },
+                collections: {
+                    collection1: 'customCollection1'
+                },
+                model: 'customModel',
+                collection: 'customCollection'
+            });
+
+            expect(block1.models.model1).toBe('customModel1');
+            expect(block1.model).toBe('customModel');
+
+            expect(block1.collections.collection1).toBe('customCollection1');
+            expect(block1.collection).toBe('customCollection');
         });
 
     });

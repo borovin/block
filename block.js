@@ -23,9 +23,7 @@ define(function(require, exports, module) {
 
                 block.stopListening();
 
-                if (data) {
-                    deepExtend(block, data);
-                }
+                deepExtend(block, block.defaults, data);
 
                 block._ensureElement();
 
@@ -36,9 +34,7 @@ define(function(require, exports, module) {
 
             block.render = function(data) {
 
-                if (data){
-                    deepExtend(block, data);
-                }
+                deepExtend(block, data);
 
                 return render.apply(block, arguments);
             };
@@ -52,15 +48,8 @@ define(function(require, exports, module) {
 
         globalEvents: {},
         events: {},
-
-        Blocks: {},
-        blocks: {},
-
-        Models: {},
-        models: {},
-
-        Collections: {},
-        collections: {},
+        defaults: {},
+        children: {},
 
         Model: function(){},
         Collection: function(){},
@@ -119,15 +108,15 @@ define(function(require, exports, module) {
                     blockName = placeholder.getAttribute('block'),
                     params = _.extend({}, placeholder.dataset, {el: placeholder});
 
-                var __block = block.Blocks[blockName](params);
+                var __block = block.blocks[blockName].call(block, params);
 
                 if (__block && __block.el){
                     __block.el.removeAttribute('block');
                 }
 
-                block.blocks[blockName] = block.blocks[blockName] || [];
+                block.children[blockName] = block.children[blockName] || [];
 
-                block.blocks[blockName].push(__block);
+                block.children[blockName].push(__block);
 
             });
         },
@@ -136,22 +125,22 @@ define(function(require, exports, module) {
 
             var block = this;
 
-            block.models = _.mapValues(block.Models, function(constructor){
-                return constructor();
+            block.models = _.mapValues(block.models, function(constructor, modelName){
+                return block.get('models.' + modelName);
             });
 
-            block.model = block.Model();
+            block.model = block.get('model');
         },
 
         initCollections: function(){
 
             var block = this;
 
-            block.collections = _.mapValues(block.Collections, function(constructor){
-                return constructor();
+            block.collections = _.mapValues(block.collections, function(constructor, collectionName){
+                return block.get('collections.' + collectionName);
             });
 
-            block.collection = block.Collection();
+            block.collection = block.get('collection');
         },
 
         remove: function() {
@@ -171,7 +160,7 @@ define(function(require, exports, module) {
 
             var block = this;
 
-            _.each(block.blocks, function(blockList, blockName) {
+            _.each(block.children, function(blockList) {
 
                 _.each(blockList, function(blockToRemove) {
                     if (blockToRemove && typeof blockToRemove.remove === 'function') {
@@ -179,9 +168,9 @@ define(function(require, exports, module) {
                     }
                 });
 
-                block.blocks[blockName] = [];
-
             });
+
+            block.children  = {};
         },
 
         trigger: function(event, data) {
