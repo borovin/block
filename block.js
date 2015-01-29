@@ -51,10 +51,12 @@ define(function(require, exports, module) {
         defaults: {},
         children: {},
 
-        Model: function(){},
-        Collection: function(){},
+        Model: function() {
+        },
+        Collection: function() {
+        },
 
-        initialize: function(){
+        initialize: function() {
 
             var block = this;
 
@@ -82,9 +84,14 @@ define(function(require, exports, module) {
         get: function() {
 
             var block = this,
-                args = [block].concat([].slice.call(arguments));
+                args = [block].concat([].slice.call(arguments)),
+                result = get.apply(null, args);
 
-            return get.apply(null, args);
+            if (typeof result === 'undefined' && block.parentBlock){
+                result = block.parentBlock.get.apply(block.parentBlock, arguments)
+            }
+
+            return result;
         },
 
         set: function(data) {
@@ -106,11 +113,14 @@ define(function(require, exports, module) {
             $blocks.each(function() {
                 var placeholder = this,
                     blockName = placeholder.getAttribute('block'),
-                    params = _.extend({}, placeholder.dataset, {el: placeholder});
+                    params = _.extend({}, placeholder.dataset, {
+                        el: placeholder,
+                        parentBlock: block
+                    });
 
                 var __block = block.blocks[blockName].call(block, params);
 
-                if (__block && __block.el){
+                if (__block && __block.el) {
                     __block.el.removeAttribute('block');
                 }
 
@@ -121,22 +131,22 @@ define(function(require, exports, module) {
             });
         },
 
-        initModels: function(){
+        initModels: function() {
 
             var block = this;
 
-            block.models = _.mapValues(block.models, function(constructor, modelName){
+            block.models = _.mapValues(block.models, function(constructor, modelName) {
                 return block.get('models.' + modelName);
             });
 
             block.model = block.get('model');
         },
 
-        initCollections: function(){
+        initCollections: function() {
 
             var block = this;
 
-            block.collections = _.mapValues(block.collections, function(constructor, collectionName){
+            block.collections = _.mapValues(block.collections, function(constructor, collectionName) {
                 return block.get('collections.' + collectionName);
             });
 
@@ -170,7 +180,7 @@ define(function(require, exports, module) {
 
             });
 
-            block.children  = {};
+            block.children = {};
         },
 
         trigger: function(event, data) {

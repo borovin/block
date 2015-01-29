@@ -89,5 +89,23 @@ define(function(require, exports, module) {
             expect(block.children.block1[0].el.tagName).toEqual('B');
         });
 
+        it('Все вложенные блоки содержат ссылку на родительский блок', function(){
+
+            var block = new Block({
+                template: function(){
+                    return '<div><span block="block1"></span></div>';
+                },
+                blocks: {
+                    block1: Block.extend({
+                        template: function(){
+                            return '<b class="block1">text</b>'
+                        }
+                    })
+                }
+            });
+
+            expect(block.children.block1[0].parentBlock).toEqual(block);
+        });
+
     });
 });
