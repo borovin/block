@@ -5,7 +5,7 @@ define(function(require, exports, module) {
         makeClass = require('bower_components/makeClass/makeClass'),
 
         Backbone = require('bower_components/backbone/backbone'),
-        _ = require('bower_components/lodash/dist/lodash'),
+        _ = require('bower_components/lodash/lodash'),
         $ = require('jquery');
 
     var View = Backbone.View;
