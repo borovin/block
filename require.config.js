@@ -6,7 +6,7 @@ require.config({
 
     map: {
         '*': {
-            'underscore': 'bower_components/lodash/dist/lodash'
+            'underscore': 'bower_components/lodash/lodash'
         }
     }
 

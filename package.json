@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "node ./node_modules/karma/bin/karma start ./tools/karma.conf.js --single-run",
-    "bower": "./node_modules/bower/bin/bower install",
+    "postinstall": "./node_modules/bower/bin/bower install",
     "coveralls": "./node_modules/coveralls/bin/coveralls.js ./coverage/PhantomJS 1.9.8 (Mac OS X)/lcov.info"
   },
   "author": "a@borovin.com",
