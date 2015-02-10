@@ -27,6 +27,9 @@ define(function(require, exports, module) {
 
                 block._ensureElement();
 
+                block.initCollections();
+                block.initModels();
+
                 return $.when(initialize.apply(block, arguments)).then(function() {
                     block.render();
                 });
@@ -50,19 +53,6 @@ define(function(require, exports, module) {
         events: {},
         defaults: {},
         children: {},
-
-        Model: function() {
-        },
-        Collection: function() {
-        },
-
-        initialize: function() {
-
-            var block = this;
-
-            block.initCollections();
-            block.initModels();
-        },
 
         render: function() {
 
