@@ -183,8 +183,16 @@ define(function(require, exports, module) {
 
             $(document).off('.' + block.cid);
 
-            _.each(block.globalEvents, function(handler, eventName) {
-                $(document).on(eventName + '.' + block.cid, handler.bind(block));
+            _.each(block.globalEvents, function(handler, event) {
+                var path = event.split(' '),
+                    eventName = path.shift();
+
+                if (path.length){
+                    $(document).on(eventName + '.' + block.cid, path.join(' '), handler.bind(block));
+                } else {
+                    $(document).on(eventName + '.' + block.cid, handler.bind(block));
+                }
+
             });
         }
     });
