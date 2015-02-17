@@ -53,62 +53,6 @@ define(function(require, exports, module) {
 
         });
 
-        it('Возвращает значение блока-родителя, если свойство не определено', function(){
-
-            var block = new Block({
-                template: function(){
-                    return '<div><b block="block1"></b></div>';
-                },
-                blocks: {
-                    block1: Block.extend({
-                        template: function(){
-                            return '<span class="block1">text</span>'
-                        }
-                    })
-                },
-                a: {
-                    b: {
-                        c: function(){
-                            return this.b;
-                        }
-                    }
-                },
-                b: 'b'
-            });
-
-            expect(block.children.block1[0].get('a.b.c')).toEqual('b');
-
-        });
-
-        it('Возвращает значение по-умолчанию, если оно не найдено в родительских блоках', function(){
-
-            var block = new Block({
-                template: function(){
-                    return '<div><b block="block1"></b></div>';
-                },
-                blocks: {
-                    block1: Block.extend({
-                        defaults: {
-                            a: {
-                                b: {
-                                    c: function(){
-                                        return this.b;
-                                    }
-                                }
-                            }
-                        },
-                        template: function(){
-                            return '<span class="block1">text</span>'
-                        },
-                        b: 'b'
-                    })
-                }
-            });
-
-            expect(block.children.block1[0].get('a.b.c')).toEqual('b');
-
-        });
-
     });
 
 });

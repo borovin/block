@@ -74,20 +74,9 @@ define(function(require, exports, module) {
         get: function(path) {
 
             var block = this,
-                args = [block].concat([].slice.call(arguments)),
-                result = get.apply(null, args),
-                defaultsPath = 'defaults.' + args[1];
+                args = [block].concat([].slice.call(arguments));
 
-            if (typeof result === 'undefined' && block.parentBlock){
-                result = block.parentBlock.get.apply(block.parentBlock, arguments)
-            }
-
-            if (typeof result === 'undefined' && block.defaults){
-                args[1] = defaultsPath;
-                result = get.apply(null, args);
-            }
-
-            return result;
+            return get.apply(null, args);
         },
 
         set: function(data) {
