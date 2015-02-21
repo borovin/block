@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
     //requirements
     var get = require('bower_components/get/get'),
+        set = require('bower_components/set/set'),
         deepExtend = require('bower_components/deepExtend/deepExtend'),
         makeClass = require('bower_components/makeClass/makeClass'),
 
@@ -71,7 +72,7 @@ define(function(require, exports, module) {
 
         },
 
-        get: function(path) {
+        get: function() {
 
             var block = this,
                 args = [block].concat([].slice.call(arguments));
@@ -79,13 +80,15 @@ define(function(require, exports, module) {
             return get.apply(null, args);
         },
 
-        set: function(data) {
+        set: function() {
 
-            var block = this;
+            var block = this,
+                args = [block].concat([].slice.call(arguments)),
+                __set = set.apply(null, args);
 
-            deepExtend(block, data);
+            block.trigger('set', __set);
 
-            block.trigger('set', data);
+            return __set;
         },
 
         initBlocks: function() {
