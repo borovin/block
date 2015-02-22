@@ -14,7 +14,7 @@ define(function(require, exports, module) {
 
             block.set({
                 a: {
-                    c: 'cc'
+                    c: 'c'
                 }
             });
 
