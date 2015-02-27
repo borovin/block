@@ -107,5 +107,48 @@ define(function(require, exports, module) {
             expect(block.children.block1[0].parentBlock).toEqual(block);
         });
 
+        it('Метод block вставляет дочерний блок в шаблон', function(){
+
+            var block = new Block({
+                template: _.template('<div><%= block(blocks.block1) %></div>'),
+                blocks: {
+                    block1: Block.extend({
+                        template: _.template('<b class="block1">text</b>')
+                    })
+                }
+            });
+
+            expect(block.el.querySelector('.block1').textContent).toEqual('text');
+        });
+
+        it('После рендеринга все временные конструкторы удаляются', function(){
+
+            var block = new Block({
+                template: _.template('<div><%= block(blocks.block1) %></div>'),
+                blocks: {
+                    block1: Block.extend({
+                        template: _.template('<b class="block1">text</b>')
+                    })
+                }
+            });
+
+            expect(_.keys(block.blocks)).toEqual(['block1']);
+        });
+
+        it('В метод block можно передать объекты-параметры', function(){
+
+            var spy = jasmine.createSpy('block');
+
+            var block = new Block({
+                text: 'test',
+                template: _.template('<div><%= block(testBlock, {a: {b: text}}) %></div>'),
+                testBlock: Block.extend({
+                    template: _.template('<b class="block1"><%- a.b %></b>')
+                })
+            });
+
+            expect(block.el.querySelector('.block1').textContent).toEqual('test');
+        });
+
     });
 });

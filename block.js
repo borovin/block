@@ -54,10 +54,12 @@ define(function(require, exports, module) {
         events: {},
         defaults: {},
         children: {},
+        blocks: {},
 
         render: function() {
 
-            var block = this;
+            var block = this,
+                originalBlocks = _.clone(block.blocks);
 
             if (!block.template) {
                 block.delegateEvents();
@@ -69,6 +71,8 @@ define(function(require, exports, module) {
             block.initBlocks();
 
             block.el.block = block;
+
+            block.blocks = originalBlocks;
 
         },
 
@@ -89,6 +93,19 @@ define(function(require, exports, module) {
             block.trigger('set', __set);
 
             return __set;
+        },
+
+        block: function(constructor, params){
+
+            var block = this,
+                id = _.uniqueId('tmp-'),
+                placeholder = '<b block="' + id + '"></b>';
+
+            block.blocks[id] = function(opt){
+                return constructor.call(block, _.extend(opt, params));
+            };
+
+            return placeholder;
         },
 
         initBlocks: function() {
