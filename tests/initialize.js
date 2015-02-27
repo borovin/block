@@ -1,10 +1,10 @@
-define(function(require, exports, module) {
+define(function (require, exports, module) {
     //requirements
     var Block = require('../block');
 
-    describe('Инициализация класса', function(){
+    describe('Инициализация класса', function () {
 
-        it('Первый объект-параметр копируется в свойства экземпляра класса при инициализации', function(){
+        it('Первый объект-параметр копируется в свойства экземпляра класса при инициализации', function () {
 
             var block = new Block({
                 number: 1,
@@ -19,11 +19,11 @@ define(function(require, exports, module) {
             expect(block.array).toEqual([1, 2, 3]);
         });
 
-        it('Даже если метод initialize был переопределен', function(){
+        it('Даже если метод initialize был переопределен', function () {
 
             var Block1 = Block.extend({
                 count: 0,
-                initialize: function(){
+                initialize: function () {
                     this.count++;
                 }
             });
@@ -37,7 +37,7 @@ define(function(require, exports, module) {
             expect(block.count).toBe(11)
         });
 
-        it('Класс может быть проинициализирован без ключевого слова new', function(){
+        it('Класс может быть проинициализирован без ключевого слова new', function () {
 
             var block = Block({
                 number: 1,
@@ -52,7 +52,7 @@ define(function(require, exports, module) {
             expect(block.array).toEqual([1, 2, 3]);
         });
 
-        it('При инициализации вызывается метод initialize', function(){
+        it('При инициализации вызывается метод initialize', function () {
 
             spyOn(Block.prototype, 'initialize');
 
@@ -61,7 +61,7 @@ define(function(require, exports, module) {
             expect(Block.prototype.initialize).toHaveBeenCalled();
         });
 
-        it('В метод initialize передаются все параметры инициализации', function(){
+        it('В метод initialize передаются все параметры инициализации', function () {
 
             spyOn(Block.prototype, 'initialize');
 
@@ -70,10 +70,10 @@ define(function(require, exports, module) {
             expect(Block.prototype.initialize).toHaveBeenCalledWith({a: 1}, 2, 'string');
         });
 
-        it('Метод initialize всегда возвращает promise', function(){
+        it('Метод initialize всегда возвращает promise', function () {
 
             var Block1 = Block.extend({
-                initialize: function(){
+                initialize: function () {
                     this.a = 1;
                 }
             });
@@ -83,23 +83,23 @@ define(function(require, exports, module) {
             expect(typeof block1.initialize().then).toBe('function');
         });
 
-        it('Инициализация дефолтных моделей и коллекций', function(){
+        it('Инициализация дефолтных моделей и коллекций', function () {
 
             var Block1 = Block.extend({
                 models: {
-                    model1: function(){
+                    model1: function () {
                         return 'model1';
                     }
                 },
-                model: function(){
+                model: function () {
                     return 'model';
                 },
                 collections: {
-                    collection1: function(){
+                    collection1: function () {
                         return 'collection1';
                     }
                 },
-                collection: function(){
+                collection: function () {
                     return 'collection';
                 }
             });
@@ -113,23 +113,23 @@ define(function(require, exports, module) {
             expect(block1.collection).toBe('collection');
         });
 
-        it('Создание моделей и коллекций при инициализации', function(){
+        it('Создание моделей и коллекций при инициализации', function () {
 
             var Block1 = Block.extend({
                 models: {
-                    model1: function(){
+                    model1: function () {
                         return 'model1';
                     }
                 },
-                model: function(){
+                model: function () {
                     return 'model';
                 },
                 collections: {
-                    collection1: function(){
+                    collection1: function () {
                         return 'collection1';
                     }
                 },
-                collection: function(){
+                collection: function () {
                     return 'collection';
                 }
             });
@@ -150,6 +150,65 @@ define(function(require, exports, module) {
 
             expect(block1.collections.collection1).toBe('customCollection1');
             expect(block1.collection).toBe('customCollection');
+        });
+
+        it('Метод initBlock возвращает новый блок', function () {
+
+            var block1 = new Block(),
+                block2 = Block.extend({
+                    name: 'block2'
+                }),
+                block3 = block1.initBlock(block2);
+
+            expect(block3.name).toEqual('block2');
+        });
+
+        it('Метод initBlock добавляет блок в children', function () {
+
+            var Block1 = Block.extend({
+                    name: 'block1'
+                }),
+                Block2 = Block.extend({
+                    name: 'block2'
+                });
+
+            var block1 = new Block1;
+
+            block1.initBlock(Block2);
+
+            expect(block1.children[0].name).toBe('block2');
+        });
+
+        it('Метод initBlock добавляет parentBlock', function () {
+
+            var Block1 = Block.extend({
+                    name: 'block1'
+                }),
+                Block2 = Block.extend({
+                    name: 'block2'
+                });
+
+            var block1 = new Block1;
+
+            var block3 = block1.initBlock(Block2);
+
+            expect(block3.parentBlock).toEqual(block1);
+        });
+
+        it('Children независимы', function () {
+
+            var Block1 = Block.extend({
+                    name: 'block1'
+                }),
+                Block2 = Block.extend({
+                    name: 'block2'
+                });
+
+            var block1 = new Block1;
+
+            var block3 = block1.initBlock(Block2);
+
+            expect(block3.children).not.toBe(block1.children);
         });
 
     });

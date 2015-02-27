@@ -1,4 +1,4 @@
-define(function(require, exports, module) {
+define(function (require, exports, module) {
     //requirements
     var get = require('bower_components/get/get'),
         set = require('bower_components/set/set'),
@@ -13,14 +13,14 @@ define(function(require, exports, module) {
 
     return makeClass(View, {
 
-        constructor: function() {
+        constructor: function () {
 
             var block = this;
 
             var initialize = block.initialize,
                 render = block.render;
 
-            block.initialize = function(data) {
+            block.initialize = function (data) {
 
                 block.stopListening();
 
@@ -31,12 +31,12 @@ define(function(require, exports, module) {
                 block.initCollections();
                 block.initModels();
 
-                return $.when(initialize.apply(block, arguments)).then(function() {
+                return $.when(initialize.apply(block, arguments)).then(function () {
                     block.render();
                 });
             };
 
-            block.render = function(data) {
+            block.render = function (data) {
 
                 deepExtend(block, data);
 
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
         children: [],
         blocks: {},
 
-        render: function() {
+        render: function () {
 
             var block = this,
                 originalBlocks = _.clone(block.blocks);
@@ -68,6 +68,8 @@ define(function(require, exports, module) {
 
             block.setElement($(block.get('template', [block])).replaceAll(block.el));
 
+            block.removeBlocks();
+
             block.initBlocks();
 
             block.el.block = block;
@@ -76,7 +78,7 @@ define(function(require, exports, module) {
 
         },
 
-        get: function() {
+        get: function () {
 
             var block = this,
                 args = [block].concat([].slice.call(arguments));
@@ -84,7 +86,7 @@ define(function(require, exports, module) {
             return get.apply(null, args);
         },
 
-        set: function() {
+        set: function () {
 
             var block = this,
                 args = [block].concat([].slice.call(arguments)),
@@ -95,20 +97,20 @@ define(function(require, exports, module) {
             return __set;
         },
 
-        block: function(constructor, params){
+        block: function (constructor, params) {
 
             var block = this,
                 id = _.uniqueId('tmp-'),
                 placeholder = '<b block="' + id + '"></b>';
 
-            block.blocks[id] = function(opt){
+            block.blocks[id] = function (opt) {
                 return constructor.call(block, _.extend(opt, params));
             };
 
             return placeholder;
         },
 
-        partial: function(partial, params){
+        partial: function (partial, params) {
 
             var block = this,
                 params = deepExtend({}, block, params);
@@ -116,55 +118,64 @@ define(function(require, exports, module) {
             return partial(params);
         },
 
-        initBlocks: function() {
+        initBlocks: function () {
 
             var block = this,
                 $blocks = block.$('[block]');
 
-            block.removeBlocks();
-
-            $blocks.each(function() {
+            $blocks.each(function () {
                 var placeholder = this,
                     blockName = placeholder.getAttribute('block'),
                     params = _.extend({}, placeholder.dataset, {
                         el: placeholder,
                         parentBlock: block
-                    });
+                    }),
+                    constructor = block.blocks[blockName];
 
-                var __block = block.blocks[blockName].call(block, params);
-
-                if (__block && __block.el) {
-                    __block.el.removeAttribute('block');
-                }
-
-                block.children.push(__block);
+                block.initBlock(constructor, params);
 
             });
         },
 
-        initModels: function() {
+        initBlock: function (constructor, params) {
+
+            var block = this,
+                child = constructor.call(null, _.extend({}, params, {
+                    parentBlock: block
+                }));
+
+            block.children.push(child);
+
+            if (child && child.el) {
+                child.el.removeAttribute('block');
+            }
+
+            return child;
+        },
+
+        initModels: function () {
 
             var block = this;
 
-            block.models = _.mapValues(block.models, function(constructor, modelName) {
+            block.models = _.mapValues(block.models, function (constructor, modelName) {
                 return block.get('models.' + modelName);
             });
 
             block.model = block.get('model');
         },
 
-        initCollections: function() {
+        initCollections: function () {
 
             var block = this;
 
-            block.collections = _.mapValues(block.collections, function(constructor, collectionName) {
+            block.collections = _.mapValues(block.collections, function (constructor, collectionName) {
                 return block.get('collections.' + collectionName);
             });
 
             block.collection = block.get('collection');
         },
 
-        remove: function() {
+        remove: function () {
 
             var block = this;
 
@@ -177,11 +188,11 @@ define(function(require, exports, module) {
             return View.prototype.remove.apply(block, arguments);
         },
 
-        removeBlocks: function() {
+        removeBlocks: function () {
 
             var block = this;
 
-            _.each(block.children, function(blockToRemove) {
+            _.each(block.children, function (blockToRemove) {
 
                 if (blockToRemove && typeof blockToRemove.remove === 'function') {
                     blockToRemove.remove();
@@ -192,7 +203,7 @@ define(function(require, exports, module) {
             block.children = [];
         },
 
-        trigger: function(event, data) {
+        trigger: function (event, data) {
 
             var block = this;
 
@@ -201,17 +212,17 @@ define(function(require, exports, module) {
             return View.prototype.trigger.apply(block, arguments);
         },
 
-        delegateGlobalEvents: function() {
+        delegateGlobalEvents: function () {
 
             var block = this;
 
             $(document).off('.' + block.cid);
 
-            _.each(block.globalEvents, function(handler, event) {
+            _.each(block.globalEvents, function (handler, event) {
                 var path = event.split(' '),
                     eventName = path.shift();
 
-                if (path.length){
+                if (path.length) {
                     $(document).on(eventName + '.' + block.cid, path.join(' '), handler.bind(block));
                 } else {
                     $(document).on(eventName + '.' + block.cid, handler.bind(block));
