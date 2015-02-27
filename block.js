@@ -140,7 +140,7 @@ define(function (require, exports, module) {
         initBlock: function (constructor, params) {
 
             var block = this,
-                child = constructor.call(null, _.extend({}, params, {
+                child = constructor.call(block, _.extend({}, params, {
                     parentBlock: block
                 }));
 
