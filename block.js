@@ -108,6 +108,14 @@ define(function(require, exports, module) {
             return placeholder;
         },
 
+        partial: function(partial, params){
+
+            var block = this,
+                params = deepExtend({}, block, params);
+
+            return partial(params);
+        },
+
         initBlocks: function() {
 
             var block = this,

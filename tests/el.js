@@ -76,5 +76,20 @@ define(function(require, exports, module) {
             expect(block.el.textContent).toEqual('text');
         });
 
+        it('Partial вызывается в контексте блока', function(){
+
+            var block = new Block({
+                text: 'text',
+                testPartial: _.template('<div class="partial" data-a="<%- a %>" data-b="<%- b %>"><%- text %></div>'),
+                template: _.template('<div><%= partial(testPartial, {a: "a", b: "b"}) %></div>')
+            });
+
+            var partial = block.el.querySelector('.partial');
+
+            expect(partial.textContent).toEqual('text');
+            expect(partial.dataset.a).toEqual('a');
+            expect(partial.dataset.b).toEqual('b');
+        });
+
     });
 });
