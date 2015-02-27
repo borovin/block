@@ -53,7 +53,7 @@ define(function(require, exports, module) {
         globalEvents: {},
         events: {},
         defaults: {},
-        children: {},
+        children: [],
         blocks: {},
 
         render: function() {
@@ -129,9 +129,7 @@ define(function(require, exports, module) {
                     __block.el.removeAttribute('block');
                 }
 
-                block.children[blockName] = block.children[blockName] || [];
-
-                block.children[blockName].push(__block);
+                block.children.push(__block);
 
             });
         },
@@ -175,17 +173,15 @@ define(function(require, exports, module) {
 
             var block = this;
 
-            _.each(block.children, function(blockList) {
+            _.each(block.children, function(blockToRemove) {
 
-                _.each(blockList, function(blockToRemove) {
-                    if (blockToRemove && typeof blockToRemove.remove === 'function') {
-                        blockToRemove.remove();
-                    }
-                });
+                if (blockToRemove && typeof blockToRemove.remove === 'function') {
+                    blockToRemove.remove();
+                }
 
             });
 
-            block.children = {};
+            block.children = [];
         },
 
         trigger: function(event, data) {

@@ -86,7 +86,7 @@ define(function(require, exports, module) {
                 }
             });
 
-            expect(block.children.block1[0].el.tagName).toEqual('B');
+            expect(block.children[0].el.tagName).toEqual('B');
         });
 
         it('Все вложенные блоки содержат ссылку на родительский блок', function(){
@@ -104,7 +104,7 @@ define(function(require, exports, module) {
                 }
             });
 
-            expect(block.children.block1[0].parentBlock).toEqual(block);
+            expect(block.children[0].parentBlock).toEqual(block);
         });
 
         it('Метод block вставляет дочерний блок в шаблон', function(){
