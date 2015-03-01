@@ -24,7 +24,7 @@ define(function (require, exports, module) {
 
                 block.stopListening();
 
-                deepExtend(block, data);
+                deepExtend(block, block.defaults, data);
 
                 block._ensureElement();
 
@@ -66,7 +66,7 @@ define(function (require, exports, module) {
                 return;
             }
 
-            block.setElement($(block.get('template', [block])).replaceAll(block.el));
+            block.setElement($(block.template(block)).replaceAll(block.el));
 
             block.removeBlocks();
 
@@ -112,10 +112,9 @@ define(function (require, exports, module) {
 
         partial: function (partial, params) {
 
-            var block = this,
-                params = deepExtend({}, block, params);
+            var block = this;
 
-            return partial(params);
+            return partial(deepExtend({}, block, params));
         },
 
         initBlocks: function () {

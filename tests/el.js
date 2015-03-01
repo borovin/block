@@ -52,17 +52,7 @@ define(function(require, exports, module) {
             expect(block.el.tagName).toEqual('SPAN');
             expect(block.el.textContent).toEqual('text');
         });
-
-        it('...или из template-строки', function(){
-
-            var block = new Block({
-                template: '<span>text</span>'
-            });
-
-            expect(block.el.tagName).toEqual('SPAN');
-            expect(block.el.textContent).toEqual('text');
-        });
-
+        
         it('Первым аргументом в template-функцию передается весь блок', function(){
 
             var block = new Block({
