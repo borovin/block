@@ -61,12 +61,11 @@ define(function (require, exports, module) {
             var block = this,
                 originalBlocks = _.clone(block.blocks);
 
-            if (!block.template) {
-                block.delegateEvents();
-                return;
-            }
+            block.delegateEvents();
 
-            block.setElement($(block.template(block)).replaceAll(block.el));
+            if (block.template) {
+                block.setElement($(block.template(block)).replaceAll(block.el));
+            }
 
             block.removeBlocks();
 

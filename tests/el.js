@@ -52,7 +52,7 @@ define(function(require, exports, module) {
             expect(block.el.tagName).toEqual('SPAN');
             expect(block.el.textContent).toEqual('text');
         });
-        
+
         it('Первым аргументом в template-функцию передается весь блок', function(){
 
             var block = new Block({
