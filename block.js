@@ -109,13 +109,6 @@ define(function (require, exports, module) {
             return placeholder;
         },
 
-        partial: function (partial, params) {
-
-            var block = this;
-
-            return partial(deepExtend({}, block, params));
-        },
-
         initBlocks: function () {
 
             var block = this,
