@@ -55,16 +55,25 @@ define(function (require, exports, module) {
         defaults: {},
         children: [],
         blocks: {},
+        innerTemplate: false,
 
         render: function () {
 
             var block = this,
-                originalBlocks = _.clone(block.blocks);
+                originalBlocks = _.clone(block.blocks),
+                template;
 
             block.delegateEvents();
 
             if (block.template) {
-                block.setElement($(block.template(block)).replaceAll(block.el));
+
+                template = block.template(block);
+
+                if (block.innerTemplate){
+                    block.el.innerHTML = template;
+                } else {
+                    block.setElement($(template).replaceAll(block.el));
+                }
             }
 
             block.removeBlocks();
@@ -176,7 +185,9 @@ define(function (require, exports, module) {
 
             block.removeBlocks();
 
-            return View.prototype.remove.apply(block, arguments);
+            if (!block.innerTemplate){
+                View.prototype.remove.apply(block, arguments);
+            }
         },
 
         removeBlocks: function () {

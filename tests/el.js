@@ -65,6 +65,6 @@ define(function(require, exports, module) {
             expect(block.el.tagName).toEqual('SPAN');
             expect(block.el.textContent).toEqual('text');
         });
-        
+
     });
 });
