@@ -28,11 +28,12 @@ define(function (require, exports, module) {
 
                 block._ensureElement();
 
-                block.initCollections();
-                block.initModels();
+                block.trigger('initializing');
 
                 return $.when(initialize.apply(block, arguments)).then(function () {
+                    block.trigger('initialized');
                     block.render();
+                    block.trigger('rendered');
                 });
             };
 
@@ -60,20 +61,13 @@ define(function (require, exports, module) {
         render: function () {
 
             var block = this,
-                originalBlocks = _.clone(block.blocks),
-                template;
+                originalBlocks = _.clone(block.blocks);
 
             block.delegateEvents();
 
             if (block.template) {
-
-                template = block.template(block);
-
-                if (block.innerTemplate){
-                    block.el.innerHTML = template;
-                } else {
-                    block.setElement($(template).replaceAll(block.el));
-                }
+                block.setElement($(block.template(block)).replaceAll(block.el));
+                block.el.id = block.get('id');
             }
 
             block.removeBlocks();
@@ -151,28 +145,6 @@ define(function (require, exports, module) {
             }
 
             return child;
-        },
-
-        initModels: function () {
-
-            var block = this;
-
-            block.models = _.mapValues(block.models, function (constructor, modelName) {
-                return block.get('models.' + modelName);
-            });
-
-            block.model = block.get('model');
-        },
-
-        initCollections: function () {
-
-            var block = this;
-
-            block.collections = _.mapValues(block.collections, function (constructor, collectionName) {
-                return block.get('collections.' + collectionName);
-            });
-
-            block.collection = block.get('collection');
         },
 
         remove: function () {
