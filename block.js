@@ -61,13 +61,17 @@ define(function (require, exports, module) {
         render: function () {
 
             var block = this,
+                id = block.get('id'),
                 originalBlocks = _.clone(block.blocks);
 
             block.delegateEvents();
 
             if (block.template) {
                 block.setElement($(block.template(block)).replaceAll(block.el));
-                block.el.id = block.get('id');
+            }
+
+            if (id){
+                block.el.id = id;
             }
 
             block.removeBlocks();
