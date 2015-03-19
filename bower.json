@@ -28,10 +28,12 @@
     "makeClass": "https://github.com/borovin/makeClass.git",
     "get": "https://github.com/borovin/get.git",
     "set": "https://github.com/borovin/set.git",
-
     "backbone": "~1.1.2",
     "jquery": "~2.1.1",
-    "lodash": "~3.1.0",
+    "lodash": "^3.5.0",
     "requirejs": "~2.1.15"
+  },
+  "resolutions": {
+    "lodash": "^3.5.0"
   }
 }
