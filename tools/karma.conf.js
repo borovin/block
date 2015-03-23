@@ -13,8 +13,7 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             'tools/polyfills.js',
-            'require.config.js',
-            'tools/require.config.test.js',
+            'tools/require.config.js',
             'tools/karma.main.js',
             {pattern: '*.js', included: false},
             {pattern: 'bower_components/**/*', included: false},
@@ -28,23 +27,10 @@ module.exports = function(config) {
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        reporters: ['dots', 'coverage'],
-
-        preprocessors: {
-            // source files, that you wanna generate coverage for
-            // do not include tests or libraries
-            // (these files will be instrumented by Istanbul)
-            'block.js': ['coverage']
-        },
-
-        coverageReporter: {
-            type : 'lcov',
-            dir : 'coverage/'
-        },
+        reporters: ['dots'],
 
         // web server port
         port: 9876,
-
 
         // enable / disable colors in the output (reporters and logs)
         colors: true,

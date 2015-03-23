@@ -7,8 +7,7 @@
   },
   "scripts": {
     "test": "node ./node_modules/karma/bin/karma start ./tools/karma.conf.js --single-run",
-    "postinstall": "./node_modules/bower/bin/bower install",
-    "coveralls": "./node_modules/coveralls/bin/coveralls.js ./coverage/PhantomJS 1.9.8 (Mac OS X)/lcov.info"
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -17,7 +16,6 @@
     "bower": "^1.3.12",
     "grunt": "^0.4.5",
     "karma": "^0.12",
-    "karma-coverage": "^0.1",
     "karma-jasmine": "^0.2.0",
     "karma-phantomjs-launcher": "^0.1",
     "karma-requirejs": "^0.2"

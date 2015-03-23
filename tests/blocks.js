@@ -1,153 +1,120 @@
-define(function(require, exports, module) {
+define(function (require, exports, module) {
     //requirements
     var Block = require('../block');
 
-    describe('Вложенные блоки', function(){
+    describe(module.id, function () {
 
-        it('Вложенный блок инициализируется на элементе с атрибутом block', function(){
+        afterEach(function () {
+            document.body.innerHTML = '';
+        });
+
+        it('Initialize on element with attribute block="blockName"', function () {
 
             var blockConstructor = jasmine.createSpy('blockConstructor');
 
+            document.body.innerHTML = '<div block="block"></div>';
+
             new Block({
-                template: function(){
-                    return '<div><span block="block1"></span></div>';
-                },
+                el: document.body,
                 blocks: {
-                    block1: blockConstructor
+                    block: blockConstructor
                 }
             });
 
             expect(blockConstructor).toHaveBeenCalled();
         });
 
-        it('В конструктор вложенного блока передается объект содержащий элемент', function(){
+        it('Context has el', function () {
 
-            var blockConstructor = jasmine.createSpy('blockConstructor');
+            var el;
 
-            new Block({
-                template: function(){
-                    return '<div><span block="block1"></span></div>';
-                },
-                blocks: {
-                    block1: blockConstructor
-                }
-            });
-
-            expect(blockConstructor.calls.argsFor(0)[0].el.tagName).toEqual('SPAN');
-        });
-
-        it('В конструктор вложенного блока передается dataset', function(){
-
-            var blockConstructor = jasmine.createSpy('blockConstructor');
+            document.body.innerHTML = '<div id="block" block="block"></div>';
 
             new Block({
-                template: function(){
-                    return '<div><span data-text="text" data-id="id" block="block1"></span></div>';
-                },
+                el: document.body,
                 blocks: {
-                    block1: blockConstructor
+                    block: function (ctx) {
+                        el = ctx.el;
+                    }
                 }
             });
 
-            expect(blockConstructor.calls.argsFor(0)[0].text).toEqual('text');
-            expect(blockConstructor.calls.argsFor(0)[0].id).toEqual('id');
+
+            expect(el.id).toEqual('block');
         });
 
-        it('Элемент вложенного блока заменяется на template', function(){
+        it('Context has parentBlock', function () {
+
+            var ctx;
+
+            document.body.innerHTML = '<div id="block" block="block"></div>';
 
             var block = new Block({
-                template: function(){
-                    return '<div><span block="block1"></span></div>';
-                },
+                el: document.body,
                 blocks: {
-                    block1: Block.extend({
-                        template: function(){
-                            return '<b class="block1">text</b>'
-                        }
-                    })
+                    block: function (context) {
+                        ctx = context;
+                    }
                 }
             });
 
-            expect(block.el.querySelector('.block1').tagName).toEqual('B');
+
+            expect(ctx.parentBlock).toEqual(block);
         });
 
-        it('Все вложенные блоки доступны через свойство children после инициализации', function(){
+        it('Context has dataset', function () {
 
-            var block = new Block({
-                template: function(){
-                    return '<div><span block="block1"></span></div>';
-                },
+            var ctx;
+
+            document.body.innerHTML = '<div data-a="a" data-b="b" block="block"></div>';
+
+            new Block({
+                el: document.body,
                 blocks: {
-                    block1: Block.extend({
-                        template: function(){
-                            return '<b class="block1">text</b>'
-                        }
-                    })
+                    block: function (context) {
+                        ctx = context;
+                    }
                 }
             });
 
-            expect(block.children[0].el.tagName).toEqual('B');
+            expect(ctx.a).toEqual('a');
+            expect(ctx.b).toEqual('b');
         });
 
-        it('Все вложенные блоки содержат ссылку на родительский блок', function(){
+        it('Context convert data to number', function () {
 
-            var block = new Block({
-                template: function(){
-                    return '<div><span block="block1"></span></div>';
-                },
+            var ctx;
+
+            document.body.innerHTML = '<div data-number="1" block="block"></div>';
+
+            new Block({
+                el: document.body,
                 blocks: {
-                    block1: Block.extend({
-                        template: function(){
-                            return '<b class="block1">text</b>'
-                        }
-                    })
+                    block: function (context) {
+                        ctx = context;
+                    }
                 }
             });
 
-            expect(block.children[0].parentBlock).toEqual(block);
+            expect(ctx.number).toEqual(1);
         });
 
-        it('Метод block вставляет дочерний блок в шаблон', function(){
+        it('Context convert data to bool', function () {
 
-            var block = new Block({
-                template: _.template('<div><%= block(blocks.block1) %></div>'),
+            var ctx;
+
+            document.body.innerHTML = '<div data-bool="false" block="block"></div>';
+
+            new Block({
+                el: document.body,
                 blocks: {
-                    block1: Block.extend({
-                        template: _.template('<b class="block1">text</b>')
-                    })
+                    block: function (context) {
+                        ctx = context;
+                    }
                 }
             });
 
-            expect(block.el.querySelector('.block1').textContent).toEqual('text');
-        });
-
-        it('После рендеринга все временные конструкторы удаляются', function(){
-
-            var block = new Block({
-                template: _.template('<div><%= block(blocks.block1) %></div>'),
-                blocks: {
-                    block1: Block.extend({
-                        template: _.template('<b class="block1">text</b>')
-                    })
-                }
-            });
-
-            expect(_.keys(block.blocks)).toEqual(['block1']);
-        });
-
-        it('В метод block можно передать объекты-параметры', function(){
-
-            var spy = jasmine.createSpy('block');
-
-            var block = new Block({
-                text: 'test',
-                template: _.template('<div><%= block(testBlock, {a: {b: text}}) %></div>'),
-                testBlock: Block.extend({
-                    template: _.template('<b class="block1"><%- a.b %></b>')
-                })
-            });
-
-            expect(block.el.querySelector('.block1').textContent).toEqual('test');
+            expect(ctx.bool).toEqual(false);
         });
 
     });
