@@ -2,9 +2,9 @@ define(function(require, exports, module) {
     //requirements
     var Block = require('../block');
 
-    describe('Наследование через статический метод класса .extend', function() {
+    describe(module.id, function() {
 
-        it('Все блоки наследуются от базового класса через метод .extend()', function() {
+        it('instanceof works as expected', function() {
 
             var Block1 = Block.extend(),
                 Block2 = Block1.extend();
@@ -17,7 +17,7 @@ define(function(require, exports, module) {
 
         });
 
-        it('Все переданные объекты-параметры копируются в прототип дочернего класса', function() {
+        it('All properties copied to prototype', function() {
 
             var Block1 = Block.extend({
                     number: 1,
@@ -43,24 +43,7 @@ define(function(require, exports, module) {
             expect(block2.array).toEqual([3, 2, 1]);
         });
 
-        it('Последний переданный объект-параметр имеет наивысший приоритет', function() {
-
-            var Block1 = Block.extend({
-                number: 1
-            }, {
-                number: 2
-            }, {
-                number: 3
-            }, {
-                number: 4
-            });
-
-            var block1 = new Block1;
-
-            expect(block1.number).toEqual(4);
-        });
-
-        it('Вложенные объекты наследуются рекурсивно (deep extend)', function() {
+        it('Nested objects merged by deep extend method', function() {
 
             var Block1 = Block.extend({
                 nested: {
@@ -85,7 +68,7 @@ define(function(require, exports, module) {
             });
         });
 
-        it('Экземпляры классов наследуются по ссылке', function() {
+        it('Instances copied by link', function() {
 
             var Block1 = Block.extend(),
                 block1 = new Block1,

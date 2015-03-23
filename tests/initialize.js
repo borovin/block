@@ -2,24 +2,18 @@ define(function (require, exports, module) {
     //requirements
     var Block = require('../block');
 
-    describe('Инициализация класса', function () {
+    describe(module.id, function () {
 
-        it('Первый объект-параметр копируется в свойства экземпляра класса при инициализации', function () {
+        it('Call initialize', function () {
 
-            var block = new Block({
-                number: 1,
-                string: 'string1',
-                bool: true,
-                array: [1, 2, 3]
-            });
+            spyOn(Block.prototype, 'initialize');
 
-            expect(block.number).toBe(1);
-            expect(block.string).toBe('string1');
-            expect(block.bool).toBe(true);
-            expect(block.array).toEqual([1, 2, 3]);
+            new Block;
+
+            expect(Block.prototype.initialize).toHaveBeenCalled();
         });
 
-        it('Даже если метод initialize был переопределен', function () {
+        it('Initialize could be overwritten', function () {
 
             var Block1 = Block.extend({
                 count: 0,
@@ -37,31 +31,7 @@ define(function (require, exports, module) {
             expect(block.count).toBe(11)
         });
 
-        it('Класс может быть проинициализирован без ключевого слова new', function () {
-
-            var block = Block({
-                number: 1,
-                string: 'string1',
-                bool: true,
-                array: [1, 2, 3]
-            });
-
-            expect(block.number).toBe(1);
-            expect(block.string).toBe('string1');
-            expect(block.bool).toBe(true);
-            expect(block.array).toEqual([1, 2, 3]);
-        });
-
-        it('При инициализации вызывается метод initialize', function () {
-
-            spyOn(Block.prototype, 'initialize');
-
-            new Block;
-
-            expect(Block.prototype.initialize).toHaveBeenCalled();
-        });
-
-        it('В метод initialize передаются все параметры инициализации', function () {
+        it('All params pass to initialize', function () {
 
             spyOn(Block.prototype, 'initialize');
 
@@ -70,7 +40,7 @@ define(function (require, exports, module) {
             expect(Block.prototype.initialize).toHaveBeenCalledWith({a: 1}, 2, 'string');
         });
 
-        it('Метод initialize всегда возвращает promise', function () {
+        it('Initialize is promise', function () {
 
             var Block1 = Block.extend({
                 initialize: function () {
@@ -81,65 +51,6 @@ define(function (require, exports, module) {
             var block1 = new Block1;
 
             expect(typeof block1.initialize().then).toBe('function');
-        });
-
-        it('Метод initBlock возвращает новый блок', function () {
-
-            var block1 = new Block(),
-                block2 = Block.extend({
-                    name: 'block2'
-                }),
-                block3 = block1.initBlock(block2);
-
-            expect(block3.name).toEqual('block2');
-        });
-
-        it('Метод initBlock добавляет блок в children', function () {
-
-            var Block1 = Block.extend({
-                    name: 'block1'
-                }),
-                Block2 = Block.extend({
-                    name: 'block2'
-                });
-
-            var block1 = new Block1;
-
-            block1.initBlock(Block2);
-
-            expect(block1.children[0].name).toBe('block2');
-        });
-
-        it('Метод initBlock добавляет parentBlock', function () {
-
-            var Block1 = Block.extend({
-                    name: 'block1'
-                }),
-                Block2 = Block.extend({
-                    name: 'block2'
-                });
-
-            var block1 = new Block1;
-
-            var block3 = block1.initBlock(Block2);
-
-            expect(block3.parentBlock).toEqual(block1);
-        });
-
-        it('Children независимы', function () {
-
-            var Block1 = Block.extend({
-                    name: 'block1'
-                }),
-                Block2 = Block.extend({
-                    name: 'block2'
-                });
-
-            var block1 = new Block1;
-
-            var block3 = block1.initBlock(Block2);
-
-            expect(block3.children).not.toBe(block1.children);
         });
 
     });

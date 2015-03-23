@@ -24,14 +24,14 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "deepExtend": "https://github.com/borovin/deepExtend.git",
-    "makeClass": "https://github.com/borovin/makeClass.git",
-    "get": "https://github.com/borovin/get.git",
-    "set": "https://github.com/borovin/set.git",
     "backbone": "~1.1.2",
     "jquery": "~2.1.1",
     "lodash": "~3.5.0",
-    "requirejs": "~2.1.15",
+
+    "deepExtend": "https://github.com/borovin/deepExtend.git",
+    "makeClass": "https://github.com/borovin/makeClass.git",
+    "get": "https://github.com/borovin/get.git#~1.0.0",
+    "set": "https://github.com/borovin/set.git#~1.0.0",
     "amd-loader": "https://github.com/guybedford/amd-loader.git#~0.0.2"
   },
   "resolutions": {

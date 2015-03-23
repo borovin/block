@@ -4,7 +4,47 @@ define(function(require, exports, module) {
 
     describe('Метод set', function() {
 
-        it('Устанавливает значение через deepextend', function(){
+        it('Set new props', function(){
+
+            var block = new Block;
+
+            block.set('a.b.c', 'abc');
+
+            expect(block.a.b.c).toBe('abc');
+        });
+
+        it('Set return only changed properties', function(){
+
+            var block = new Block({
+                a: {
+                    b: 'b',
+                    c: 'c',
+                    d: 'd'
+                }
+            });
+
+            var changedProps = block.set('a', {
+                e: 'e',
+                b: 'b',
+                c: 'cc'
+            });
+
+            expect(changedProps).toEqual({a: {e: 'e', c: 'cc'}});
+        });
+
+        it('Array modification', function(){
+
+            var block = new Block({
+                arr: [1,2,3]
+            });
+
+            block.set('arr', [4,5,6]);
+
+            expect(block.arr).toEqual([4,5,6]);
+
+        });
+
+        it('Object modification', function(){
 
             var block = new Block({
                 a: {
@@ -12,18 +52,12 @@ define(function(require, exports, module) {
                 }
             });
 
-            block.set({
-                a: {
-                    c: 'c'
-                }
-            });
+            block.set('a.b', 'c');
 
-            expect(block.get('a.b')).toBe('b');
-            expect(block.get('a.c')).toBe('c');
-
+            expect(block.a.b).toEqual('c');
         });
 
-        it('Устанавливает значение по указанному пути', function(){
+        it('Set boolean', function(){
 
             var block = new Block({
                 a: {
@@ -31,23 +65,35 @@ define(function(require, exports, module) {
                 }
             });
 
-            block.set('a.c.d', 'c');
+            block.set('a.b', false);
 
-            expect(block.get('a.b')).toBe('b');
-            expect(block.get('a.c.d')).toBe('c');
-
+            expect(block.a.b).toBeFalsy();
         });
 
-        it('Вызывает событие set', function(){
+        it('Set number', function(){
 
-            var block = new Block(),
-                handler = jasmine.createSpy('handler');
+            var block = new Block({
+                a: {
+                    b: 'b'
+                }
+            });
 
-            block.on('set', handler);
+            block.set('a.b', 1);
 
-            block.set('a.c', {d: 'd'});
+            expect(block.a.b).toBe(1);
+        });
 
-            expect(handler).toHaveBeenCalledWith({a: {c: {d: 'd'}}});
+        it('Set nested array', function(){
+
+            var block = new Block({
+                a: {
+                    b: [1,2,3]
+                }
+            });
+
+            block.set('a.b', [4,5]);
+
+            expect(block.a.b).toEqual([4,5]);
 
         });
 
