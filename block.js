@@ -20,11 +20,16 @@ define(function (require, exports, module) {
             var initialize = block.initialize,
                 render = block.render;
 
+            block.cid = _.uniqueId('block');
+
             block.initialize = function (data) {
 
                 block.stopListening();
 
                 deepExtend(block, block.defaults, data);
+
+                block.initCollections();
+                block.initModels();
 
                 block._ensureElement();
 
@@ -32,19 +37,20 @@ define(function (require, exports, module) {
 
                 return $.when(initialize.apply(block, arguments)).then(function () {
                     block.trigger('initialized');
-                    block.render();
-                    block.trigger('rendered');
+                    return block.render();
                 });
             };
 
             block.render = function (data) {
 
+                block.trigger('rendering');
+
                 deepExtend(block, data);
 
-                return render.apply(block, arguments);
+                return $.when(render.apply(block, arguments), function(){
+                    block.trigger('rendered');
+                });
             };
-
-            block.cid = _.uniqueId('block');
 
             block.initialize.apply(this, arguments);
 
@@ -81,6 +87,28 @@ define(function (require, exports, module) {
 
             block.blocks = originalBlocks;
 
+        },
+
+        initCollections: function () {
+
+            var block = this;
+
+            block.collections = _.mapValues(block.collections, function (constructor, collectionName) {
+                return block.get('collections.' + collectionName);
+            });
+
+            block.collection = block.get('collection');
+        },
+
+        initModels: function () {
+
+            var block = this;
+
+            block.models = _.mapValues(block.models, function (constructor, modelName) {
+                return block.get('models.' + modelName);
+            });
+
+            block.model = block.get('model');
         },
 
         get: function () {
