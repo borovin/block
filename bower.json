@@ -28,10 +28,10 @@
     "jquery": "^2.1.1",
     "lodash": "^3.5.0",
 
-    "deepExtend": "https://github.com/borovin/deepExtend.git",
-    "makeClass": "https://github.com/borovin/makeClass.git",
-    "get": "https://github.com/borovin/get.git#^1.0.0",
-    "set": "https://github.com/borovin/set.git#^1.0.0",
+    "deepExtend": "https://github.com/borovin/deepExtend.git#^0.0.1",
+    "makeClass": "https://github.com/borovin/makeClass.git#^0.0.1",
+    "get": "https://github.com/borovin/get.git#^0.0.1",
+    "set": "https://github.com/borovin/set.git#^0.0.1",
     "amd-loader": "https://github.com/guybedford/amd-loader.git#^0.0.2"
   },
   "resolutions": {
