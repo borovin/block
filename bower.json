@@ -32,7 +32,7 @@
     "makeClass": "https://github.com/borovin/makeClass.git#^1.0.0",
     "get": "https://github.com/borovin/get.git#^1.0.0",
     "set": "https://github.com/borovin/set.git#^1.0.0",
-    "amd-loader": "https://github.com/guybedford/amd-loader.git#^0.0.2"
+    "amd-loader": "https://github.com/guybedford/amd-loader.git"
   },
   "resolutions": {
     "lodash": "^3.5.0"
