@@ -47,7 +47,7 @@ define(function (require, exports, module) {
 
                 deepExtend(block, data);
 
-                return $.when(render.apply(block, arguments), function(){
+                return $.when(render.apply(block, arguments)).then(function(){
                     block.trigger('rendered');
                 });
             };
