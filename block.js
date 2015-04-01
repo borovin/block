@@ -138,7 +138,7 @@ define(function (require, exports, module) {
 
             var block = this,
                 id = _.uniqueId('tmp-'),
-                placeholder = '<' + tag + ' block="' + id + '"></' + tag + '>';
+                placeholder = '<' + params.tag + ' block="' + id + '"></' + params.tag + '>';
 
             block.blocks[id] = function (opt) {
                 return constructor.call(block, _.extend(opt, params));
