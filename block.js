@@ -132,9 +132,13 @@ define(function (require, exports, module) {
 
         include: function (constructor, params) {
 
+            params = _.extend({
+                tag: 'b'
+            }, params);
+
             var block = this,
                 id = _.uniqueId('tmp-'),
-                placeholder = '<b block="' + id + '"></b>';
+                placeholder = '<' + tag + ' block="' + id + '"></' + tag + '>';
 
             block.blocks[id] = function (opt) {
                 return constructor.call(block, _.extend(opt, params));
