@@ -36,20 +36,18 @@ define(function (require, exports, module) {
                 block.trigger('initializing');
 
                 return $.when(initialize.apply(block, arguments)).then(function () {
+
+                    block.render();
+
                     block.trigger('initialized');
-                    return block.render();
                 });
             };
 
             block.render = function (data) {
 
-                block.trigger('rendering');
-
                 deepExtend(block, data);
 
-                return $.when(render.apply(block, arguments)).then(function(){
-                    block.trigger('rendered');
-                });
+                return render.apply(block, arguments);
             };
 
             block.initialize.apply(this, arguments);
