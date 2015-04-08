@@ -39,6 +39,8 @@ define(function (require, exports, module) {
 
                     block.render();
 
+                    block.startListening();
+
                     block.trigger('initialized');
                 });
             };
@@ -250,6 +252,29 @@ define(function (require, exports, module) {
                 } else {
                     $(document).on(eventName + '.' + block.cid, handler.bind(block));
                 }
+
+            });
+        },
+
+        startListening: function(){
+
+            var block = this,
+                listeners = block.get('listeners');
+
+            _.forEach(listeners, function(listener, path){
+
+                var normalizedListener = _.mapValues(listener, function(value){
+
+                    if (typeof value === 'string'){
+                        return function(){
+                            block[value].apply(block, arguments);
+                        }
+                    } else {
+                        return value;
+                    }
+                });
+
+                block.listenTo(block.get(path), normalizedListener);
 
             });
         }
