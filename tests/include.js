@@ -8,15 +8,36 @@ define(function (require, exports, module) {
             document.body.innerHTML = '';
         });
 
-        it('Include with custom tag', function () {
+        it('Include block', function () {
 
-            var constructor = function(){};
-
-            var block = new Block({
-                el: document.body
+            var child = Block.extend({
+                template: function(){
+                    return '<div class="child">child</div>'
+                }
             });
 
-            expect(block.include(constructor, {tag: 'tr'}).indexOf('<tr')).toBe(0);
+            var block = new Block({
+                template: function(block){
+                    return '<div>' + block.include(child) + '</div>'
+                }
+            });
+
+            expect(block.el.querySelector('.child').innerHTML).toEqual('child');
+        });
+
+        it('Include partial', function () {
+
+            var child = function(){
+                return '<div class="child">child</div>'
+            };
+
+            var block = new Block({
+                template: function(block){
+                    return '<div>' + block.include(child) + '</div>'
+                }
+            });
+
+            expect(block.el.querySelector('.child').innerHTML).toEqual('child');
         });
 
     });

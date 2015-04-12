@@ -58,34 +58,30 @@ define(function (require, exports, module) {
         },
 
         globalEvents: {},
+        listeners: {},
         events: {},
         defaults: {},
-        children: [],
         blocks: {},
+        children: [],
 
         render: function () {
 
             var block = this,
-                id = block.get('id'),
-                originalBlocks = _.clone(block.blocks);
+                id = block.get('id');
 
-            block.delegateEvents();
+            block.removeBlocks();
 
             if (block.template) {
                 block.setElement($(block.template(block)).replaceAll(block.el));
             }
 
-            if (id){
+            if (id) {
                 block.el.id = id;
             }
-
-            block.removeBlocks();
 
             block.initBlocks();
 
             block.el.block = block;
-
-            block.blocks = originalBlocks;
 
         },
 
@@ -132,52 +128,35 @@ define(function (require, exports, module) {
 
         include: function (constructor, params) {
 
-            params = _.extend({
-                tag: 'b'
-            }, params);
+            var block = this;
 
-            var block = this,
-                id = _.uniqueId('tmp-'),
-                placeholder = '<' + params.tag + ' block="' + id + '"></' + params.tag + '>';
+            var include = constructor.call(block, params);
 
-            block.blocks[id] = function (opt) {
-                return constructor.call(block, _.extend(opt, params));
-            };
+            if (typeof include === 'string') {
+                return include;
+            }
 
-            return placeholder;
+            block.initBlock(include);
+
+            return '<' + include.el.tagName + ' block-cid="' + include.cid + '"></' + include.el.tagName + '>';
         },
 
         initBlocks: function () {
 
             var block = this,
-                $blocks = block.$('[block]');
+                $blocks = block.$('[block-cid]'),
+                blocks = {};
+
+            _.forEach(block.children, function(block){
+                blocks[block.cid] = block;
+            });
 
             $blocks.each(function () {
                 var placeholder = this,
-                    blockName = placeholder.getAttribute('block'),
-                    constructor = block.blocks[blockName];
+                    blockCid = placeholder.getAttribute('block-cid'),
+                    child = blocks[blockCid];
 
-                var params = _.transform(placeholder.dataset, function (result, data, key) {
-
-                    result[key] = data;
-
-                    if (data === 'true') {
-                        result[key] = true;
-                    }
-
-                    if (data === 'false') {
-                        result[key] = false;
-                    }
-
-                    if (!_.isNaN(Number(data))) {
-                        result[key] = Number(data)
-                    }
-                });
-
-                params.el = placeholder;
-                params.parentBlock = block;
-
-                block.initBlock(constructor, params);
+                $(placeholder).replaceWith(child.el);
 
             });
         },
@@ -185,9 +164,15 @@ define(function (require, exports, module) {
         initBlock: function (constructor, params) {
 
             var block = this,
+                child = constructor;
+
+            if (typeof constructor === 'function') {
                 child = constructor.call(block, _.extend({}, params, {
                     parentBlock: block
                 }));
+            } else {
+                child.parentBlock = block;
+            }
 
             block.children.push(child);
 
@@ -208,7 +193,7 @@ define(function (require, exports, module) {
 
             block.removeBlocks();
 
-            if (!block.innerTemplate){
+            if (!block.innerTemplate) {
                 View.prototype.remove.apply(block, arguments);
             }
         },
@@ -256,17 +241,17 @@ define(function (require, exports, module) {
             });
         },
 
-        startListening: function(){
+        startListening: function () {
 
             var block = this,
                 listeners = block.get('listeners');
 
-            _.forEach(listeners, function(listener, path){
+            _.forEach(listeners, function (listener, path) {
 
-                var normalizedListener = _.mapValues(listener, function(value){
+                var normalizedListener = _.mapValues(listener, function (value) {
 
-                    if (typeof value === 'string'){
-                        return function(){
+                    if (typeof value === 'string') {
+                        return function () {
                             block[value].apply(block, arguments);
                         }
                     } else {
