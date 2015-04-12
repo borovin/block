@@ -61,8 +61,7 @@ define(function (require, exports, module) {
         listeners: {},
         events: {},
         defaults: {},
-        blocks: {},
-        children: [],
+        children: {},
 
         render: function () {
 
@@ -128,15 +127,8 @@ define(function (require, exports, module) {
 
         include: function (constructor, params) {
 
-            var block = this;
-
-            var include = constructor.call(block, params);
-
-            if (typeof include === 'string') {
-                return include;
-            }
-
-            block.initBlock(include);
+            var block = this,
+                include = block.initBlock(constructor, params);
 
             return '<' + include.el.tagName + ' block-cid="' + include.cid + '"></' + include.el.tagName + '>';
         },
@@ -144,17 +136,13 @@ define(function (require, exports, module) {
         initBlocks: function () {
 
             var block = this,
-                $blocks = block.$('[block-cid]'),
-                blocks = {};
-
-            _.forEach(block.children, function(block){
-                blocks[block.cid] = block;
-            });
+                $blocks = block.$('[block-cid]');
 
             $blocks.each(function () {
+
                 var placeholder = this,
                     blockCid = placeholder.getAttribute('block-cid'),
-                    child = blocks[blockCid];
+                    child = block.children[blockCid];
 
                 $(placeholder).replaceWith(child.el);
 
@@ -164,21 +152,11 @@ define(function (require, exports, module) {
         initBlock: function (constructor, params) {
 
             var block = this,
-                child = constructor;
-
-            if (typeof constructor === 'function') {
                 child = constructor.call(block, _.extend({}, params, {
                     parentBlock: block
                 }));
-            } else {
-                child.parentBlock = block;
-            }
 
-            block.children.push(child);
-
-            if (child && child.el) {
-                child.el.removeAttribute('block');
-            }
+            block.children[child.cid] = child;
 
             return child;
         },
@@ -193,9 +171,7 @@ define(function (require, exports, module) {
 
             block.removeBlocks();
 
-            if (!block.innerTemplate) {
-                View.prototype.remove.apply(block, arguments);
-            }
+            View.prototype.remove.apply(block, arguments);
         },
 
         removeBlocks: function () {
@@ -210,7 +186,7 @@ define(function (require, exports, module) {
 
             });
 
-            block.children = [];
+            block.children = {};
         },
 
         trigger: function (event, data) {
