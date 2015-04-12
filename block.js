@@ -69,16 +69,10 @@ define(function (require, exports, module) {
                 id = block.get('id');
 
             block.removeBlocks();
-
-            if (block.template) {
-                block.setElement($(block.template(block)).replaceAll(block.el));
-            }
-
-            if (id) {
-                block.el.id = id;
-            }
-
+            block.template && block.setElement($(block.template(block)).replaceAll(block.el));
             block.initBlocks();
+
+            id && (block.el.id = id);
 
             block.el.block = block;
 
@@ -118,11 +112,11 @@ define(function (require, exports, module) {
 
             var block = this,
                 args = [block].concat([].slice.call(arguments)),
-                __set = set.apply(null, args);
+                changed = set.apply(null, args);
 
-            block.trigger('set', __set);
+            block.trigger('change', changed);
 
-            return __set;
+            return changed;
         },
 
         include: function (constructor, params) {
