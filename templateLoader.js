@@ -7,7 +7,7 @@ define(function(require) {
     return amdLoader('tpl', function(name, source, req, callback, errback, config) {
 
         var options = {
-            variable: 'block'
+            variable: 'ctx'
         };
 
         var content = 'define(function(require){return ' + _.template(source, options) + '})';

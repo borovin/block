@@ -124,7 +124,14 @@ define(function (require, exports, module) {
             var block = this,
                 include = block.initBlock(constructor, params);
 
-            return '<' + include.el.tagName + ' block-cid="' + include.cid + '"></' + include.el.tagName + '>';
+            if (constructor.extend){
+                include = block.initBlock(constructor, params);
+                include = '<' + include.el.tagName + ' block-cid="' + include.cid + '"></' + include.el.tagName + '>';
+            } else {
+                include = constructor.call(block, params);
+            }
+
+            return include;
         },
 
         initBlocks: function () {
@@ -147,7 +154,7 @@ define(function (require, exports, module) {
 
             var block = this,
                 child = constructor.call(block, _.extend({}, params, {
-                    parentBlock: block
+                    parent: block
                 }));
 
             block.children[child.cid] = child;
