@@ -18,8 +18,8 @@ define(function (require, exports, module) {
             });
 
             var block = new Block({
-                template: function(block){
-                    return '<div>' + block.include(child) + '</div>'
+                template: function(){
+                    return '<div>' + this.include(child) + '</div>'
                 }
             });
 
@@ -28,14 +28,14 @@ define(function (require, exports, module) {
 
         it('Include partial', function () {
 
-            var partial = function(data){
+            var partial = function(){
                 return '<div class="child">' + this.text + '</div>'
             };
 
             var block = new Block({
                 text: 'child',
-                template: function(block){
-                    return '<div>' + block.include(partial) + '</div>'
+                template: function(){
+                    return '<div>' + this.include(partial) + '</div>'
                 }
             });
 

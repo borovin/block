@@ -25,6 +25,22 @@ module.exports = function(config) {
         ],
 
 
+        preprocessors: {
+            // source files, that you wanna generate coverage for
+            // do not include tests or libraries
+            // (these files will be instrumented by Istanbul)
+            'block.js': ['coverage']
+        },
+
+
+        // optionally, configure the reporter
+        coverageReporter: {
+            type : 'lcovonly',
+            dir : 'coverage',
+            subdir : '.'
+        },
+
+
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
         reporters: ['dots'],

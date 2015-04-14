@@ -69,7 +69,7 @@ define(function (require, exports, module) {
                 id = block.get('id');
 
             block.removeBlocks();
-            block.template && block.setElement($(block.template(block)).replaceAll(block.el));
+            block.template && block.setElement($(block.template()).replaceAll(block.el));
             block.initBlocks();
 
             id && (block.el.id = id);
