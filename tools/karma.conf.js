@@ -36,9 +36,14 @@ module.exports = function(config) {
         // optionally, configure the reporter
         coverageReporter: {
             type : 'lcovonly',
-            dir : 'coverage',
+            dir : 'reporters',
             subdir : '.'
         },
+
+        junitReporter: {
+            outputFile: 'reporters/junit.xml'
+        },
+
 
 
         // test results reporter to use
