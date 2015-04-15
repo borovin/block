@@ -17,8 +17,7 @@ define(function (require, exports, module) {
 
             var block = this;
 
-            var initialize = block.initialize,
-                render = block.render;
+            var initialize = block.initialize;
 
             block.cid = _.uniqueId('block');
 
@@ -45,13 +44,6 @@ define(function (require, exports, module) {
                 });
             };
 
-            block.render = function (data) {
-
-                deepExtend(block, data);
-
-                return render.apply(block, arguments);
-            };
-
             block.initialize.apply(this, arguments);
 
             block.delegateGlobalEvents();
@@ -62,6 +54,7 @@ define(function (require, exports, module) {
         events: {},
         defaults: {},
         children: {},
+        template: null,
 
         render: function () {
 
