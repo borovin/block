@@ -12,7 +12,8 @@ define(function (require, exports, module) {
     var View = Backbone.View;
 
     /**
-     * @class Block расширенный класс Backbone.View
+     * расширенный класс Backbone.View
+     * @class Block
      * @param {Object} opt block options
      * @param {String | HTMLElement} opt.el элемент к которому будет привязан блок
      * @param {Function} opt.template шаблон, который будет использован для формирования DOM элемента блока
