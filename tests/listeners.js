@@ -69,5 +69,24 @@ define(function (require, exports, module) {
             expect(listener).toHaveBeenCalled();
         });
 
+        it('Listen block itself', function () {
+
+            var listener = jasmine.createSpy('listener');
+
+            var block = new Block({
+                id: 'block',
+                listeners: {
+                    'change:a.b': listener
+                },
+                a: {
+                    b: 'b'
+                }
+            });
+
+            block.set('a.b', 'c');
+
+            expect(listener).toHaveBeenCalled();
+        });
+
     });
 });

@@ -1,5 +1,5 @@
 .idea/
 bower_components/
 node_modules/
-coverage/
+reporters/
 .DS_Store

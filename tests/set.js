@@ -97,6 +97,31 @@ define(function(require, exports, module) {
 
         });
 
+        iit('Set trigger change events', function(){
+
+            var change1 = jasmine.createSpy('a.b'),
+                change2 = jasmine.createSpy('a.c');
+
+            var block = new Block({
+                a: {
+                    b: 'b',
+                    c: 'c'
+                }
+            });
+
+            block.on('change:a.b', change1);
+            block.on('change:a.c', change2);
+
+            block.set('a', {
+                b: 'new',
+                c: 'c'
+            });
+
+            expect(change1).toHaveBeenCalled();
+            expect(change2).not.toHaveBeenCalled();
+
+        });
+
     });
 
 });

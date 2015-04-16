@@ -107,7 +107,18 @@ define(function (require, exports, module) {
                 args = [block].concat([].slice.call(arguments)),
                 changed = set.apply(null, args);
 
-            block.trigger('change', changed);
+            var triggerChanges = function(path, data){
+
+                if (_.isPlainObject(data)){
+                    _.forEach(data, function(data, key){
+                        triggerChanges(path ? (path + '.' + key) : key, data);
+                    });
+                }
+
+                block.trigger(path ? ('change:' + path) : 'change', data);
+            };
+
+            triggerChanges('', changed);
 
             return changed;
         },
@@ -218,18 +229,36 @@ define(function (require, exports, module) {
 
             _.forEach(listeners, function (listener, path) {
 
-                var normalizedListener = _.mapValues(listener, function (value) {
+                var normalizedListener;
 
-                    if (typeof value === 'string') {
-                        return function () {
-                            block[value].apply(block, arguments);
+                if (_.isPlainObject(listener)){
+
+                    normalizedListener = _.mapValues(listener, function (value) {
+
+                        if (typeof value === 'string') {
+                            return function () {
+                                block[value].apply(block, arguments);
+                            }
+                        } else {
+                            return value;
                         }
-                    } else {
-                        return value;
-                    }
-                });
+                    });
 
-                block.listenTo(block.get(path), normalizedListener);
+                    block.listenTo(block.get(path), normalizedListener);
+
+                } else {
+
+                    if (typeof listener === 'string'){
+                        normalizedListener = function () {
+                            block[listener].apply(block, arguments);
+                        };
+                    } else {
+                        normalizedListener = listener;
+                    }
+
+                    block.listenTo(block, path, normalizedListener);
+
+                }
 
             });
         }
