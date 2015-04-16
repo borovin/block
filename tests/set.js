@@ -97,7 +97,7 @@ define(function(require, exports, module) {
 
         });
 
-        iit('Set trigger change events', function(){
+        it('Set trigger change events', function(){
 
             var change1 = jasmine.createSpy('a.b'),
                 change2 = jasmine.createSpy('a.c');

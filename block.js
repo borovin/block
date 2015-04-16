@@ -62,13 +62,18 @@ define(function (require, exports, module) {
                 id = block.get('id');
 
             block.removeBlocks();
-            block.template && block.setElement($(block.template()).replaceAll(block.el));
-            block.initBlocks();
 
-            id && (block.el.id = id);
+            if (block.template) {
+                block.setElement($(block.template()).replaceAll(block.el));
+            }
+
+            if (id){
+                block.el.id = id
+            }
 
             block.el.block = block;
 
+            block.initBlocks();
         },
 
         initCollections: function () {
@@ -107,10 +112,10 @@ define(function (require, exports, module) {
                 args = [block].concat([].slice.call(arguments)),
                 changed = set.apply(null, args);
 
-            var triggerChanges = function(path, data){
+            var triggerChanges = function (path, data) {
 
-                if (_.isPlainObject(data)){
-                    _.forEach(data, function(data, key){
+                if (_.isPlainObject(data)) {
+                    _.forEach(data, function (data, key) {
                         triggerChanges(path ? (path + '.' + key) : key, data);
                     });
                 }
@@ -128,7 +133,7 @@ define(function (require, exports, module) {
             var block = this,
                 include = block.initBlock(constructor, params);
 
-            if (constructor.extend){
+            if (constructor.extend) {
                 include = block.initBlock(constructor, params);
                 include = '<' + include.el.tagName + ' block-cid="' + include.cid + '"></' + include.el.tagName + '>';
             } else {
@@ -231,7 +236,7 @@ define(function (require, exports, module) {
 
                 var normalizedListener;
 
-                if (_.isPlainObject(listener)){
+                if (_.isPlainObject(listener)) {
 
                     normalizedListener = _.mapValues(listener, function (value) {
 
@@ -248,7 +253,7 @@ define(function (require, exports, module) {
 
                 } else {
 
-                    if (typeof listener === 'string'){
+                    if (typeof listener === 'string') {
                         normalizedListener = function () {
                             block[listener].apply(block, arguments);
                         };
