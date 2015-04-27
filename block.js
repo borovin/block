@@ -256,7 +256,7 @@ define(function (require, exports, module) {
                         }
                     });
 
-                    block.listenTo(block.get(path), normalizedListener);
+                    block.get(path) && block.listenTo(block.get(path), normalizedListener);
 
                 } else {
 
