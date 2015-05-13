@@ -188,6 +188,8 @@ define(function (require, exports, module) {
 
             block.removeBlocks();
 
+            delete block.parent[block.cid];
+
             View.prototype.remove.apply(block, arguments);
         },
 
