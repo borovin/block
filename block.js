@@ -66,12 +66,14 @@ define(function (require, exports, module) {
         render: function () {
 
             var block = this,
-                id = block.get('id');
+                id = block.get('id'),
+                $el = block.$el;
 
             block.removeBlocks();
 
             if (block.template) {
-                block.setElement($(block.template()).replaceAll(block.el));
+                block.setElement(block.template());
+                $el && $el.replaceWith(block.el);
             }
 
             if (id){
