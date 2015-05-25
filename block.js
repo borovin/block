@@ -140,7 +140,7 @@ define(function (require, exports, module) {
         include: function (constructor, params) {
 
             var block = this,
-                include = block.initBlock(constructor, params);
+                include;
 
             if (constructor.extend) {
                 include = block.initBlock(constructor, params);
