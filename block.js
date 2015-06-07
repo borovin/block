@@ -1,4 +1,4 @@
-define(function (require, exports, module) {
+define(function(require, exports, module) {
     //requirements
     var get = require('bower_components/get/get'),
         set = require('bower_components/set/set'),
@@ -20,7 +20,7 @@ define(function (require, exports, module) {
      */
     return makeClass(View, {
 
-        constructor: function () {
+        constructor: function() {
 
             var block = this;
 
@@ -28,7 +28,7 @@ define(function (require, exports, module) {
 
             block.cid = _.uniqueId('block');
 
-            block.initialize = function (data) {
+            block.initialize = function(data) {
 
                 block.stopListening();
 
@@ -41,7 +41,7 @@ define(function (require, exports, module) {
 
                 block.trigger('initializing');
 
-                return $.when(initialize.apply(block, arguments)).then(function () {
+                return $.when(initialize.apply(block, arguments)).then(function() {
 
                     block.render();
 
@@ -63,11 +63,12 @@ define(function (require, exports, module) {
         children: {},
         template: null,
 
-        render: function () {
+        render: function() {
 
             var block = this,
                 id = block.get('id'),
-                $el = block.$el;
+                $el = block.$el,
+                className = block.get('className');
 
             block.removeBlocks();
 
@@ -76,8 +77,14 @@ define(function (require, exports, module) {
                 $el && $el.replaceWith(block.el);
             }
 
-            if (id){
+            if (id) {
                 block.el.id = id
+            }
+
+            if (className) {
+                _.forEach(className.split(' '), function(className) {
+                    block.el.classList.add(className);
+                });
             }
 
             block.el.block = block;
@@ -85,29 +92,29 @@ define(function (require, exports, module) {
             block.initBlocks();
         },
 
-        initCollections: function () {
+        initCollections: function() {
 
             var block = this;
 
-            block.collections = _.mapValues(block.collections, function (constructor, collectionName) {
+            block.collections = _.mapValues(block.collections, function(constructor, collectionName) {
                 return block.get('collections.' + collectionName);
             });
 
             block.collection = block.get('collection');
         },
 
-        initModels: function () {
+        initModels: function() {
 
             var block = this;
 
-            block.models = _.mapValues(block.models, function (constructor, modelName) {
+            block.models = _.mapValues(block.models, function(constructor, modelName) {
                 return block.get('models.' + modelName);
             });
 
             block.model = block.get('model');
         },
 
-        get: function () {
+        get: function() {
 
             var block = this,
                 args = [block].concat([].slice.call(arguments));
@@ -115,16 +122,16 @@ define(function (require, exports, module) {
             return get.apply(null, args);
         },
 
-        set: function () {
+        set: function() {
 
             var block = this,
                 args = [block].concat([].slice.call(arguments)),
                 changed = set.apply(null, args);
 
-            var triggerChanges = function (path, data) {
+            var triggerChanges = function(path, data) {
 
                 if (_.isPlainObject(data)) {
-                    _.forEach(data, function (data, key) {
+                    _.forEach(data, function(data, key) {
                         triggerChanges(path ? (path + '.' + key) : key, data);
                     });
                 }
@@ -137,7 +144,7 @@ define(function (require, exports, module) {
             return changed;
         },
 
-        include: function (constructor, params) {
+        include: function(constructor, params) {
 
             var block = this,
                 include;
@@ -152,12 +159,12 @@ define(function (require, exports, module) {
             return include;
         },
 
-        initBlocks: function () {
+        initBlocks: function() {
 
             var block = this,
                 $blocks = block.$('[block-cid]');
 
-            $blocks.each(function () {
+            $blocks.each(function() {
 
                 var placeholder = this,
                     blockCid = placeholder.getAttribute('block-cid'),
@@ -168,7 +175,7 @@ define(function (require, exports, module) {
             });
         },
 
-        initBlock: function (constructor, params) {
+        initBlock: function(constructor, params) {
 
             var block = this,
                 child = constructor.call(block, _.extend({}, params, {
@@ -180,7 +187,7 @@ define(function (require, exports, module) {
             return child;
         },
 
-        remove: function () {
+        remove: function() {
 
             var block = this;
 
@@ -195,11 +202,11 @@ define(function (require, exports, module) {
             View.prototype.remove.apply(block, arguments);
         },
 
-        removeBlocks: function () {
+        removeBlocks: function() {
 
             var block = this;
 
-            _.each(block.children, function (blockToRemove) {
+            _.each(block.children, function(blockToRemove) {
 
                 if (blockToRemove && typeof blockToRemove.remove === 'function') {
                     blockToRemove.remove();
@@ -210,7 +217,7 @@ define(function (require, exports, module) {
             block.children = {};
         },
 
-        trigger: function (event, data) {
+        trigger: function(event, data) {
 
             var block = this;
 
@@ -219,13 +226,13 @@ define(function (require, exports, module) {
             return View.prototype.trigger.apply(block, arguments);
         },
 
-        delegateGlobalEvents: function () {
+        delegateGlobalEvents: function() {
 
             var block = this;
 
             $(document).off('.' + block.cid);
 
-            _.each(block.globalEvents, function (handler, event) {
+            _.each(block.globalEvents, function(handler, event) {
                 var path = event.split(' '),
                     eventName = path.shift();
 
@@ -238,21 +245,21 @@ define(function (require, exports, module) {
             });
         },
 
-        startListening: function () {
+        startListening: function() {
 
             var block = this,
                 listeners = block.get('listeners');
 
-            _.forEach(listeners, function (listener, path) {
+            _.forEach(listeners, function(listener, path) {
 
                 var normalizedListener;
 
                 if (_.isPlainObject(listener)) {
 
-                    normalizedListener = _.mapValues(listener, function (value) {
+                    normalizedListener = _.mapValues(listener, function(value) {
 
                         if (typeof value === 'string') {
-                            return function () {
+                            return function() {
                                 block[value].apply(block, arguments);
                             }
                         } else {
@@ -265,7 +272,7 @@ define(function (require, exports, module) {
                 } else {
 
                     if (typeof listener === 'string') {
-                        normalizedListener = function () {
+                        normalizedListener = function() {
                             block[listener].apply(block, arguments);
                         };
                     } else {
