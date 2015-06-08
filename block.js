@@ -66,25 +66,25 @@ define(function(require, exports, module) {
         render: function() {
 
             var block = this,
+                attrs = block.get('attributes') || {},
                 id = block.get('id'),
                 $el = block.$el,
                 className = block.get('className');
 
             block.removeBlocks();
 
-            if (block.template) {
-                block.setElement(block.template());
-                $el && $el.replaceWith(block.el);
-            }
-
             if (id) {
-                block.el.id = id
+                attrs.id = id
             }
 
             if (className) {
-                _.forEach(className.split(' '), function(className) {
-                    block.el.classList.add(className);
-                });
+                attrs['class'] = className;
+            }
+
+            if (block.template) {
+                block.setElement(block.template());
+                $el && $el.replaceWith(block.el);
+                block.$el.attr(attrs);
             }
 
             block.el.block = block;
