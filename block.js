@@ -66,7 +66,7 @@ define(function(require, exports, module) {
         render: function() {
 
             var block = this,
-                attrs = block.get('attributes') || {},
+                attrs = _.extend({}, block.get('attributes')),
                 id = block.get('id'),
                 $el = block.$el,
                 className = block.get('className');
