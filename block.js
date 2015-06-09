@@ -68,8 +68,7 @@ define(function(require, exports, module) {
             var block = this,
                 attrs = _.extend({}, block.get('attributes')),
                 id = block.get('id'),
-                $el = block.$el,
-                className = block.get('className');
+                $el = block.$el;
 
             block.removeBlocks();
 
@@ -77,14 +76,12 @@ define(function(require, exports, module) {
                 attrs.id = id
             }
 
-            if (className) {
-                attrs['class'] = className;
-            }
-
             if (block.template) {
                 block.setElement(block.template());
                 $el && $el.replaceWith(block.el);
-                block.$el.attr(attrs);
+                block.$el
+                    .attr(attrs)
+                    .addClass(block.get('className'));
             }
 
             block.el.block = block;
