@@ -1,54 +1,42 @@
 // Karma configuration
-// Generated on Fri Sep 27 2013 16:37:01 GMT+0400 (MSK)
 
 module.exports = function(config) {
     config.set({
 
         // base path, that will be used to resolve files and exclude
-        basePath: '../',
+        basePath: './',
 
         // frameworks to use
-        frameworks: ['jasmine', 'requirejs'],
+        frameworks: ['jasmine', 'systemjs'],
 
         // list of files / patterns to load in the browser
-        files: [
-            'tools/polyfills.js',
-            'tools/require.config.js',
-            'tools/karma.main.js',
-            {pattern: '*.js', included: false},
-            {pattern: 'bower_components/**/*', included: false},
-            {pattern: 'tests/**/*', included: false}
-        ],
+        files: [],
+
+        systemjs: {
+
+            configFile: 'system.config.js',
+
+            // File patterns for your application code, dependencies, and test suites
+            files: [
+                'bower_components/**/*',
+                './*.js'
+            ],
+
+            config: {
+                baseURL: '/',
+                transpiler: null
+            }
+        },
 
         // list of files to exclude
         exclude: [
+            'bower_components/**/*.spec.js'
         ],
-
-
-        preprocessors: {
-            // source files, that you wanna generate coverage for
-            // do not include tests or libraries
-            // (these files will be instrumented by Istanbul)
-            'block.js': ['coverage']
-        },
-
-
-        // optionally, configure the reporter
-        coverageReporter: {
-            type : 'lcovonly',
-            dir : 'reporters',
-            subdir : '.'
-        },
-
-        junitReporter: {
-            outputFile: 'reporters/junit.xml'
-        },
-
 
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        reporters: ['dots'],
+        reporters: ['mocha'],
 
         // web server port
         port: 9876,

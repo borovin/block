@@ -1,12 +1,11 @@
-define(function(require, exports, module) {
+define(function(require) {
     //requirements
-    var get = require('bower_components/get/get'),
-        set = require('bower_components/set/set'),
-        deepExtend = require('bower_components/deepExtend/deepExtend'),
-        makeClass = require('bower_components/makeClass/makeClass'),
-
-        Backbone = require('bower_components/backbone/backbone'),
-        _ = require('bower_components/lodash/lodash'),
+    var get = require('bower_components/get/get.js'),
+        set = require('bower_components/set/set.js'),
+        deepExtend = require('bower_components/deepExtend/deepExtend.js'),
+        createClass = require('bower_components/createClass/createClass.js'),
+        Backbone = require('bower_components/backbone/backbone.js'),
+        _ = require('bower_components/lodash/lodash.js'),
         $ = require('jquery');
 
     var View = Backbone.View;
@@ -18,7 +17,7 @@ define(function(require, exports, module) {
      * @param {String | HTMLElement} opt.el элемент к которому будет привязан блок
      * @param {Function} opt.template шаблон, который будет использован для формирования DOM элемента блока
      */
-    return makeClass(View, {
+    return createClass(View, {
 
         constructor: function() {
 
