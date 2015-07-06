@@ -33,6 +33,22 @@ module.exports = function(config) {
             'bower_components/**/*.spec.js'
         ],
 
+        preprocessors: {
+            // source files, that you wanna generate coverage for
+            // do not include tests or libraries
+            // (these files will be instrumented by Istanbul)
+            'block.js': ['coverage']
+        },
+
+        coverageReporter: {
+            type : 'lcovonly',
+            dir : 'reporters',
+            subdir : '.'
+        },
+
+        junitReporter: {
+            outputFile: 'reporters/junit.xml'
+        },
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
