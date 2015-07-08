@@ -143,13 +143,16 @@ define(function(require) {
         include: function(constructor, params) {
 
             var block = this,
+                childBlock,
                 include;
 
-            if (constructor.extend) {
-                include = block.initBlock(constructor, params);
-                include = '<' + include.el.tagName + ' block-cid="' + include.cid + '"></' + include.el.tagName + '>';
-            } else {
+            if (constructor.extend || typeof constructor === 'object') {
+                childBlock = block.initBlock(constructor, params);
+                include = '<' + childBlock.el.tagName + ' block-cid="' + childBlock.cid + '"></' + childBlock.el.tagName + '>';
+            } else if (typeof constructor === 'function') {
                 include = constructor.call(block, params);
+            } else if (typeof constructor === 'string') {
+                include = constructor;
             }
 
             return include;
@@ -174,10 +177,13 @@ define(function(require) {
         initBlock: function(constructor, params) {
 
             var block = this,
-                child = constructor.call(block, _.extend({}, params, {
-                    parent: block
-                }));
+                child = constructor;
 
+            if (typeof constructor === 'function'){
+                child = new constructor(params);
+            }
+
+            child.parent = block;
             block.children[child.cid] = child;
 
             return child;
