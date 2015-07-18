@@ -50,7 +50,7 @@ module.exports = function(config) {
         },
 
         junitReporter: {
-            outputFile: 'reporters/junit.xml'
+            outputDir: 'reports/junit'
         },
 
         // test results reporter to use
