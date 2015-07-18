@@ -1,7 +1,7 @@
 System.config({
+    baseURL: '/',
+    transpiler: 'babel',
     map: {
-        jquery: 'bower_components/jquery/dist/jquery.js',
-        backbone: 'bower_components/backbone/backbone.js',
-        underscore: 'bower_components/lodash/lodash.js'
+        'babel': 'node_modules/babel-core/browser.js'
     }
 });

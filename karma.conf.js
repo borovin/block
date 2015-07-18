@@ -18,13 +18,16 @@ module.exports = function(config) {
 
             // File patterns for your application code, dependencies, and test suites
             files: [
+                'node_modules/babel-core/browser.js',
                 'bower_components/**/*',
                 './*.js'
             ],
 
             config: {
-                baseURL: '/',
-                transpiler: null
+                transpiler: 'babel',
+                map: {
+                    'babel': 'node_modules/babel-core/browser.js'
+                }
             }
         },
 
