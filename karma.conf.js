@@ -21,14 +21,7 @@ module.exports = function(config) {
                 'node_modules/babel-core/browser.js',
                 'bower_components/**/*',
                 './*.js'
-            ],
-
-            config: {
-                transpiler: 'babel',
-                map: {
-                    'babel': 'node_modules/babel-core/browser.js'
-                }
-            }
+            ]
         },
 
         // list of files to exclude
