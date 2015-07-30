@@ -19,7 +19,9 @@
     "index.html",
     "system.config.js",
     "package.json",
-    "Gruntfile.js"
+    "Gruntfile.js",
+    "karma.conf.js",
+    "circle.yml"
   ],
   "dependencies": {
     "backbone": "^1.1.2",
