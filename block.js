@@ -143,16 +143,22 @@ define(function(require) {
         include: function(constructor, params) {
 
             var block = this,
-                childBlock,
                 include;
 
-            if (constructor.extend || typeof constructor === 'object') {
-                childBlock = block.initBlock(constructor, params);
-                include = '<' + childBlock.el.tagName + ' block-cid="' + childBlock.cid + '"></' + childBlock.el.tagName + '>';
-            } else if (typeof constructor === 'function') {
-                include = constructor.call(block, params);
-            } else if (typeof constructor === 'string') {
-                include = constructor;
+            switch (typeof constructor) {
+                case 'function':
+                    include = constructor.call(block, params);
+                    break;
+                case 'string':
+                    include = _.template(constructor)(params);
+                    break;
+                default:
+                    include = constructor;
+            }
+
+            if (include.el && include.cid) {
+                block.initBlock(include);
+                include = '<' + include.el.tagName + ' block-cid="' + include.cid + '"></' + include.el.tagName + '>';
             }
 
             return include;
@@ -174,13 +180,12 @@ define(function(require) {
             });
         },
 
-        initBlock: function(constructor, params) {
+        initBlock: function(child, params) {
 
-            var block = this,
-                child = constructor;
+            var block = this;
 
-            if (typeof constructor === 'function'){
-                child = new constructor(params);
+            if (typeof child === 'function') {
+                child = new child(params);
             }
 
             child.parent = block;
