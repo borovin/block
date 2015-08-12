@@ -40,7 +40,7 @@ define(function(require) {
 
                 block.trigger('initializing');
 
-                return Promise.all([initialize.apply(block, arguments)]).then(function() {
+                return $.when(initialize.apply(block, arguments)).then(function() {
 
                     block.render();
 
