@@ -1,36 +1,33 @@
 {
   "name": "block",
-  "main": "block.js",
+  "main": "index.js",
   "version": "0.0.1",
   "description": "extended backbone view",
   "authors": [
     "a@borovin.com"
   ],
   "moduleType": [
-    "amd"
+    "node"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests",
-    "index.html",
-    "system.config.js",
+
+    "*.spec.js",
     "package.json",
-    "Gruntfile.js",
     "karma.conf.js",
-    "circle.yml"
+    "system.config.js"
   ],
   "dependencies": {
     "backbone": "^1.1.2",
     "jquery": "^2.1.1",
     "lodash": "^3.9.0",
-    "deepExtend": "https://github.com/borovin/deepExtend.git#^1.0.0",
-    "createClass": "https://github.com/borovin/createClass.git#^1.0.0",
-    "get": "https://github.com/borovin/get.git#^1.0.0",
-    "set": "https://github.com/borovin/set.git#^1.0.0",
+    "deepExtend": "borovin/deepExtend#^1.0.0",
+    "createClass": "borovin/createClass#^1.0.0",
+    "get": "borovin/get#^1.0.0",
+    "set": "borovin/set#^1.0.0",
     "system.js": "~0.18.4"
   }
 }
