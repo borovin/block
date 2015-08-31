@@ -8,6 +8,7 @@
   "homepage": "https://github.com/borovin/block",
   "scripts": {
     "test": "node ./node_modules/karma/bin/karma start --single-run",
+    "docs": "node ./node_modules/docco/bin/docco _spec.js && cp -f ./docs/_spec.html ./docs/index.html",
     "postinstall": "node ./node_modules/bower/bin/bower install"
   },
   "author": "a@borovin.com",
