@@ -19,12 +19,12 @@ module.exports = createClass(View, {
 
         block._initElement();
 
-        block.trigger('initializing');
+        block.trigger('initializing', block);
 
         $.when(block.initialize.apply(block, arguments)).then(function() {
             block.render();
             block._delegateGlobalEvents();
-            block.trigger('initialized');
+            block.trigger('initialized', block);
         });
     },
 
@@ -61,8 +61,6 @@ module.exports = createClass(View, {
         block.$el
             .attr(attrs)
             .addClass(block.get('className'));
-
-        block.el.block = block;
 
         block.delegateEvents();
         block._initBlocks();
@@ -198,6 +196,7 @@ module.exports = createClass(View, {
 
         this.el = $(el || this.get('el'))[0];
         this.$el = $(this.el);
+        this.el.block = this;
 
         return this.el;
 
