@@ -14,7 +14,7 @@ describe(module.id, function() {
 
         // You can pass option-object parameter to the constructor. All this options will be set directly on the block instance
         // as block properties and will be available throw this context
-        it('All initialization properties should be set to block instance', function() {
+        it('Sets all initialization properties to block instance', function() {
 
             var block = new Block({
                 number: 1,
@@ -31,7 +31,7 @@ describe(module.id, function() {
 
         // Block can be initialized as regular function without new keyword. It is useful when you need to wrap block
         // constructor into anonymous function for some initialization purposes
-        it('Block can be initialized without new keyword', function() {
+        it('Can be initialized without new keyword', function() {
 
             var block = Block({
                 a: 1
@@ -40,7 +40,7 @@ describe(module.id, function() {
             expect(block.a).toBe(1)
         });
 
-        it('initialize method should be called by constructor', function() {
+        it('Should call initialize method from constructor', function() {
 
             spyOn(Block.prototype, 'initialize');
 
@@ -49,7 +49,8 @@ describe(module.id, function() {
             expect(Block.prototype.initialize).toHaveBeenCalled();
         });
 
-        it('Initialize method can be overwritten', function() {
+        // By default initialize method is empty. So you can override it with your own logic.
+        it('Can override initialize method', function() {
 
             var Block1 = Block.extend({
                 count: 0,
@@ -65,16 +66,26 @@ describe(module.id, function() {
             expect(block.count).toEqual(11)
         });
 
-        it('All initialization properties should be passed to initialize method', function() {
+        it('Should pass all initialization properties to initialize method', function() {
 
-            spyOn(Block.prototype, 'initialize');
+            var a, b, c;
 
-            new Block({a: 1}, 2, 'string');
+            var SomeBlock = Block.extend({
+                initialize: function(options, param1, param2){
+                    a = options;
+                    b = param1;
+                    c = param2;
+                }
+            });
 
-            expect(Block.prototype.initialize).toHaveBeenCalledWith({a: 1}, 2, 'string');
+            new SomeBlock({a: 1}, 2, 'string');
+
+            expect(a).toEqual({a: 1});
+            expect(b).toEqual(2);
+            expect(c).toEqual('string');
         });
 
-        it('All plain object properties pass by values and do not affect another instances', function() {
+        it('Should pass all plain object properties by values and does not affect another instances', function() {
 
             var plainObject = {
                 a: 1
@@ -93,38 +104,56 @@ describe(module.id, function() {
             expect(block2.plainObject.a).toEqual(1);
         });
 
-        it('Initializing event should be triggered', function() {
+        it('Should trigger initializing event before initialization', function() {
 
             document.body.innerHTML = '<div id="block"></div>';
 
-            var handler = jasmine.createSpy('initialize handler');
+            var a;
 
-            $('#block').on('initializing', handler);
+            var SomeBlock = Block.extend({
+                a: 1,
+                initialize: function(){
+                    this.a = 2;
+                }
+            });
 
-            new Block({
+            $('#block').on('initializing', function(e){
+                a = e.target.block.a;
+            });
+
+            new SomeBlock({
                 el: '#block'
             });
 
-            expect(handler).toHaveBeenCalled();
+            expect(a).toEqual(1);
         });
 
-        it('Initialized event should be triggered', function() {
+        it('Should trigger initialized event after initialization', function() {
 
             document.body.innerHTML = '<div id="block"></div>';
 
-            var handler = jasmine.createSpy('initialize handler');
+            var a;
 
-            $('#block').on('initialized', handler);
+            var SomeBlock = Block.extend({
+                a: 1,
+                initialize: function(){
+                    this.a = 2;
+                }
+            });
 
-            new Block({
+            $('#block').on('initialized', function(e){
+                a = e.target.block.a;
+            });
+
+            new SomeBlock({
                 el: '#block'
             });
 
-            expect(handler).toHaveBeenCalled();
+            expect(a).toEqual(2);
 
         });
 
-        it('Initialize method can return promise object', function(done) {
+        it('Can return promise from initialize method', function(done) {
 
             document.body.innerHTML = '<div id="block"></div>';
 
@@ -152,6 +181,7 @@ describe(module.id, function() {
 
     });
 
+    // ### Extending Block class
     describe('extend method', function() {
 
         it('instanceof should work as expected', function() {
@@ -167,7 +197,7 @@ describe(module.id, function() {
 
         });
 
-        it('All properties should be copied to prototype', function() {
+        it('extend method should copy all properties to prototype', function() {
 
             var Block1 = Block.extend({
                 number: 1,
@@ -194,7 +224,7 @@ describe(module.id, function() {
             expect(block2.array).toEqual([3, 2, 1]);
         });
 
-        it('Nested properties should be merged by deep extend method', function() {
+        it('extend method should merge all nested properties by deep merge algorithm', function() {
 
             var Block1 = Block.extend({
                 nested: {
@@ -219,7 +249,7 @@ describe(module.id, function() {
             });
         });
 
-        it('Plain object properties should be copied by values and do not affect other instances', function() {
+        it('extend method should copy plain object properties by values and does not affect other instances', function() {
 
             var plainObject = {
                 a: 1
@@ -240,7 +270,7 @@ describe(module.id, function() {
             expect(block2.plainObject.a).toEqual(1);
         });
 
-        it('Not plain object properties should be copied by link', function() {
+        it('Should copy not plain object properties by link', function() {
 
             var Block1 = Block.extend(),
                 block1 = new Block1;
@@ -255,6 +285,7 @@ describe(module.id, function() {
 
     });
 
+    // ### Block el (element) property
     describe('el property', function() {
 
         it('el property should be empty div by default', function() {
@@ -298,7 +329,7 @@ describe(module.id, function() {
             expect(block.el.textContent).toEqual('test');
         });
 
-        it('el property can be function', function() {
+        it('el property can be a function', function() {
 
             document.body.innerHTML = '<b id="block">test</b>';
 
@@ -313,7 +344,7 @@ describe(module.id, function() {
             expect(block.el.textContent).toEqual('test');
         });
 
-        it('Block el has jQuery wrapper', function() {
+        it('el property has jQuery wrapper', function() {
 
             var block = new Block;
 
@@ -323,9 +354,12 @@ describe(module.id, function() {
 
     });
 
+    // ### get method
+    // You can get any block property by keypath (ex: `block.get('foo.bar.baz')`). If on of property in this path is function
+    // (getter accessor) it will be executed with block context.
     describe('get method', function() {
 
-        it('Get undefined property should return expected undefined', function() {
+        it('get method should return expected undefined property', function() {
 
             var block = new Block();
 
@@ -333,7 +367,7 @@ describe(module.id, function() {
 
         });
 
-        it('Get boolean property should return expected boolean', function() {
+        it('get method should return expected boolean property', function() {
 
             var block = new Block({
                 a: {
@@ -345,7 +379,7 @@ describe(module.id, function() {
 
         });
 
-        it('Get number property should return expected number', function() {
+        it('get method should return expected number property', function() {
 
             var block = new Block({
                 a: {
@@ -357,7 +391,7 @@ describe(module.id, function() {
 
         });
 
-        it('Get string property should return expected string', function() {
+        it('get method should return expected string property', function() {
 
             var block = new Block({
                 a: {
@@ -369,15 +403,15 @@ describe(module.id, function() {
 
         });
 
-        it('Get function result property should return function result with block context', function() {
+        it('get method should return function result with block context', function() {
 
             var block = new Block({
                 a: {
                     b: function() {
-                        return this.result;
+                        return this.c;
                     }
                 },
-                result: 'result'
+                c: 'result'
             });
 
             expect(block.get('a.b')).toEqual('result');
@@ -386,9 +420,12 @@ describe(module.id, function() {
 
     });
 
+    // ### set method
+    // `set` method update or create property by keypath. If some property in this path does not exist it will be created automatically.
+    // `set` method return only changed properties.
     describe('set method', function() {
 
-        it('set new property should add it to the instance and create new objects if necessary', function() {
+        it('set method should add new property to the instance and create new objects if necessary', function() {
 
             var block = new Block;
 
@@ -467,10 +504,13 @@ describe(module.id, function() {
             expect(block.a.b).toEqual(0);
         });
 
+        // `set` method will trigger corresponding `change` events if any properties in keypath are changed.
+        // For nested properties all chain will be triggered from lowest level. (ex: `change:foo.bar.baz` -> `change:foo.bar` -> `change:foo`)
         it('set should trigger change events', function() {
 
             var change1 = jasmine.createSpy('a.b'),
-                change2 = jasmine.createSpy('a.c');
+                change2 = jasmine.createSpy('a.c'),
+                change3 = jasmine.createSpy('a');
 
             var block = new Block({
                 a: {
@@ -481,6 +521,7 @@ describe(module.id, function() {
 
             block.on('change:a.b', change1);
             block.on('change:a.c', change2);
+            block.on('change:a', change3);
 
             block.set('a', {
                 b: 'new',
@@ -494,9 +535,12 @@ describe(module.id, function() {
 
     });
 
+    // ### include method
+    // `include` method is proper way to decompose block on sub-blocks. It will automatically initialize and remove all nested
+    // blocks to avoid memory leaks.
     describe('include method', function() {
 
-        it('include method can include block constructor', function() {
+        it('include method can include block constructor and pass properties', function() {
 
             var child = Block.extend({
                 template: function() {
@@ -561,9 +605,12 @@ describe(module.id, function() {
 
     });
 
+    // ### Global Events
+    // Independent blocks (blocks that are not parent and child to each other) can subscribe to each other by `globalEvents`
+    // property. It will properly remove all global events when one of the block is removed.
     describe('Global events', function() {
 
-        it('Independent blocks can subscribe to each other', function() {
+        it('Can subscribe to independent block events', function() {
 
             document.body.innerHTML = '<div id="block1"></div><div id="block2"></div>';
 
