@@ -7,8 +7,11 @@ describe(module.id, function() {
         document.body.innerHTML = '';
     });
 
-    describe('initialization', function(){
+    // ### Initialization process
+    describe('initialization', function() {
 
+        // You can pass option-object parameter to the constructor. All this options will be set directly on the block instance
+        // as block properties and will be available throw this
         it('All initialization properties should be set to block instance', function() {
 
             var block = new Block({
@@ -24,6 +27,8 @@ describe(module.id, function() {
             expect(block.array).toEqual([1, 2, 3]);
         });
 
+        // Block can be initialized as regular function without new keyword. It is useful when you need to wrap block
+        // constructor into anonymous function for some initialization purposes
         it('Block can be initialized without new keyword', function() {
 
             var block = Block({
@@ -86,7 +91,7 @@ describe(module.id, function() {
             expect(block2.plainObject.a).toEqual(1);
         });
 
-        it('Initializing event should be triggered', function(){
+        it('Initializing event should be triggered', function() {
 
             document.body.innerHTML = '<div id="block"></div>';
 
@@ -101,7 +106,7 @@ describe(module.id, function() {
             expect(handler).toHaveBeenCalled();
         });
 
-        it('Initialized event should be triggered', function(){
+        it('Initialized event should be triggered', function() {
 
             document.body.innerHTML = '<div id="block"></div>';
 
@@ -121,17 +126,17 @@ describe(module.id, function() {
 
             document.body.innerHTML = '<div id="block"></div>';
 
-            $('#block').on('initialized', function(){
+            $('#block').on('initialized', function() {
                 done();
             });
 
             var Block1 = Block.extend({
                 el: '#block',
-                initialize: function(){
+                initialize: function() {
 
                     var deferred = $.Deferred();
 
-                    setTimeout(function(){
+                    setTimeout(function() {
                         deferred.resolve();
                     }, 100);
 
@@ -145,7 +150,7 @@ describe(module.id, function() {
 
     });
 
-    describe('extend method', function(){
+    describe('extend method', function() {
 
         it('instanceof should work as expected', function() {
 
@@ -248,7 +253,7 @@ describe(module.id, function() {
 
     });
 
-    describe('el property', function(){
+    describe('el property', function() {
 
         it('el property should be empty div by default', function() {
 
@@ -297,7 +302,7 @@ describe(module.id, function() {
 
             var block = new Block({
                 elementID: 'block',
-                el: function(){
+                el: function() {
                     return document.getElementById(this.elementID);
                 }
             });
@@ -379,7 +384,7 @@ describe(module.id, function() {
 
     });
 
-    describe('set method', function(){
+    describe('set method', function() {
 
         it('set new property should add it to the instance and create new objects if necessary', function() {
 
@@ -487,7 +492,7 @@ describe(module.id, function() {
 
     });
 
-    describe('include method', function(){
+    describe('include method', function() {
 
         it('include method can include block constructor', function() {
 
@@ -554,9 +559,9 @@ describe(module.id, function() {
 
     });
 
-    describe('Global events', function(){
+    describe('Global events', function() {
 
-        it('Independent blocks can subscribe to each other', function(){
+        it('Independent blocks can subscribe to each other', function() {
 
             document.body.innerHTML = '<div id="block1"></div><div id="block2"></div>';
 
@@ -567,7 +572,7 @@ describe(module.id, function() {
             var Block1 = Block.extend({
                 el: '#block1',
                 globalEvents: {
-                    'event #block2': function(e, param1, param2){
+                    'event #block2': function(e, param1, param2) {
 
                         eventHandler();
                         a = param1;
