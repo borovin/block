@@ -49,7 +49,7 @@ module.exports = createClass(View, {
         block._removeBlocks();
 
         if (id) {
-            attrs.id = id
+            attrs.id = id;
         }
 
         if (block.template) {
@@ -121,18 +121,18 @@ module.exports = createClass(View, {
         return include;
     },
 
-    initBlock: function(child, params) {
+    initBlock: function(Child, params) {
 
         var block = this;
 
-        if (typeof child === 'function') {
-            child = new child(params);
+        if (typeof Child === 'function') {
+            Child = new Child(params);
         }
 
-        child.parent = block;
-        block._children[child.cid] = child;
+        Child.parent = block;
+        block._children[Child.cid] = Child;
 
-        return child;
+        return Child;
     },
 
     remove: function() {
@@ -145,7 +145,9 @@ module.exports = createClass(View, {
 
         block._removeBlocks();
 
-        block.parent && delete block.parent[block.cid];
+        if (block.parent){
+            delete block.parent[block.cid];
+        }
 
         View.prototype.remove.apply(block, arguments);
     },
