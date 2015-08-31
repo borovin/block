@@ -1,6 +1,5 @@
 var get = require('bower_components/get/index.js'),
     set = require('bower_components/set/index.js'),
-    deepExtend = require('bower_components/deepExtend/index.js'),
     createClass = require('bower_components/createClass/index.js'),
     backbone = require('bower_components/backbone/backbone.js'),
     _ = require('bower_components/lodash/lodash.js'),
@@ -16,7 +15,7 @@ module.exports = createClass(View, {
 
         block.cid = _.uniqueId('block');
 
-        deepExtend(block, block.defaults, config);
+        set(block, block.defaults, config);
 
         block._initElement();
 
@@ -32,13 +31,14 @@ module.exports = createClass(View, {
     el: '<div></div>',
     globalEvents: {},
     events: {},
+    defaults: {},
     template: null,
 
     _children: {},
 
     render: function(data) {
 
-        deepExtend(this, data);
+        this.set(data);
 
         var block = this,
             attrs = _.extend({}, block.get('attributes')),
@@ -157,9 +157,6 @@ module.exports = createClass(View, {
         block.$el.trigger(event, data);
 
         return View.prototype.trigger.apply(block, arguments);
-    },
-
-    startListening: function() {
     },
 
     _initBlocks: function() {

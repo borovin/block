@@ -24,10 +24,9 @@
     "backbone": "^1.1.2",
     "jquery": "^2.1.1",
     "lodash": "^3.9.0",
-    "deepExtend": "borovin/deepExtend#^1.0.0",
     "createClass": "borovin/createClass#^1.0.0",
     "get": "borovin/get#^1.0.0",
     "set": "borovin/set#^1.0.0",
-    "system.js": "~0.18.4"
+    "system.js": "^0.18.4"
   }
 }
