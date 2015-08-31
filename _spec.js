@@ -355,8 +355,7 @@ describe(module.id, function() {
     });
 
     // ### get method
-    // You can get any block property by keypath (ex: `block.get('foo.bar.baz')`). If on of property in this path is function
-    // (getter accessor) it will be executed with block context.
+    // You can get any block property by keypath (ex: `block.get('foo.bar.baz')`).
     describe('get method', function() {
 
         it('get method should return expected undefined property', function() {
@@ -403,6 +402,8 @@ describe(module.id, function() {
 
         });
 
+        // If one of property in this path is function
+        // (getter accessor) it will be executed with block context.
         it('get method should return function result with block context', function() {
 
             var block = new Block({
@@ -529,6 +530,7 @@ describe(module.id, function() {
             });
 
             expect(change1).toHaveBeenCalled();
+            expect(change3).toHaveBeenCalled();
             expect(change2).not.toHaveBeenCalled();
 
         });
@@ -536,7 +538,7 @@ describe(module.id, function() {
     });
 
     // ### include method
-    // `include` method is proper way to decompose block on sub-blocks. It will automatically initialize and remove all nested
+    // `include` method is proper way to decompose block into sub-blocks. It will automatically initialize and remove all nested
     // blocks to avoid memory leaks.
     describe('include method', function() {
 
