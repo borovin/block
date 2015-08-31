@@ -291,6 +291,21 @@ describe(module.id, function() {
             expect(block.el.textContent).toEqual('test');
         });
 
+        it('el property can be function', function() {
+
+            document.body.innerHTML = '<b id="block">test</b>';
+
+            var block = new Block({
+                elementID: 'block',
+                el: function(){
+                    return document.getElementById(this.elementID);
+                }
+            });
+
+            expect(block.el.tagName).toEqual('B');
+            expect(block.el.textContent).toEqual('test');
+        });
+
         it('Block el has jQuery wrapper', function() {
 
             var block = new Block;
@@ -366,7 +381,7 @@ describe(module.id, function() {
 
     describe('set method', function(){
 
-        it('Set new props', function() {
+        it('set new property should add it to the instance and create new objects if necessary', function() {
 
             var block = new Block;
 
@@ -375,7 +390,7 @@ describe(module.id, function() {
             expect(block.a.b.c).toBe('abc');
         });
 
-        it('Set return only changed properties', function() {
+        it('set method should return only changed properties', function() {
 
             var block = new Block({
                 a: {
@@ -394,19 +409,19 @@ describe(module.id, function() {
             expect(changedProps).toEqual({a: {e: 'e', c: 'cc'}});
         });
 
-        it('Array modification', function() {
+        it('set method should modify array without merging', function() {
 
             var block = new Block({
-                arr: [1, 2, 3]
+                array: [1, 2, 3]
             });
 
-            block.set('arr', [4, 5, 6]);
+            block.set('array', [4, 5, 6]);
 
-            expect(block.arr).toEqual([4, 5, 6]);
+            expect(block.array).toEqual([4, 5, 6]);
 
         });
 
-        it('Object modification', function() {
+        it('set method should modify object value by key path', function() {
 
             var block = new Block({
                 a: {
@@ -419,7 +434,7 @@ describe(module.id, function() {
             expect(block.a.b).toEqual('c');
         });
 
-        it('Set boolean', function() {
+        it('set method should set boolean value event it is false', function() {
 
             var block = new Block({
                 a: {
@@ -432,7 +447,7 @@ describe(module.id, function() {
             expect(block.a.b).toEqual(false);
         });
 
-        it('Set number', function() {
+        it('set method should set number event it is 0', function() {
 
             var block = new Block({
                 a: {
@@ -440,26 +455,12 @@ describe(module.id, function() {
                 }
             });
 
-            block.set('a.b', 1);
+            block.set('a.b', 0);
 
-            expect(block.a.b).toEqual(1);
+            expect(block.a.b).toEqual(0);
         });
 
-        it('Set nested array', function() {
-
-            var block = new Block({
-                a: {
-                    b: [1, 2, 3]
-                }
-            });
-
-            block.set('a.b', [4, 5]);
-
-            expect(block.a.b).toEqual([4, 5]);
-
-        });
-
-        it('Set trigger change events', function() {
+        it('set should trigger change events', function() {
 
             var change1 = jasmine.createSpy('a.b'),
                 change2 = jasmine.createSpy('a.c');
@@ -488,10 +489,9 @@ describe(module.id, function() {
 
     describe('include method', function(){
 
-        it('Include block', function() {
+        it('include method can include block constructor', function() {
 
             var child = Block.extend({
-                text: 'child',
                 template: function() {
                     return '<div class="child">' + this.text + '</div>'
                 }
@@ -499,14 +499,31 @@ describe(module.id, function() {
 
             var block = new Block({
                 template: function() {
-                    return '<div>' + this.include(child) + '</div>'
+                    return '<div>' + this.include(child, {text: 'child'}) + '</div>'
                 }
             });
 
             expect(block.el.querySelector('.child').innerHTML).toEqual('child');
         });
 
-        it('Include partial', function() {
+        it('include method can include block instance', function() {
+
+            var child = Block.extend({
+                template: function() {
+                    return '<div class="child">' + this.text + '</div>'
+                }
+            });
+
+            var block = new Block({
+                template: function() {
+                    return '<div>' + this.include(child({text: 'child'})) + '</div>'
+                }
+            });
+
+            expect(block.el.querySelector('.child').innerHTML).toEqual('child');
+        });
+
+        it('include method can include partial function', function() {
 
             var partial = function() {
                 return '<div class="child">' + this.text + '</div>'
@@ -516,6 +533,19 @@ describe(module.id, function() {
                 text: 'child',
                 template: function() {
                     return '<div>' + this.include(partial) + '</div>'
+                }
+            });
+
+            expect(block.el.querySelector('.child').innerHTML).toEqual('child');
+        });
+
+        it('include method can include html string', function() {
+
+            var htmlString = '<div class="child">child</div>';
+
+            var block = new Block({
+                template: function() {
+                    return '<div>' + this.include(htmlString) + '</div>'
                 }
             });
 
