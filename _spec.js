@@ -1,4 +1,4 @@
-// # Block component
+// # Block specification
 
 var Block = require('./index.js'),
     $ = require('./bower_components/jquery/dist/jquery.js');
