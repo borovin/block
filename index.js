@@ -38,7 +38,9 @@ module.exports = createClass(View, {
 
     render: function(data) {
 
-        this.set(data);
+        if (_.isPlainObject(data)){
+            this.set(data);
+        }
 
         var block = this,
             attrs = _.extend({}, block.get('attributes')),
@@ -152,11 +154,11 @@ module.exports = createClass(View, {
         View.prototype.remove.apply(block, arguments);
     },
 
-    trigger: function(event, data) {
+    trigger: function(event) {
 
         var block = this;
 
-        block.$el.trigger(event, data);
+        block.$el.trigger(event, [].slice.call(arguments, 1));
 
         return View.prototype.trigger.apply(block, arguments);
     },
