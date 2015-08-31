@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>_spec.js</title>
+  <title>Block component</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -13,12 +13,6 @@
     
     <ul class="sections">
         
-          <li id="title">
-              <div class="annotation">
-                  <h1>_spec.js</h1>
-              </div>
-          </li>
-        
         
         
         <li id="section-1">
@@ -27,10 +21,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <h1 id="block-component">Block component</h1>
+
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> Block = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./index.js'</span>),
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> Block = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./index.js'</span>),
     $ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./bower_components/jquery/dist/jquery.js'</span>);
 
 describe(<span class="hljs-built_in">module</span>.id, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -64,7 +60,7 @@ describe(<span class="hljs-built_in">module</span>.id, <span class="hljs-functio
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>You can pass option-object parameter to the constructor. All this options will be set directly on the block instance
-as block properties and will be available throw this</p>
+as block properties and will be available throw this context</p>
 
             </div>
             

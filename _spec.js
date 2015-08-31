@@ -1,3 +1,5 @@
+// # Block component
+
 var Block = require('./index.js'),
     $ = require('./bower_components/jquery/dist/jquery.js');
 
@@ -11,7 +13,7 @@ describe(module.id, function() {
     describe('initialization', function() {
 
         // You can pass option-object parameter to the constructor. All this options will be set directly on the block instance
-        // as block properties and will be available throw this
+        // as block properties and will be available throw this context
         it('All initialization properties should be set to block instance', function() {
 
             var block = new Block({
