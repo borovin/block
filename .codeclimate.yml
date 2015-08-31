@@ -3,3 +3,4 @@ languages:
 exclude_paths:
   - "index.spec.js"
   - "system.config.js"
+  - "karma.conf.js"
