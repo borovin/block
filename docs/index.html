@@ -64,7 +64,7 @@ as block properties and will be available throw this context</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">'All initialization properties should be set to block instance'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">'Sets all initialization properties to block instance'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block({
                 number: <span class="hljs-number">1</span>,
@@ -93,7 +93,7 @@ constructor into anonymous function for some initialization purposes</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">'Block can be initialized without new keyword'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">'Can be initialized without new keyword'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = Block({
                 a: <span class="hljs-number">1</span>
@@ -102,16 +102,29 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block.a).toBe(<span class="hljs-number">1</span>)
         });
 
-        it(<span class="hljs-string">'initialize method should be called by constructor'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'Should call initialize method from constructor'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             spyOn(Block.prototype, <span class="hljs-string">'initialize'</span>);
 
             <span class="hljs-keyword">new</span> Block;
 
             expect(Block.prototype.initialize).toHaveBeenCalled();
-        });
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>By default initialize method is empty. So you can override it with your own logic.</p>
 
-        it(<span class="hljs-string">'Initialize method can be overwritten'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">'Can override initialize method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> Block1 = Block.extend({
                 count: <span class="hljs-number">0</span>,
@@ -127,16 +140,26 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block.count).toEqual(<span class="hljs-number">11</span>)
         });
 
-        it(<span class="hljs-string">'All initialization properties should be passed to initialize method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'Should pass all initialization properties to initialize method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
-            spyOn(Block.prototype, <span class="hljs-string">'initialize'</span>);
+            <span class="hljs-keyword">var</span> a, b, c;
 
-            <span class="hljs-keyword">new</span> Block({a: <span class="hljs-number">1</span>}, <span class="hljs-number">2</span>, <span class="hljs-string">'string'</span>);
+            <span class="hljs-keyword">var</span> SomeBlock = Block.extend({
+                initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, param1, param2</span>)</span>{
+                    a = options;
+                    b = param1;
+                    c = param2;
+                }
+            });
 
-            expect(Block.prototype.initialize).toHaveBeenCalledWith({a: <span class="hljs-number">1</span>}, <span class="hljs-number">2</span>, <span class="hljs-string">'string'</span>);
+            <span class="hljs-keyword">new</span> SomeBlock({a: <span class="hljs-number">1</span>}, <span class="hljs-number">2</span>, <span class="hljs-string">'string'</span>);
+
+            expect(a).toEqual({a: <span class="hljs-number">1</span>});
+            expect(b).toEqual(<span class="hljs-number">2</span>);
+            expect(c).toEqual(<span class="hljs-string">'string'</span>);
         });
 
-        it(<span class="hljs-string">'All plain object properties pass by values and do not affect another instances'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'Should pass all plain object properties by values and does not affect another instances'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> plainObject = {
                 a: <span class="hljs-number">1</span>
@@ -155,38 +178,56 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block2.plainObject.a).toEqual(<span class="hljs-number">1</span>);
         });
 
-        it(<span class="hljs-string">'Initializing event should be triggered'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'Should trigger initializing event before initialization'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-built_in">document</span>.body.innerHTML = <span class="hljs-string">'&lt;div id="block"&gt;&lt;/div&gt;'</span>;
 
-            <span class="hljs-keyword">var</span> handler = jasmine.createSpy(<span class="hljs-string">'initialize handler'</span>);
+            <span class="hljs-keyword">var</span> a;
 
-            $(<span class="hljs-string">'#block'</span>).on(<span class="hljs-string">'initializing'</span>, handler);
+            <span class="hljs-keyword">var</span> SomeBlock = Block.extend({
+                a: <span class="hljs-number">1</span>,
+                initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+                    <span class="hljs-keyword">this</span>.a = <span class="hljs-number">2</span>;
+                }
+            });
 
-            <span class="hljs-keyword">new</span> Block({
+            $(<span class="hljs-string">'#block'</span>).on(<span class="hljs-string">'initializing'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{
+                a = e.target.block.a;
+            });
+
+            <span class="hljs-keyword">new</span> SomeBlock({
                 el: <span class="hljs-string">'#block'</span>
             });
 
-            expect(handler).toHaveBeenCalled();
+            expect(a).toEqual(<span class="hljs-number">1</span>);
         });
 
-        it(<span class="hljs-string">'Initialized event should be triggered'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'Should trigger initialized event after initialization'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-built_in">document</span>.body.innerHTML = <span class="hljs-string">'&lt;div id="block"&gt;&lt;/div&gt;'</span>;
 
-            <span class="hljs-keyword">var</span> handler = jasmine.createSpy(<span class="hljs-string">'initialize handler'</span>);
+            <span class="hljs-keyword">var</span> a;
 
-            $(<span class="hljs-string">'#block'</span>).on(<span class="hljs-string">'initialized'</span>, handler);
+            <span class="hljs-keyword">var</span> SomeBlock = Block.extend({
+                a: <span class="hljs-number">1</span>,
+                initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+                    <span class="hljs-keyword">this</span>.a = <span class="hljs-number">2</span>;
+                }
+            });
 
-            <span class="hljs-keyword">new</span> Block({
+            $(<span class="hljs-string">'#block'</span>).on(<span class="hljs-string">'initialized'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{
+                a = e.target.block.a;
+            });
+
+            <span class="hljs-keyword">new</span> SomeBlock({
                 el: <span class="hljs-string">'#block'</span>
             });
 
-            expect(handler).toHaveBeenCalled();
+            expect(a).toEqual(<span class="hljs-number">2</span>);
 
         });
 
-        it(<span class="hljs-string">'Initialize method can return promise object'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+        it(<span class="hljs-string">'Can return promise from initialize method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
 
             <span class="hljs-built_in">document</span>.body.innerHTML = <span class="hljs-string">'&lt;div id="block"&gt;&lt;/div&gt;'</span>;
 
@@ -212,9 +253,22 @@ constructor into anonymous function for some initialization purposes</p>
 
         });
 
-    });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h3 id="extending-block-class">Extending Block class</h3>
 
-    describe(<span class="hljs-string">'extend method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    describe(<span class="hljs-string">'extend method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
         it(<span class="hljs-string">'instanceof should work as expected'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
@@ -229,7 +283,7 @@ constructor into anonymous function for some initialization purposes</p>
 
         });
 
-        it(<span class="hljs-string">'All properties should be copied to prototype'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'extend method should copy all properties to prototype'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> Block1 = Block.extend({
                 number: <span class="hljs-number">1</span>,
@@ -256,7 +310,7 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block2.array).toEqual([<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]);
         });
 
-        it(<span class="hljs-string">'Nested properties should be merged by deep extend method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'extend method should merge all nested properties by deep merge algorithm'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> Block1 = Block.extend({
                 nested: {
@@ -281,7 +335,7 @@ constructor into anonymous function for some initialization purposes</p>
             });
         });
 
-        it(<span class="hljs-string">'Plain object properties should be copied by values and do not affect other instances'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'extend method should copy plain object properties by values and does not affect other instances'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> plainObject = {
                 a: <span class="hljs-number">1</span>
@@ -302,7 +356,7 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block2.plainObject.a).toEqual(<span class="hljs-number">1</span>);
         });
 
-        it(<span class="hljs-string">'Not plain object properties should be copied by link'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'Should copy not plain object properties by link'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> Block1 = Block.extend(),
                 block1 = <span class="hljs-keyword">new</span> Block1;
@@ -315,9 +369,22 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block2.block1).toEqual(block1);
         });
 
-    });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h3 id="block-el-element-property">Block el (element) property</h3>
 
-    describe(<span class="hljs-string">'el property'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    describe(<span class="hljs-string">'el property'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
         it(<span class="hljs-string">'el property should be empty div by default'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
@@ -360,7 +427,7 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block.el.textContent).toEqual(<span class="hljs-string">'test'</span>);
         });
 
-        it(<span class="hljs-string">'el property can be function'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'el property can be a function'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-built_in">document</span>.body.innerHTML = <span class="hljs-string">'&lt;b id="block"&gt;test&lt;/b&gt;'</span>;
 
@@ -375,7 +442,7 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block.el.textContent).toEqual(<span class="hljs-string">'test'</span>);
         });
 
-        it(<span class="hljs-string">'Block el has jQuery wrapper'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'el property has jQuery wrapper'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block;
 
@@ -383,11 +450,26 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block.$el[<span class="hljs-number">0</span>].textContent).toEqual(<span class="hljs-string">''</span>);
         });
 
-    });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h3 id="get-method">get method</h3>
+<p>You can get any block property by keypath (ex: <code>block.get(&#39;foo.bar.baz&#39;)</code>). If on of property in this path is function
+(getter accessor) it will be executed with block context.</p>
 
-    describe(<span class="hljs-string">'get method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    describe(<span class="hljs-string">'get method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
-        it(<span class="hljs-string">'Get undefined property should return expected undefined'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'get method should return expected undefined property'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block();
 
@@ -395,7 +477,7 @@ constructor into anonymous function for some initialization purposes</p>
 
         });
 
-        it(<span class="hljs-string">'Get boolean property should return expected boolean'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'get method should return expected boolean property'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block({
                 a: {
@@ -407,7 +489,7 @@ constructor into anonymous function for some initialization purposes</p>
 
         });
 
-        it(<span class="hljs-string">'Get number property should return expected number'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'get method should return expected number property'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block({
                 a: {
@@ -419,7 +501,7 @@ constructor into anonymous function for some initialization purposes</p>
 
         });
 
-        it(<span class="hljs-string">'Get string property should return expected string'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'get method should return expected string property'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block({
                 a: {
@@ -431,26 +513,41 @@ constructor into anonymous function for some initialization purposes</p>
 
         });
 
-        it(<span class="hljs-string">'Get function result property should return function result with block context'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'get method should return function result with block context'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block({
                 a: {
                     b: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.result;
+                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.c;
                     }
                 },
-                result: <span class="hljs-string">'result'</span>
+                c: <span class="hljs-string">'result'</span>
             });
 
             expect(block.get(<span class="hljs-string">'a.b'</span>)).toEqual(<span class="hljs-string">'result'</span>);
 
         });
 
-    });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h3 id="set-method">set method</h3>
+<p><code>set</code> method update or create property by keypath. If some property in this path does not exist it will be created automatically.
+<code>set</code> method return only changed properties.</p>
 
-    describe(<span class="hljs-string">'set method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    describe(<span class="hljs-string">'set method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
-        it(<span class="hljs-string">'set new property should add it to the instance and create new objects if necessary'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'set method should add new property to the instance and create new objects if necessary'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block;
 
@@ -527,12 +624,27 @@ constructor into anonymous function for some initialization purposes</p>
             block.set(<span class="hljs-string">'a.b'</span>, <span class="hljs-number">0</span>);
 
             expect(block.a.b).toEqual(<span class="hljs-number">0</span>);
-        });
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p><code>set</code> method will trigger corresponding <code>change</code> events if any properties in keypath are changed.
+For nested properties all chain will be triggered from lowest level. (ex: <code>change:foo.bar.baz</code> -&gt; <code>change:foo.bar</code> -&gt; <code>change:foo</code>)</p>
 
-        it(<span class="hljs-string">'set should trigger change events'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">'set should trigger change events'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> change1 = jasmine.createSpy(<span class="hljs-string">'a.b'</span>),
-                change2 = jasmine.createSpy(<span class="hljs-string">'a.c'</span>);
+                change2 = jasmine.createSpy(<span class="hljs-string">'a.c'</span>),
+                change3 = jasmine.createSpy(<span class="hljs-string">'a'</span>);
 
             <span class="hljs-keyword">var</span> block = <span class="hljs-keyword">new</span> Block({
                 a: {
@@ -543,6 +655,7 @@ constructor into anonymous function for some initialization purposes</p>
 
             block.on(<span class="hljs-string">'change:a.b'</span>, change1);
             block.on(<span class="hljs-string">'change:a.c'</span>, change2);
+            block.on(<span class="hljs-string">'change:a'</span>, change3);
 
             block.set(<span class="hljs-string">'a'</span>, {
                 b: <span class="hljs-string">'new'</span>,
@@ -554,11 +667,26 @@ constructor into anonymous function for some initialization purposes</p>
 
         });
 
-    });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h3 id="include-method">include method</h3>
+<p><code>include</code> method is proper way to decompose block on sub-blocks. It will automatically initialize and remove all nested
+blocks to avoid memory leaks.</p>
 
-    describe(<span class="hljs-string">'include method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    describe(<span class="hljs-string">'include method'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
-        it(<span class="hljs-string">'include method can include block constructor'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'include method can include block constructor and pass properties'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> child = Block.extend({
                 template: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -621,11 +749,26 @@ constructor into anonymous function for some initialization purposes</p>
             expect(block.el.querySelector(<span class="hljs-string">'.child'</span>).innerHTML).toEqual(<span class="hljs-string">'child'</span>);
         });
 
-    });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <h3 id="global-events">Global Events</h3>
+<p>Independent blocks (blocks that are not parent and child to each other) can subscribe to each other by <code>globalEvents</code>
+property. It will properly remove all global events when one of the block is removed.</p>
 
-    describe(<span class="hljs-string">'Global events'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    describe(<span class="hljs-string">'Global events'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
-        it(<span class="hljs-string">'Independent blocks can subscribe to each other'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        it(<span class="hljs-string">'Can subscribe to independent block events'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-built_in">document</span>.body.innerHTML = <span class="hljs-string">'&lt;div id="block1"&gt;&lt;/div&gt;&lt;div id="block2"&gt;&lt;/div&gt;'</span>;
 
