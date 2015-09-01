@@ -344,6 +344,24 @@ describe(module.id, function() {
             expect(block.el.textContent).toEqual('test');
         });
 
+        // You can (and in almost all cases you need) to define template function which will be executed during rendering process
+        // and replace current block element. So you can use existing DOM element as placeholder and replace it with your own template.
+        it('el should be rendered from template function', function() {
+
+            document.body.innerHTML = '<b id="block"></b>';
+
+            var block = new Block({
+                el: '#block',
+                template: function() {
+                    return '<b class="block">' + this.foo + '</b>';
+                },
+                foo: 'text'
+            });
+
+            expect(block.el.tagName).toEqual('B');
+            expect(block.el.textContent).toEqual('text');
+        });
+
         it('el property has jQuery wrapper', function() {
 
             var block = new Block;
