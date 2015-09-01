@@ -8,4 +8,4 @@ cache:
     - bower_components
 script:
   - npm test -- --reporters=coverage,mocha
-  - ./node_modules/codeclimate-test-reporter/bin/codeclimate.js < ./reporters/lcov.info
+  - ./node_modules/coveralls/bin/coveralls.js < ./reporters/lcov.info
