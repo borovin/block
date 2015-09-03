@@ -64,15 +64,6 @@ module.exports = createClass(View, {
     defaults: {},
     template: null,
 
-    /**
-     * test property description
-     *
-     * @property {string} b nested property description
-     */
-    a: {
-        b: 'test'
-    },
-
     _children: {},
 
     /**

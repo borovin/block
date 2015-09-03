@@ -30,17 +30,6 @@ Block element for initialization. It will be replaced with block.template during
 
 
 
-### a
-
-test property description
-
-| Field | Type | Description |
-| ----- | -----| ----------- |
-| a.b | `string` | nested property description |
-
-
-
-
 
 ## Methods
 
