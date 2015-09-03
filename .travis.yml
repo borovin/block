@@ -7,5 +7,5 @@ cache:
     - node_modules
     - bower_components
 script:
-  - npm test-ci
+  - npm run test-ci
   - ./node_modules/coveralls/bin/coveralls.js < ./reporters/lcov.info
