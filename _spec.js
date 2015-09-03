@@ -570,7 +570,7 @@ describe(module.id, function() {
 
             var block = new Block({
                 template: function() {
-                    return '<div>' + this.include(child, {text: 'child'}) + '</div>'
+                    return '<div>' + this.include(child, {text: "child"}) + '</div>'
                 }
             });
 

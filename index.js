@@ -211,6 +211,9 @@ module.exports = createClass(View, {
             id = block.get('id'),
             $oldEl = block.$el;
 
+        block.undelegateEvents();
+        block._removeBlocks();
+
         if (id) {
             attrs.id = id;
         }
@@ -222,6 +225,9 @@ module.exports = createClass(View, {
         block.$el
             .attr(attrs)
             .addClass(block.get('className'));
+
+        block.delegateEvents();
+        block._initBlocks();
 
         return block;
     },
@@ -403,7 +409,7 @@ module.exports = createClass(View, {
      * @param event
      * @param data
      */
-    trigger: function(event, data) {
+    trigger: function(event) {
 
         var block = this;
 
@@ -447,18 +453,11 @@ module.exports = createClass(View, {
 
         var block = this;
 
-        block.undelegateEvents();
-        block._removeBlocks();
-
         block.el = $(el || block.get('el'))[0];
         block.$el = $(block.el);
         block.el.block = block;
 
-        block.delegateEvents();
-        block._initBlocks();
-
         return block.el;
-
     },
 
     _delegateGlobalEvents: function() {
