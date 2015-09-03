@@ -250,6 +250,7 @@ module.exports = createClass(View, {
      * block.get('a.b.c.d') // -> undefined
      * ```
      *
+     * @param {string} keyPath path to property
      * @returns {value|undefined}
      */
     get: function() {
@@ -282,6 +283,8 @@ module.exports = createClass(View, {
      * block.set('a.b', 2);
      * ```
      *
+     * @param {string} keyPath path to property
+     * @param {value} value new property value
      * @returns {object|undefined}
      */
     set: function() {

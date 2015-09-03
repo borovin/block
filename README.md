@@ -180,7 +180,7 @@ Render method set new data on block instance and invoke template function if it 
 
 
 
-### get()
+### get(keyPath)
 You can get any block property by keypath. If one of the property is undefined get method return undefined (not error).
 If one of the property is function it will be executed in block context and return the result to get method.
 
@@ -198,9 +198,14 @@ block.get('a.c') // -> 'string'
 block.get('a.b.c.d') // -> undefined
 ```
 
+| Param | Type | Description |
+| ----- | -----| ----------- |
+| keyPath | `string` | path to property |
 
 
-### set()
+
+
+### set(keyPath, value)
 Update or create property by keypath. If some property in this path does not exist it will be created automatically.
 `set` method return only changed properties. All changed properties trigger change:propertyKeyPath event.
 
@@ -221,6 +226,13 @@ block.on('change:a', function(e, newValue){
 
 block.set('a.b', 2);
 ```
+
+| Param | Type | Description |
+| ----- | -----| ----------- |
+| keyPath | `string` | path to property |
+
+| value | `value` | new property value |
+
 
 
 
