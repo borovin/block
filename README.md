@@ -47,7 +47,6 @@ someBlock.a.c === 2;
 | config | `object` | all properties from this config-object will be set on block instance |
 
 
-
 ## Properties
 
 
@@ -179,7 +178,6 @@ Render method set new data on block instance and invoke template function if it 
 
 
 
-
 ### get(keyPath)
 You can get any block property by keypath. If one of the property is undefined get method return undefined (not error).
 If one of the property is function it will be executed in block context and return the result to get method.
@@ -201,7 +199,6 @@ block.get('a.b.c.d') // -> undefined
 | Param | Type | Description |
 | ----- | -----| ----------- |
 | keyPath | `string` | path to property |
-
 
 
 
@@ -230,9 +227,7 @@ block.set('a.b', 2);
 | Param | Type | Description |
 | ----- | -----| ----------- |
 | keyPath | `string` | path to property |
-
 | value | `value` | new property value |
-
 
 
 
@@ -251,9 +246,7 @@ var block = new Block({
 | Param | Type | Description |
 | ----- | -----| ----------- |
 | constructor |  |  |
-
 | params |  |  |
-
 
 
 
@@ -270,9 +263,7 @@ parentBlock.remove();
 | Param | Type | Description |
 | ----- | -----| ----------- |
 | Child |  |  |
-
 | params |  |  |
-
 
 
 
@@ -296,9 +287,7 @@ block.trigger('someEvent');
 | Param | Type | Description |
 | ----- | -----| ----------- |
 | event |  |  |
-
 | data |  |  |
-
 
 
 
@@ -318,7 +307,6 @@ block.on('initializing', function(block){});
 | block | `object` | block instance where the event was appeared |
 
 
-
 ### initialized
 initialized event triggers after initialize and render methods
 
@@ -329,7 +317,6 @@ block.on('initialized', function(block){});
 | Property | Type | Description |
 | ----- | -----| ----------- |
 | block | `object` | block instance where the event was appeared |
-
 
 
 
