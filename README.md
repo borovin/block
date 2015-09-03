@@ -28,6 +28,16 @@ Block can be initialized as regular function without new keyword.
 
 Block element for initialization. It will be replaced with block.template during render process.
 
+```
+new Block({
+ el: '.page'
+});
+
+new Block({
+ el: document.getElementById('page')
+});
+```
+
 
 
 
