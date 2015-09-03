@@ -44,7 +44,7 @@ someBlock.a.c === 2;
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| config | `object` | all properties from this config-object will be set on block instance |
+| config | `object`  | all properties from this config-object will be set on block instance |
 
 
 ## Properties
@@ -174,7 +174,7 @@ Render method set new data on block instance and invoke template function if it 
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| data | `object` | data which will be set to block instance before rendering. So you can get it in template throw this context. |
+| data | `object`  | data which will be set to block instance before rendering. So you can get it in template throw this context. |
 
 
 
@@ -198,7 +198,7 @@ block.get('a.b.c.d') // -> undefined
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| keyPath | `string` | path to property |
+| keyPath | `string`  | path to property |
 
 
 
@@ -226,8 +226,8 @@ block.set('a.b', 2);
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| keyPath | `string` | path to property |
-| value | `value` | new property value |
+| keyPath | `string`  | path to property |
+| value | `value`  | new property value |
 
 
 
@@ -245,8 +245,8 @@ var block = new Block({
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| constructor | `object``function` | block class for initialization |
-| params | `object` | child block config |
+| constructor | `object` `function`  | block class for initialization |
+| params | `object`  | child block config |
 
 
 
@@ -262,8 +262,8 @@ parentBlock.remove();
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| Child | `object``class` | block class for initialization |
-| params | `object` | child block config |
+| Child | `object` `class`  | block class for initialization |
+| params | `object`  | child block config |
 
 
 
@@ -286,8 +286,8 @@ block.trigger('someEvent');
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| event | `string` | event name |
-| data | `value` | any additional data |
+| event | `string`  | event name |
+| data | `value`  | any additional data |
 
 
 
@@ -304,7 +304,7 @@ block.on('initializing', function(block){});
 
 | Property | Type | Description |
 | ----- | -----| ----------- |
-| block | `object` | block instance where the event was appeared |
+| block | `object`  | block instance where the event was appeared |
 
 
 ### initialized
@@ -316,7 +316,7 @@ block.on('initialized', function(block){});
 
 | Property | Type | Description |
 | ----- | -----| ----------- |
-| block | `object` | block instance where the event was appeared |
+| block | `object`  | block instance where the event was appeared |
 
 
 
