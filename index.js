@@ -7,8 +7,20 @@ var get = require('bower_components/get/index.js'),
 
 var View = backbone.View;
 
+/**
+ * Extended Backbone View
+ *
+ * @module block
+ */
+
 module.exports = createClass(View, {
 
+    /**
+     * Block can be initialized as regular function without new keyword.
+     *
+     * @constructor Block
+     * @param {object} config all properties from this config-object will be set on block instance
+     */
     constructor: function(config) {
 
         var block = this;
@@ -19,23 +31,56 @@ module.exports = createClass(View, {
 
         block._initElement();
 
+        /**
+         * initializing event triggers before initialize and render methods
+         *
+         * @event initializing
+         * @property {object} block block instance where the event was appeared
+         */
         block.trigger('initializing', block);
 
         $.when(block.initialize.apply(block, arguments)).then(function() {
             block.render();
             block._delegateGlobalEvents();
+
+            /**
+             * initialized event triggers after initialize and render methods
+             *
+             * @event initialized
+             * @property {object} block block instance where the event was appeared
+             */
             block.trigger('initialized', block);
         });
     },
 
+    /**
+     * Block element for initialization. It will be replaced with block.template during render process.
+     *
+     * @type {HTMLElement|selector|string|function}
+     */
     el: '<div></div>',
     globalEvents: {},
     events: {},
     defaults: {},
     template: null,
 
+    /**
+     * test property description
+     *
+     * @property {string} b nested property description
+     */
+    a: {
+        b: 'test'
+    },
+
     _children: {},
 
+    /**
+     * Render method description
+     *
+     * @param {object} data data which will be set to block instance before rendering. So you can get it in template throw this context.
+     * @return {object} block instance for chaining
+     */
     render: function(data) {
 
         if (_.isPlainObject(data)){
@@ -65,6 +110,7 @@ module.exports = createClass(View, {
         block.delegateEvents();
         block._initBlocks();
 
+        return block;
     },
 
     get: function() {

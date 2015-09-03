@@ -7,8 +7,9 @@
   },
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "test": "node ./node_modules/karma/bin/karma start --single-run",
-    "docs": "node ./node_modules/docco/bin/docco _spec.js && cp -f ./docs/_spec.html ./docs/index.html",
+    "test": "node ./node_modules/grunt-cli/bin/grunt test",
+    "test-ci": "node ./node_modules/grunt-cli/bin/grunt test-ci",
+    "docs": "node ./node_modules/grunt-cli/bin/grunt docs",
     "postinstall": "node ./node_modules/bower/bin/bower install"
   },
   "author": "a@borovin.com",
@@ -18,6 +19,10 @@
     "coveralls": "^2.11.4",
     "es6-module-loader": "^0.17.3",
     "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-docs": "borovin/grunt-docs",
+    "grunt-eslint": "^17.1.0",
+    "grunt-karma": "^0.12.0",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.9",
     "karma-coverage": "^0.5.1",
@@ -25,6 +30,7 @@
     "karma-mocha-reporter": "^1.0.2",
     "karma-phantomjs-launcher": "^0.1",
     "karma-systemjs": "^0.5.0",
+    "lodash": "^3.10.1",
     "phantomjs-polyfill": "^0.0.1",
     "systemjs": "^0.18.3"
   }
