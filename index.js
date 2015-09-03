@@ -321,8 +321,8 @@ module.exports = createClass(View, {
      * });
      * ```
      *
-     * @param constructor
-     * @param params
+     * @param {object|function} constructor block class for initialization
+     * @param {object} params child block config
      * @returns {string}
      */
     include: function(constructor, params) {
@@ -359,8 +359,8 @@ module.exports = createClass(View, {
      * parentBlock.remove();
      * ```
      *
-     * @param Child
-     * @param params
+     * @param {object|class} Child block class for initialization
+     * @param {object} params child block config
      * @returns {childBlock}
      */
     initBlock: function(Child, params) {
@@ -409,8 +409,8 @@ module.exports = createClass(View, {
      * block.trigger('someEvent');
      * ```
      *
-     * @param event
-     * @param data
+     * @param {string} event event name
+     * @param {value} data any additional data
      */
     trigger: function(event) {
 

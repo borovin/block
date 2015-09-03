@@ -245,8 +245,8 @@ var block = new Block({
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| constructor |  |  |
-| params |  |  |
+| constructor | `object``function` | block class for initialization |
+| params | `object` | child block config |
 
 
 
@@ -262,8 +262,8 @@ parentBlock.remove();
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| Child |  |  |
-| params |  |  |
+| Child | `object``class` | block class for initialization |
+| params | `object` | child block config |
 
 
 
@@ -286,8 +286,8 @@ block.trigger('someEvent');
 
 | Param | Type | Description |
 | ----- | -----| ----------- |
-| event |  |  |
-| data |  |  |
+| event | `string` | event name |
+| data | `value` | any additional data |
 
 
 
