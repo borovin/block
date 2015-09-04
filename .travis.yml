@@ -8,4 +8,5 @@ cache:
     - bower_components
 script:
   - npm run test-ci
+  - npm run lint
   - ./node_modules/coveralls/bin/coveralls.js < ./reporters/lcov.info
