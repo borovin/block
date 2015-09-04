@@ -31,7 +31,8 @@ module.exports = function(grunt){
         }
     });
 
-    grunt.registerTask('test', ['karma:local', 'eslint']);
-    grunt.registerTask('test-ci', ['karma:ci', 'eslint']);
+    grunt.registerTask('test', ['karma:local']);
+    grunt.registerTask('test-ci', ['karma:ci']);
+    grunt.registerTask('lint', ['eslint']);
 
 };
