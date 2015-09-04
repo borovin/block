@@ -8,8 +8,6 @@ var get = require('bower_components/get/index.js'),
 var View = backbone.View;
 
 /**
- * Extended Backbone View
- *
  * You can extend any Block class by static Block.extend method. This method set all passed properties to new block prototype using
  * deep merge method.
  *
