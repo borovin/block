@@ -1,5 +1,2 @@
 .idea/
-bower_components/
 node_modules/
-reporters/
-.DS_Store

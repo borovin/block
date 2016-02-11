@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Test'em</title>
+
+    <link rel="stylesheet" href="/tools/jasmine.css">
+
+    <script src="/tools/jasmine.js"></script>
+    <script src="/tools/jasmine-html.js"></script>
+    <script src="/tools/jasmine-boot.js"></script>
+    <script src="/testem.js"></script>
+
+    <script>
+        window.__testFiles__ = [
+            {{#serve_files}}
+                "{{{src}}}",
+            {{/serve_files}}
+        ]
+    </script>
+
+    <script src="/node_modules/steal/steal.js" main="tools/testem.bootstrap"></script>
+
+</head>
+<body>
+<div id="jasmine_content"></div>
+</body>
+</html>
