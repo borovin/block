@@ -34,6 +34,7 @@ module.exports = createClass(function (config) {
     render: function (data) {
 
         var view = this;
+        var prevView = view.el.view;
 
         var changes = data ? view.set(data) : null;
 
@@ -42,15 +43,17 @@ module.exports = createClass(function (config) {
             view._initChildren();
         }
 
-        if (view.el.view && view.el.view !== view){
-            _.forEach(view.el.view.children, function(child){
+        view.el.view = view;
+
+        if (prevView && prevView !== view){
+            _.forEach(prevView.children, function(child){
                 view.initChild(child);
             });
 
-            view.el.view.removeEvents();
+            prevView.stopListening();
         }
 
-        view.el.view = view;
+        view.startListening();
 
     },
 
@@ -139,7 +142,7 @@ module.exports = createClass(function (config) {
 
         var view = this;
 
-        view.removeEvents();
+        view.stopListening();
         view.removeChildren();
 
         _.remove(view.get('parent.children'), function (child) {
@@ -161,21 +164,51 @@ module.exports = createClass(function (config) {
         });
     },
 
-    removeEvents: function(){
-
-        var view = this;
-
-        $(document).off('.' + view.cid);
-        view.stopListening();
-        $(view.el).off();
-    },
-
     trigger: function (event) {
 
         var view = this;
 
-        view.$el.trigger.apply(view.$el, arguments);
+        $(view.el).trigger.apply(view.$el, arguments);
         view.trigger.apply(view, arguments);
+    },
+
+    startListening: function() {
+
+        var view = this;
+
+        view.stopListening();
+
+        _.forEach(view.get('events'), function(handler, eventKey){
+
+            var keyParts = eventKey.split(' ');
+            var eventName = keyParts.shift();
+            var selector = keyParts.join(' ') || '*';
+
+            $(view.el).on(eventName, selector, handler.bind(view));
+        });
+
+        _.forEach(view.get('globalEvents'), function (handler, eventKey) {
+
+            var keyParts = eventKey.split(' ');
+            var eventName = keyParts.shift();
+            var selector = keyParts.join(' ') || '*';
+
+            $(document).on(eventName + '.' + view.cid, selector, handler.bind(view));
+
+        });
+
+    },
+
+    stopListening: function() {
+
+        var view = this;
+
+        Events.stopListening.call(view);
+
+        if (view.el) {
+            $(document).off('.' + view.cid);
+            $(view.el).off();
+        }
     },
 
     _triggerChanges: function (path, data) {
