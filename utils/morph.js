@@ -1,5 +1,5 @@
 var morphdom = require('morphdom');
-var includes = require('./_includes');
+var includes = require('./includes');
 
 function onBeforeMorphEl(fromEl, toEl) {
 

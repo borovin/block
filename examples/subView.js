@@ -1,5 +1,5 @@
 var View = require('view');
 
 module.exports = View.extend({
-    template: '<div>subView</div>'
+    template: '<div style="color: red">subView</div>'
 });

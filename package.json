@@ -16,6 +16,7 @@
   "dependencies": {
     "ampersand-events": "^1.1.1",
     "createClass": "github:borovin/createClass",
+    "ejsLoader": "github:borovin/ejsLoader",
     "get": "github:borovin/get",
     "jquery": "^2.2.0",
     "lodash": "^4.1.0",

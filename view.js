@@ -4,8 +4,8 @@ var createClass = require('createClass/index');
 var _ = require('lodash');
 var $ = require('jquery');
 var Events = require('ampersand-events');
-var includes = require('./_includes');
-var morph = require('./_morph');
+var includes = require('./utils/includes');
+var morph = require('./utils/morph');
 
 module.exports = createClass(function (config) {
 
@@ -38,24 +38,34 @@ module.exports = createClass(function (config) {
         var changes = data ? view.set(data) : null;
 
         if (!data || changes) {
-
             view.el = morph(view.el, _.trim(view.get('template')));
-
             view._initChildren();
         }
+
+        if (view.el.view && view.el.view !== view){
+            _.forEach(view.el.view._children, function(child){
+                view.initChild(child);
+            });
+
+            view.el.view.removeEvents();
+        }
+
+        view.el.view = view;
 
     },
 
     include: function (constructor, config) {
 
         var includeItem;
-        var includeId = _.uniqueId('include-');
+        var includeId;
 
         if (typeof constructor === 'string') {
-            includeItem = _.template(constructor)(config);
+            includeItem = _.template.call(this, constructor)(config);
         }
 
         if (typeof constructor === 'function') {
+
+            includeId = _.uniqueId('include-');
 
             includes[includeId] = {
                 constructor: constructor,
@@ -128,23 +138,36 @@ module.exports = createClass(function (config) {
     remove: function () {
 
         var view = this;
-        var children = view._children;
 
-        $(document).off('.' + view.cid);
-        view.stopListening();
-        view.$el.off();
-
-        view._children = [];
-
-        _.forEach(children, function (child) {
-
-            child.remove();
-
-        });
+        view.removeEvents();
+        view.removeChildren();
 
         _.remove(view.get('parent._children'), function (child) {
             return child === view;
         });
+
+        $(view.el).remove();
+    },
+
+    removeChildren: function(){
+
+        var view = this;
+        var children = view._children;
+
+        view._children = [];
+
+        _.forEach(children, function (child) {
+            child.remove();
+        });
+    },
+
+    removeEvents: function(){
+
+        var view = this;
+
+        $(document).off('.' + view.cid);
+        view.stopListening();
+        $(view.el).off();
     },
 
     trigger: function (event) {
