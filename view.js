@@ -26,7 +26,7 @@ module.exports = createClass(function (config) {
 
     template: null,
 
-    _children: [],
+    children: [],
 
     initialize: function () {
     },
@@ -43,7 +43,7 @@ module.exports = createClass(function (config) {
         }
 
         if (view.el.view && view.el.view !== view){
-            _.forEach(view.el.view._children, function(child){
+            _.forEach(view.el.view.children, function(child){
                 view.initChild(child);
             });
 
@@ -127,7 +127,7 @@ module.exports = createClass(function (config) {
         }
 
         child.parent = view;
-        view._children.push(child);
+        view.children.push(child);
 
         return child;
     },
@@ -142,7 +142,7 @@ module.exports = createClass(function (config) {
         view.removeEvents();
         view.removeChildren();
 
-        _.remove(view.get('parent._children'), function (child) {
+        _.remove(view.get('parent.children'), function (child) {
             return child === view;
         });
 
@@ -152,9 +152,9 @@ module.exports = createClass(function (config) {
     removeChildren: function(){
 
         var view = this;
-        var children = view._children;
+        var children = view.children;
 
-        view._children = [];
+        view.children = [];
 
         _.forEach(children, function (child) {
             child.remove();
