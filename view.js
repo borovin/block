@@ -45,8 +45,8 @@ module.exports = createClass(function (config) {
 
         view.el.view = view;
 
-        if (prevView && prevView !== view){
-            _.forEach(prevView.children, function(child){
+        if (prevView && prevView !== view) {
+            _.forEach(prevView.children, function (child) {
                 view.initChild(child);
             });
 
@@ -152,7 +152,7 @@ module.exports = createClass(function (config) {
         $(view.el).remove();
     },
 
-    removeChildren: function(){
+    removeChildren: function () {
 
         var view = this;
         var children = view.children;
@@ -164,21 +164,22 @@ module.exports = createClass(function (config) {
         });
     },
 
-    trigger: function (event) {
+    trigger: function () {
 
         var view = this;
+        var $el = $(view.el);
 
-        $(view.el).trigger.apply(view.$el, arguments);
+        $el.trigger.apply($el, arguments);
         view.trigger.apply(view, arguments);
     },
 
-    startListening: function() {
+    startListening: function () {
 
         var view = this;
 
         view.stopListening();
 
-        _.forEach(view.get('events'), function(handler, eventKey){
+        _.forEach(view.get('events'), function (handler, eventKey) {
 
             var keyParts = eventKey.split(' ');
             var eventName = keyParts.shift();
@@ -199,7 +200,7 @@ module.exports = createClass(function (config) {
 
     },
 
-    stopListening: function() {
+    stopListening: function () {
 
         var view = this;
 
@@ -215,14 +216,14 @@ module.exports = createClass(function (config) {
 
         var view = this;
 
-        if (_.isPlainObject(path)){
+        if (_.isPlainObject(path)) {
             data = path;
             path = null;
         }
 
         if (_.isPlainObject(data)) {
-            _.forEach(data, function (data, key) {
-                view.triggerChanges(path ? (path + '.' + key) : key, data);
+            _.forEach(data, function (dataItem, key) {
+                view.triggerChanges(path ? (path + '.' + key) : key, dataItem);
             });
         }
 

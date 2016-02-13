@@ -27,9 +27,9 @@ function onBeforeNodeDiscarded(node) {
     return true;
 }
 
-module.exports = function(fromEl, toEl){
+module.exports = function (fromEl, toEl) {
 
-    if (!toEl){
+    if (!toEl) {
         return fromEl;
     }
 

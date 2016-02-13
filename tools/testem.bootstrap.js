@@ -1,6 +1,6 @@
 (function () {
 
-    var imports = __testFiles__.map(function (testFile) {
+    var imports = window.__testFiles__.map(function (testFile) {
         return System.import(testFile.replace('.js', ''));
     });
 

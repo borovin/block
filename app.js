@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 var express = require('express');
 var playground = require('playground');
 

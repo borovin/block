@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js .",
-    "test": "node ./node_modules/testem/testem.js ci"
+    "test": "node ./node_modules/testem/testem.js ci && npm run lint -s"
   },
   "devDependencies": {
     "eslint": "^1.10.3",

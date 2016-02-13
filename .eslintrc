@@ -4,6 +4,7 @@
     "yandex"
   ],
   "env": {
+    "node": true,
     "commonjs": true,
     "browser": true,
     "jasmine": true
