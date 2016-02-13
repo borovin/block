@@ -3,6 +3,5 @@
 module.exports = {
     src_files: ['tests/*', 'block.js'],
     serve_files: 'tests/*',
-    test_page: 'tools/testem.mustache',
-    reporter: 'dot'
+    test_page: 'tools/testem.mustache'
 };
