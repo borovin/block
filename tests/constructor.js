@@ -1,4 +1,4 @@
-var View = require('view');
+var View = require('block');
 
 describe('constructor', function () {
 

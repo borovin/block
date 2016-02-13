@@ -1,6 +1,6 @@
-var View = require('view');
+var View = require('block');
 
 new View({
     el: '#example',
-    template: require('view/examples/template.ejs!ejsLoader')
+    template: require('block/examples/template.ejs!ejsLoader')
 });

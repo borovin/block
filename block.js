@@ -9,16 +9,16 @@ var morph = require('./utils/morph');
 
 module.exports = createClass(function (config) {
 
-    var view = this;
+    var block = this;
 
-    view.cid = _.uniqueId('view-');
+    block.cid = _.uniqueId('block-');
 
-    set(view, config);
+    set(block, config);
 
-    view.el = $(view.get('el'))[0];
+    block.el = $(block.get('el'))[0];
 
-    view.initialize();
-    view.render();
+    block.initialize();
+    block.render();
 
 }, Events, {
 
@@ -33,27 +33,27 @@ module.exports = createClass(function (config) {
 
     render: function (data) {
 
-        var view = this;
-        var prevView = view.el.view;
+        var block = this;
+        var prevView = block.el.block;
 
-        var changes = data ? view.set(data) : null;
+        var changes = data ? block.set(data) : null;
 
         if (!data || changes) {
-            view.el = morph(view.el, _.trim(view.get('template')));
-            view._initChildren();
+            block.el = morph(block.el, _.trim(block.get('template')));
+            block._initChildren();
         }
 
-        view.el.view = view;
+        block.el.block = block;
 
-        if (prevView && prevView !== view) {
+        if (prevView && prevView !== block) {
             _.forEach(prevView.children, function (child) {
-                view.initChild(child);
+                block.initChild(child);
             });
 
             prevView.stopListening();
         }
 
-        view.startListening();
+        block.startListening();
 
     },
 
@@ -83,19 +83,19 @@ module.exports = createClass(function (config) {
 
     get: function (path) {
 
-        var view = this;
+        var block = this;
 
-        return get(view, path);
+        return get(block, path);
     },
 
     set: function () {
 
-        var view = this;
-        var args = [view].concat([].slice.call(arguments));
+        var block = this;
+        var args = [block].concat([].slice.call(arguments));
         var changes = set.apply(null, args);
 
         if (changes) {
-            view._triggerChanges(changes);
+            block._triggerChanges(changes);
         }
 
         return changes;
@@ -103,8 +103,8 @@ module.exports = createClass(function (config) {
 
     _initChildren: function () {
 
-        var view = this;
-        var childElements = view.el.querySelectorAll('include');
+        var block = this;
+        var childElements = block.el.querySelectorAll('include');
 
         _.forEach(childElements, function (childElement) {
 
@@ -113,7 +113,7 @@ module.exports = createClass(function (config) {
 
             include.config.el = childElement;
 
-            view.initChild(include.constructor, include.config);
+            block.initChild(include.constructor, include.config);
 
             delete includes[includeId];
 
@@ -122,15 +122,15 @@ module.exports = createClass(function (config) {
 
     initChild: function (Child, config) {
 
-        var view = this;
+        var block = this;
         var child;
 
         if (typeof Child === 'function') {
             child = new Child(config);
         }
 
-        child.parent = view;
-        view.children.push(child);
+        child.parent = block;
+        block.children.push(child);
 
         return child;
     },
@@ -140,24 +140,24 @@ module.exports = createClass(function (config) {
      */
     remove: function () {
 
-        var view = this;
+        var block = this;
 
-        view.stopListening();
-        view.removeChildren();
+        block.stopListening();
+        block.removeChildren();
 
-        _.remove(view.get('parent.children'), function (child) {
-            return child === view;
+        _.remove(block.get('parent.children'), function (child) {
+            return child === block;
         });
 
-        $(view.el).remove();
+        $(block.el).remove();
     },
 
     removeChildren: function () {
 
-        var view = this;
-        var children = view.children;
+        var block = this;
+        var children = block.children;
 
-        view.children = [];
+        block.children = [];
 
         _.forEach(children, function (child) {
             child.remove();
@@ -166,35 +166,35 @@ module.exports = createClass(function (config) {
 
     trigger: function () {
 
-        var view = this;
-        var $el = $(view.el);
+        var block = this;
+        var $el = $(block.el);
 
         $el.trigger.apply($el, arguments);
-        view.trigger.apply(view, arguments);
+        block.trigger.apply(block, arguments);
     },
 
     startListening: function () {
 
-        var view = this;
+        var block = this;
 
-        view.stopListening();
+        block.stopListening();
 
-        _.forEach(view.get('events'), function (handler, eventKey) {
+        _.forEach(block.get('events'), function (handler, eventKey) {
 
             var keyParts = eventKey.split(' ');
             var eventName = keyParts.shift();
             var selector = keyParts.join(' ') || '*';
 
-            $(view.el).on(eventName, selector, handler.bind(view));
+            $(block.el).on(eventName, selector, handler.bind(block));
         });
 
-        _.forEach(view.get('globalEvents'), function (handler, eventKey) {
+        _.forEach(block.get('globalEvents'), function (handler, eventKey) {
 
             var keyParts = eventKey.split(' ');
             var eventName = keyParts.shift();
             var selector = keyParts.join(' ') || '*';
 
-            $(document).on(eventName + '.' + view.cid, selector, handler.bind(view));
+            $(document).on(eventName + '.' + block.cid, selector, handler.bind(block));
 
         });
 
@@ -202,19 +202,19 @@ module.exports = createClass(function (config) {
 
     stopListening: function () {
 
-        var view = this;
+        var block = this;
 
-        Events.stopListening.call(view);
+        Events.stopListening.call(block);
 
-        if (view.el) {
-            $(document).off('.' + view.cid);
-            $(view.el).off();
+        if (block.el) {
+            $(document).off('.' + block.cid);
+            $(block.el).off();
         }
     },
 
     _triggerChanges: function (path, data) {
 
-        var view = this;
+        var block = this;
 
         if (_.isPlainObject(path)) {
             data = path;
@@ -223,10 +223,10 @@ module.exports = createClass(function (config) {
 
         if (_.isPlainObject(data)) {
             _.forEach(data, function (dataItem, key) {
-                view.triggerChanges(path ? (path + '.' + key) : key, dataItem);
+                block.triggerChanges(path ? (path + '.' + key) : key, dataItem);
             });
         }
 
-        view.trigger(path ? ('change:' + path) : 'change', data);
+        block.trigger(path ? ('change:' + path) : 'change', data);
     }
 });
