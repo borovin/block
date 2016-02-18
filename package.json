@@ -22,7 +22,6 @@
     "lodash": "^4.1.0",
     "morphdom": "^1.1.2",
     "playground": "github:borovin/playground",
-    "queryString": "github:borovin/queryString",
     "set": "github:borovin/set",
     "steal": "^0.13.2"
   },
