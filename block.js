@@ -17,6 +17,8 @@ module.exports = createClass(function (config) {
 
     block.el = $(block.get('el'))[0];
 
+    //TODO: remove initialized block from element if exists and replace its children to the new block
+
     block.initialize();
     block.render();
 
@@ -34,7 +36,6 @@ module.exports = createClass(function (config) {
     render: function (data) {
 
         var block = this;
-        var prevView = block.el.block;
 
         var changes = data ? block.set(data) : null;
 
@@ -44,14 +45,6 @@ module.exports = createClass(function (config) {
         }
 
         block.el.block = block;
-
-        if (prevView && prevView !== block) {
-            _.forEach(prevView.children, function (child) {
-                block.initChild(child);
-            });
-
-            prevView.stopListening();
-        }
 
         block.startListening();
 

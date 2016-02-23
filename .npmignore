@@ -1,5 +1,8 @@
 .travis.yml
-karma.*.js
+.eslintignore
+.eslintrc
+testem.js
 tests
 examples
+tools
 app.js
