@@ -163,7 +163,7 @@ module.exports = createClass(function (config) {
         var $el = $(block.el);
 
         $el.trigger.apply($el, arguments);
-        block.trigger.apply(block, arguments);
+        Events.trigger.apply(block, arguments);
     },
 
     startListening: function () {
