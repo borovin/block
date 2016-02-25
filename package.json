@@ -1,6 +1,6 @@
 {
-  "version": "1.1.0",
-  "main": "block.js",
+  "version": "1.1.1",
+  "main": "index.js",
   "name": "block",
   "scripts": {
     "start": "node app.js",

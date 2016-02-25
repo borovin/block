@@ -216,7 +216,7 @@ module.exports = createClass(function (config) {
 
         if (_.isPlainObject(data)) {
             _.forEach(data, function (dataItem, key) {
-                block.triggerChanges(path ? (path + '.' + key) : key, dataItem);
+                block._triggerChanges(path ? (path + '.' + key) : key, dataItem);
             });
         }
 
