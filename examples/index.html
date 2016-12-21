@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Block Docs</title>
+    <script src="/node_modules/@webcomponents/custom-elements/custom-elements.min.js"></script>
+    <script src="/node_modules/systemjs/dist/system.js"></script>
+    <script src="/main.js"></script>
+</head>
+<body>
+<h1>Block Examples</h1>
+<script>
+    let exampleUrl;
+    const queryParams = location.search.substring(1).split('&');
+
+    queryParams.forEach(param => {
+        if (param.indexOf('url=') === 0){
+            exampleUrl = param.split('=')[1];
+        }
+    });
+
+    if (exampleUrl){
+        document.body.innerHTML = '<div id="example"></div>';
+        System.import(exampleUrl);
+    }
+</script>
+</body>
+</html>

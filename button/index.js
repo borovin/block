@@ -8,7 +8,7 @@ class Button extends Block {
     }
 
     get template() {
-        return `button`;
+        return `test button`;
     }
 }
 

@@ -1,13 +1,15 @@
 {
   "name": "@basket/block",
   "description": "UI blocks based on Custom Elements v1 spec.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/borovin/block.git"
   },
   "homepage": "https://github.com/borovin/block",
   "scripts": {
+    "build": "gulp",
+    "start": "serve",
     "test": "eslint .",
     "test:codestyle": "eslint ."
   },
@@ -29,7 +31,14 @@
     "morphdom": "^2.2.1"
   },
   "devDependencies": {
-    "webcomponents.js": "^0.7.23",
-    "eslint": "^3.10.2"
+    "@webcomponents/custom-elements": "^1.0.0-alpha.3",
+    "eslint": "^3.10.2",
+    "fs-extra": "^1.0.0",
+    "globby": "^6.1.0",
+    "gulp": "^3.9.1",
+    "lodash": "^4.16.6",
+    "serve": "^2.1.0",
+    "systemjs": "^0.19.40",
+    "systemjs-builder": "^0.15.34"
   }
 }
