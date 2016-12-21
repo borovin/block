@@ -1,12 +1,12 @@
 language: node_js
-node_js:
-  - "stable"
-sudo: false
 cache:
   directories:
     - node_modules
-    - bower_components
+node_js:
+  - "stable"
+sudo: false
+env:
+  - TEST_TYPE=coverage CACHE_NAME=JOB1
+  - TEST_TYPE=codestyle CACHE_NAME=JOB1
 script:
-  - npm run test-ci
-  - npm run lint
-  - ./node_modules/coveralls/bin/coveralls.js < ./reporters/lcov.info
+  - npm run test:$TEST_TYPE -s
