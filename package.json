@@ -1,6 +1,6 @@
 {
   "name": "@basket/block",
-  "description": "extended backbone view",
+  "description": "UI blocks based on Custom Elements v1 spec.",
   "version": "1.0.0",
   "repository": {
     "type": "git",
@@ -8,8 +8,7 @@
   },
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "eslint .",
     "test:codestyle": "eslint ."
   },
   "author": "a@borovin.com",
@@ -26,37 +25,11 @@
       "jest": true
     }
   },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
-  },
-  "jest": {
-    "setupFiles": [
-      ".jestSetup.js"
-    ],
-    "collectCoverageFrom": [
-      "**/*.js",
-      "!**/node_modules/**",
-      "!**/__tests__/**",
-      "!**/__mocks__/**",
-      "!coverage/**"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "lines": 80
-      }
-    }
-  },
   "dependencies": {
     "morphdom": "^2.2.1"
   },
   "devDependencies": {
     "webcomponents.js": "^0.7.23",
-    "babel-preset-es2015": "^6.18.0",
-    "eslint": "^3.10.2",
-    "jest": "^17.0.3",
-    "@webcomponents/custom-elements": "^1.0.0-alpha.3"
-
+    "eslint": "^3.10.2"
   }
 }
