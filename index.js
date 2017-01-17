@@ -8,6 +8,12 @@ class Block extends window.HTMLElement {
             this.content = props.content;
         }
 
+        if (this.innerHTML){
+            this.content = this.innerHTML;
+        }
+
+        this.innerHTML = '';
+
         for (let attr in this.constructor.attributes) {
             const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), attr) || {};
             const defaultValue = this.constructor.attributes[attr];
@@ -45,7 +51,6 @@ class Block extends window.HTMLElement {
             const defaultValue = this.constructor.attributes[attr];
             this.setAttribute(attr, defaultValue);
         }
-        this.innerHTML = '';
         this.render();
     }
 

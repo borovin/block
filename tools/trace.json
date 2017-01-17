@@ -1,0 +1,212 @@
+{
+  "packages": {
+    "examples/button": {
+      "map": {
+        "@basket/block/button": "button/index"
+      }
+    },
+    "button/index": {
+      "map": {
+        "../index": "index",
+        "./template": "button/template",
+        "./styles": "button/styles"
+      }
+    },
+    "index": {
+      "map": {
+        "morphdom": "node_modules/morphdom/src/index"
+      }
+    },
+    "button/template": {
+      "map": {
+        "lodash/escape": "node_modules/lodash/escape"
+      }
+    },
+    "browser_modules/lodash/escape": {
+      "map": {
+        "./_escapeHtmlChar": "browser_modules/lodash/_escapeHtmlChar",
+        "./toString": "browser_modules/lodash/toString"
+      }
+    },
+    "browser_modules/lodash/_escapeHtmlChar": {
+      "map": {
+        "./_basePropertyOf": "browser_modules/lodash/_basePropertyOf"
+      }
+    },
+    "browser_modules/lodash/toString": {
+      "map": {
+        "./_baseToString": "browser_modules/lodash/_baseToString"
+      }
+    },
+    "browser_modules/lodash/_baseToString": {
+      "map": {
+        "./_Symbol": "browser_modules/lodash/_Symbol",
+        "./_arrayMap": "browser_modules/lodash/_arrayMap",
+        "./isArray": "browser_modules/lodash/isArray",
+        "./isSymbol": "browser_modules/lodash/isSymbol"
+      }
+    },
+    "browser_modules/lodash/_Symbol": {
+      "map": {
+        "./_root": "browser_modules/lodash/_root"
+      }
+    },
+    "browser_modules/lodash/_root": {
+      "map": {
+        "./_freeGlobal": "browser_modules/lodash/_freeGlobal"
+      }
+    },
+    "browser_modules/lodash/isSymbol": {
+      "map": {
+        "./_baseGetTag": "browser_modules/lodash/_baseGetTag",
+        "./isObjectLike": "browser_modules/lodash/isObjectLike"
+      }
+    },
+    "browser_modules/lodash/_baseGetTag": {
+      "map": {
+        "./_Symbol": "browser_modules/lodash/_Symbol",
+        "./_getRawTag": "browser_modules/lodash/_getRawTag",
+        "./_objectToString": "browser_modules/lodash/_objectToString"
+      }
+    },
+    "browser_modules/lodash/_getRawTag": {
+      "map": {
+        "./_Symbol": "browser_modules/lodash/_Symbol"
+      }
+    },
+    "button/styles": {
+      "map": {
+        "@basket/block/utils/importStyles/index": "utils/importStyles/index",
+        "lodash/escape": "node_modules/lodash/escape",
+        "../styles/fonts": "styles/fonts/index",
+        "../styles/colors": "styles/colors/index"
+      }
+    },
+    "styles/fonts/index": {
+      "map": {
+        "./styles": "styles/fonts/styles"
+      }
+    },
+    "styles/fonts/styles": {
+      "map": {
+        "@basket/block/utils/importStyles/index": "utils/importStyles/index",
+        "lodash/escape": "node_modules/lodash/escape"
+      }
+    },
+    "examples/test/a/a": {
+      "map": {
+        "../b": "examples/test/b/index",
+        "./aa": "examples/test/a/aa",
+        "./aaa": "examples/test/a/aaa"
+      }
+    },
+    "examples/test/b/index": {
+      "map": {
+        "../c": "examples/test/c/index"
+      }
+    }
+  },
+  "depCache": {
+    "examples/button.js": [
+      "button/index.js"
+    ],
+    "button/index.js": [
+      "index.js",
+      "button/template.js",
+      "button/styles.js"
+    ],
+    "index.js": [
+      "browser_modules/morphdom/src/index.js"
+    ],
+    "button/template.js": [
+      "browser_modules/lodash/escape.js"
+    ],
+    "browser_modules/lodash/escape.js": [
+      "browser_modules/lodash/_escapeHtmlChar.js",
+      "browser_modules/lodash/toString.js"
+    ],
+    "browser_modules/lodash/_escapeHtmlChar.js": [
+      "browser_modules/lodash/_basePropertyOf.js"
+    ],
+    "browser_modules/lodash/toString.js": [
+      "browser_modules/lodash/_baseToString.js"
+    ],
+    "browser_modules/lodash/_baseToString.js": [
+      "browser_modules/lodash/_Symbol.js",
+      "browser_modules/lodash/_arrayMap.js",
+      "browser_modules/lodash/isArray.js",
+      "browser_modules/lodash/isSymbol.js"
+    ],
+    "browser_modules/lodash/_Symbol.js": [
+      "browser_modules/lodash/_root.js"
+    ],
+    "browser_modules/lodash/_root.js": [
+      "browser_modules/lodash/_freeGlobal.js"
+    ],
+    "browser_modules/lodash/isSymbol.js": [
+      "browser_modules/lodash/_baseGetTag.js",
+      "browser_modules/lodash/isObjectLike.js"
+    ],
+    "browser_modules/lodash/_baseGetTag.js": [
+      "browser_modules/lodash/_Symbol.js",
+      "browser_modules/lodash/_getRawTag.js",
+      "browser_modules/lodash/_objectToString.js"
+    ],
+    "browser_modules/lodash/_getRawTag.js": [
+      "browser_modules/lodash/_Symbol.js"
+    ],
+    "button/styles.js": [
+      "utils/importStyles/index.js",
+      "browser_modules/lodash/escape.js",
+      "styles/fonts/index.js",
+      "styles/colors/index.js"
+    ],
+    "styles/fonts/index.js": [
+      "styles/fonts/styles.js"
+    ],
+    "styles/fonts/styles.js": [
+      "utils/importStyles/index.js",
+      "browser_modules/lodash/escape.js"
+    ],
+    "examples/test/a/a.js": [
+      "examples/test/b/index.js",
+      "examples/test/a/aa.js",
+      "examples/test/a/aaa.js"
+    ],
+    "examples/test/b/index.js": [
+      "examples/test/c/index.js"
+    ]
+  },
+  "traced": {
+    "browser_modules/morphdom/src/index.js": 1483058710962,
+    "index.js": 1483058710963,
+    "browser_modules/lodash/_basePropertyOf.js": 1483058711001,
+    "browser_modules/lodash/_escapeHtmlChar.js": 1483058711002,
+    "browser_modules/lodash/_freeGlobal.js": 1483058711021,
+    "browser_modules/lodash/_root.js": 1483058711022,
+    "browser_modules/lodash/_Symbol.js": 1483058711022,
+    "browser_modules/lodash/_arrayMap.js": 1483058711026,
+    "browser_modules/lodash/isArray.js": 1483058711028,
+    "browser_modules/lodash/_getRawTag.js": 1483058711051,
+    "browser_modules/lodash/_objectToString.js": 1483058711056,
+    "browser_modules/lodash/_baseGetTag.js": 1483058711057,
+    "browser_modules/lodash/isObjectLike.js": 1483058711059,
+    "browser_modules/lodash/isSymbol.js": 1483058711059,
+    "browser_modules/lodash/_baseToString.js": 1483058711060,
+    "browser_modules/lodash/toString.js": 1483058711060,
+    "browser_modules/lodash/escape.js": 1483058711153,
+    "button/template.js": 1483058711060,
+    "utils/importStyles/index.js": 1483058711074,
+    "styles/fonts/styles.js": 1483058711154,
+    "styles/fonts/index.js": 1483058711155,
+    "styles/colors/index.js": 1483058711164,
+    "button/styles.js": 1483058711165,
+    "button/index.js": 1483058711165,
+    "examples/button.js": 1483058711166,
+    "examples/test/c/index.js": 1483058711172,
+    "examples/test/b/index.js": 1483058711172,
+    "examples/test/a/aa.js": 1483058711174,
+    "examples/test/a/a.js": 1483058864961,
+    "examples/test/a/aaa.js": 1483058948314
+  }
+}

@@ -27,18 +27,27 @@
       "jest": true
     }
   },
+  "babel": {
+    "presets": [
+      "babili"
+    ],
+    "comments": false
+  },
   "dependencies": {
-    "morphdom": "^2.2.1"
+    "lodash": "^4.17.2",
+    "morphdom": "^2.2.1",
+    "@webcomponents/custom-elements": "^1.0.0-alpha.3",
+    "systemjs": "^0.19.40"
   },
   "devDependencies": {
-    "@webcomponents/custom-elements": "^1.0.0-alpha.3",
+    "babel-core": "^6.21.0",
+    "babel-preset-babili": "0.0.9",
+    "chokidar": "^1.6.1",
     "eslint": "^3.10.2",
     "fs-extra": "^1.0.0",
     "globby": "^6.1.0",
-    "gulp": "^3.9.1",
-    "lodash": "^4.16.6",
-    "serve": "^2.1.0",
-    "systemjs": "^0.19.40",
+    "globule": "^1.1.0",
+    "precinct": "^3.5.0",
     "systemjs-builder": "^0.15.34"
   }
 }

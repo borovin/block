@@ -1,4 +1,7 @@
 const Block = require('../index');
+const template = require('./template');
+
+require('./styles');
 
 class Button extends Block {
     static get attributes() {
@@ -8,7 +11,7 @@ class Button extends Block {
     }
 
     get template() {
-        return `test button`;
+        return template.call(this);
     }
 }
 

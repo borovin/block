@@ -1,4 +1,3 @@
-const path = require('path');
 const fs = require('fs-extra');
 const _ = require('lodash');
 
@@ -10,7 +9,7 @@ function getPackages() {
         packages: {},
     };
 
-    packagesMap.map[packageJson.name] = '.';
+    packagesMap.map[packageJson.name] = 'src';
     packagesMap.packages[packageJson.name] = {"main": packageJson.main || 'index.js'};
 
     function add(dependencies) {
@@ -21,19 +20,19 @@ function getPackages() {
         const mappedPackages = _.keys(packagesMap.map);
 
         _(dependencies).omit(mappedPackages).forEach((dependencyVersion, dependencyName) => {
-            const dependencyPackageJson = path.resolve(`node_modules/${dependencyName}/package.json`);
-            const dependencyPackageData = fs.readJsonSync(dependencyPackageJson);
+            fs.copySync(`node_modules/${dependencyName}`, `browser_modules/${dependencyName}`);
+            const dependencyPackageData = require(`${dependencyName}/package.json`);
 
-            packagesMap.map[dependencyPackageData.name] = `node_modules/${dependencyPackageData.name}`;
+            packagesMap.map[dependencyPackageData.name] = `browser_modules/${dependencyPackageData.name}`;
             packagesMap.packages[dependencyPackageData.name] = {
                 main: `${dependencyPackageData.main || 'index.js'}`,
             };
 
-            add(dependencyPackageData.dependencies);
+            add(dependencyPackageData.browserDependencies || dependencyPackageData.dependencies);
         });
     }
 
-    add(packageJson.dependencies);
+    add(packageJson.browserDependencies || packageJson.dependencies);
 
     return Promise.resolve(packagesMap);
 }

@@ -1,3 +1,3 @@
-const Button = require('@basket/block/button/index');
+require('@basket/block/button');
 
-document.getElementById('example').innerHTML = '<b-button></b-button>';
+document.getElementById('example').innerHTML = '<b-button>test button</b-button>';
