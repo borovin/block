@@ -1,6 +1,7 @@
-.idea/
-node_modules/
+.idea
+node_modules
 browser_modules
 coverage
 .DS_Store
 main.js
+/tools/trace.json

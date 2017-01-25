@@ -8,10 +8,11 @@
   },
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "build": "gulp",
+    "build": "node ./tools/linkSrc.js && node ./tools/build.js",
     "start": "serve",
     "test": "eslint .",
-    "test:codestyle": "eslint ."
+    "test:codestyle": "eslint .",
+    "deploy": "firebase deploy --only hosting"
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -35,19 +36,19 @@
   },
   "dependencies": {
     "lodash": "^4.17.2",
-    "morphdom": "^2.2.1",
-    "@webcomponents/custom-elements": "^1.0.0-alpha.3",
-    "systemjs": "^0.19.40"
+    "morphdom": "^2.2.1"
   },
   "devDependencies": {
+    "@webcomponents/custom-elements": "^1.0.0-alpha.3",
     "babel-core": "^6.21.0",
     "babel-preset-babili": "0.0.9",
     "chokidar": "^1.6.1",
     "eslint": "^3.10.2",
-    "fs-extra": "^1.0.0",
-    "globby": "^6.1.0",
+    "fs-extra": "^2.0.0",
     "globule": "^1.1.0",
     "precinct": "^3.5.0",
+    "serve": "^2.4.3",
+    "systemjs": "^0.19.40",
     "systemjs-builder": "^0.15.34"
   }
 }

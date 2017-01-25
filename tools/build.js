@@ -9,9 +9,11 @@ const styleFiles = ['**/styles.ejs'].concat(ignoreFiles);
 const glob = require('globule');
 let start;
 
-fs.copySync('tools/mainTemplate.js', 'main.js');
-
 start = Date.now();
+
+fs.copySync('tools/mainTemplate.js', 'main.js');
+fs.writeJSONSync('tools/trace.json', {packages: {}, depCache: {}, traced: {}});
+fs.removeSync('/browser_modules');
 
 Promise.all([compileStyles(styleFiles), compileTemplate(templateFiles)])
     .then(() => glob.find(srcFiles).forEach(trace))
@@ -22,4 +24,5 @@ Promise.all([compileStyles(styleFiles), compileTemplate(templateFiles)])
         fs.appendFileSync('main.js', `System.config({"depCache": ${JSON.stringify(depCache)}});`, {encoding: 'utf-8'});
 
         console.log(`Done (${Date.now() - start}ms)`);
-    });
+    })
+    .catch(err => {throw err});
