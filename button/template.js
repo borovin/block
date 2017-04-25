@@ -1,1 +1,0 @@
-const _={escape:require('lodash/escape')};module.exports=function(){var b,c='';return c+='<a class="button__content">\n    '+(null==(b=this.content)?'':b)+'\n</a>\n',c};

@@ -8,11 +8,12 @@
   },
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "build": "node ./tools/linkSrc.js && node ./tools/build.js",
+    "build": "gulp",
     "start": "serve",
     "test": "eslint .",
     "test:codestyle": "eslint .",
-    "deploy": "firebase deploy --only hosting"
+    "test:all": "testcafe all ./tests --app \"serve -p 5001\"",
+    "test:chrome": "testcafe chrome ./tests --app \"serve -p 5001\""
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -28,27 +29,23 @@
       "jest": true
     }
   },
-  "babel": {
-    "presets": [
-      "babili"
-    ],
-    "comments": false
-  },
   "dependencies": {
     "lodash": "^4.17.2",
     "morphdom": "^2.2.1"
   },
   "devDependencies": {
-    "@webcomponents/custom-elements": "^1.0.0-alpha.3",
-    "babel-core": "^6.21.0",
-    "babel-preset-babili": "0.0.9",
-    "chokidar": "^1.6.1",
     "eslint": "^3.10.2",
-    "fs-extra": "^2.0.0",
-    "globule": "^1.1.0",
-    "precinct": "^3.5.0",
-    "serve": "^2.4.3",
-    "systemjs": "^0.19.40",
-    "systemjs-builder": "^0.15.34"
+    "gulp": "latest",
+    "gulp-cli": "^1.2.2",
+    "gulp-csso": "^3.0.0",
+    "gulp-imagemin": "latest",
+    "gulp-rename": "latest",
+    "gulp-wrap": "latest",
+    "rollup": "latest",
+    "rollup-plugin-babili": "latest",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "serve": "^5.0.3",
+    "testcafe": "^0.14.0"
   }
 }

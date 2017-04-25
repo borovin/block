@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Block Docs</title>
     <script src="/node_modules/@webcomponents/custom-elements/custom-elements.min.js"></script>
-    <script src="/node_modules/systemjs/dist/system.src.js"></script>
-    <script src="/main.js"></script>
+    <script src="/build/amd.js"></script>
     <style>
         html, body {
             height: 100%;
@@ -36,7 +35,7 @@
 
     if (exampleUrl){
         document.body.innerHTML = '<div id="example"></div>';
-        System.import(exampleUrl);
+        amd.import(exampleUrl);
     }
 </script>
 </body>
