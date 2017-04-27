@@ -51,8 +51,7 @@
     "rollup-plugin-babili": "latest",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "serve": "^5.0.3",
-    "testcafe": "^0.14.0"
+    "serve": "^5.0.3"
   },
   "jest": {
     "collectCoverageFrom": [
