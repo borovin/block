@@ -13,11 +13,17 @@ b-button {
     font-weight: 500;
     background-color: var(--b-primary-color);
     border-radius: 2px;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+b-button:hover {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
 }
 
 b-button a, b-button button {
     color: #fff;
     text-transform: uppercase;
+    background: transparent;
     display: inline-block;
     text-align: center;
     padding: 0 16px;
@@ -25,7 +31,6 @@ b-button a, b-button button {
     line-height: 36px;
     position: relative;
     cursor: pointer;
-    transition: color 0.2s, background-color 0.2s, transform 0.2s, box-shadow 0.2s;
     vertical-align: middle;
     font-size: 14px;
     user-select: none;
@@ -36,7 +41,6 @@ b-button a, b-button button {
     font-family: var(--b-font);
     min-width: 64px;
     box-sizing: content-box;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
 }
 
 b-button[disabled] {
@@ -70,10 +74,6 @@ b-button[color="danger"] {
 
 b-button[flat="true"][color="danger"] {
     color: #E53935;
-}
-
-b-button a:hover, .button button:hover {
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.37);
 }
 
 b-button[flat="true"] {

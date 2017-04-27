@@ -1,19 +1,21 @@
+const stringifyAttributes = require('../utils/stringifyAttributes');
+
 module.exports = block => {
-    const value = block.value ? `value="${block.value}"` : '';
-    const label = block.label ? `<label>${block.label}</label>` : '';
-    const placeholder  = block.placeholder ? `placeholder="${block.placeholder}"` : '';
-    const name  = block.name ? `name="${block.name}"` : '';
+    const label = block.label ? `<b-input-label>${block.label}</b-input-label>` : '';
+
+    const inputAttributes = stringifyAttributes({
+        value: block.value,
+        type: block.type,
+        placeholder: block.placeholder,
+        name: block.name,
+        autofocus: block.autofocus,
+        disabled: block.disabled
+    });
 
     return `
-        <input
-            type="${block.type}"
-            ${value}
-            ${placeholder}
-            ${name}
-            ${block.autofocus ? 'autofocus' : ''}
-            ${block.disabled ? 'disabled' : ''} />
+        <input ${inputAttributes} />
         
-        <border></border>
+        <b-input-border></b-input-border>
         
         ${label}
     `;

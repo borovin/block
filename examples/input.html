@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Block Docs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/examples/examples.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="//unpkg.com/@webcomponents/custom-elements/custom-elements.min.js"></script>
     <script src="/dist/input.js"></script>
 </head>
 <body>
 <div id="example">
-    <b-input></b-input>
-    <b-input label="floating label"></b-input>
-    <b-input value="example value"></b-input>
+    <b-input placeholder="Input Placeholder"></b-input>
+    <b-input label="Floating Label"></b-input>
+    <b-input value="Example Value" label="Input Label"></b-input>
+    <b-input value="Example Value" label="Input Label" error="some input error"></b-input>
 </div>
 </body>
 </html>

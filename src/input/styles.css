@@ -1,18 +1,18 @@
-:host {
+b-input {
     position: relative;
     display: block;
     box-sizing: border-box;
     min-height: 72px;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-family: ${fonts.roboto};
+    font-family: var(--b-font);
     text-align: left;
 }
 
-input, textarea {
+b-input > input {
     width: 100%;
     box-sizing: border-box;
-    font-family: Roboto, Tahoma, sans-serif;
+    font-family: var(--b-font);
     font-size: 16px;
     outline: none;
     background: none;
@@ -25,7 +25,11 @@ input, textarea {
     transition: background-color 0.2s;
 }
 
-label {
+b-input > input::placeholder {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+b-input-label {
     transform: translate3d(0, 26px, 0);
     font-size: 16px;
     color: rgba(0, 0, 0, 0.38);
@@ -36,7 +40,7 @@ label {
     top: 4px;
 }
 
-border {
+b-input-border {
     height: 2px;
     width: 100%;
     display: block;
@@ -45,18 +49,34 @@ border {
     transition: border-color 0.2s;
 }
 
-input:focus ~ label {
+b-input > input:focus ~ b-input-label {
     font-size: 12px;
     transform: translate3d(0, 0, 0);
-    color: ${colors.primary};
+    color: var(--b-primary-color);
 }
 
-input:focus ~ border {
-    border-bottom: 2px solid ${colors.primary};
+b-input > input:focus ~ b-input-border {
+    border-bottom: 2px solid var(--b-primary-color);
 }
 
-:host([value]) label {
+b-input[value] b-input-label {
     font-size: 12px;
     transform: translate3d(0, 0, 0);
     color: rgba(0, 0, 0, 0.54);
+}
+
+b-input[error] > input ~ b-input-label {
+    font-size: 12px;
+    transform: translate3d(0, 0, 0);
+    color: var(--b-danger-color);
+}
+
+b-input[error] > input ~ b-input-border {
+    border-bottom: 2px solid var(--b-danger-color);
+}
+
+b-input[error]::after {
+    content: attr(error);
+    font-size: 12px;
+    color: var(--b-danger-color);
 }

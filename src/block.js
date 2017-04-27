@@ -1,7 +1,13 @@
 const morphdom = require('morphdom');
-const trim = require('lodash/trim');
 
 require('./styles');
+
+function onBeforeElChildrenUpdated(fromEl, toEl) {
+    if (fromEl.content) {
+        fromEl.content = toEl.innerHTML;
+        return false;
+    }
+}
 
 class Block extends window.HTMLElement {
     constructor(props = {}) {
@@ -15,7 +21,14 @@ class Block extends window.HTMLElement {
     }
 
     render() {
-        morphdom(this, `<div>${this.template}</div>`, {childrenOnly: true});
+        this._renderTimeout && clearTimeout(this._renderTimeout);
+
+        const morphOptions = {
+            childrenOnly: true,
+            onBeforeElChildrenUpdated
+        };
+
+        this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0);
     }
 
     get template() {
@@ -44,17 +57,30 @@ class Block extends window.HTMLElement {
         }
 
         setTimeout(() => {
-            this._connected = true;
             this.content = this.innerHTML;
             this.innerHTML = '';
             this.render();
+            this._connected = true;
         }, 0);
     }
 
-    attributeChangedCallback(attrName, oldVal, newVal) {
-        const isChanged = oldVal !== newVal;
+    set content(value) {
+        const newContent = value;
+        const oldContent = this._content;
 
-        if (isChanged && this._connected) {
+        this._content = newContent;
+
+        if (this._connected && (oldContent !== newContent)) {
+            this.render();
+        }
+    }
+
+    get content() {
+        return this._content;
+    }
+
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        if (this._connected && (oldVal !== newVal)) {
             this.render();
         }
     }

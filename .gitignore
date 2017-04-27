@@ -1,6 +1,7 @@
 .idea
 node_modules
 styles.js
+src/styles/*.js
 browser_modules
 coverage
 output

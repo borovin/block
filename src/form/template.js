@@ -1,8 +1,7 @@
-
 module.exports = block => {
     return `
         <form>
-            <slot></slot>
+            ${block.content}
         </form>
     `;
 };

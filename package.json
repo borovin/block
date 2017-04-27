@@ -8,12 +8,13 @@
   },
   "homepage": "https://github.com/borovin/block",
   "scripts": {
+    "prepublishOnly": "gulp --production",
     "build": "gulp",
     "start": "serve",
-    "test": "eslint .",
+    "test": "npm run test:unit && npm run test:codestyle",
+    "test:unit": "jest",
     "test:codestyle": "eslint .",
-    "test:all": "testcafe all ./tests --app \"serve -p 5001\"",
-    "test:chrome": "testcafe chrome ./tests --app \"serve -p 5001\""
+    "test:acceptance": "testcafe all ./tests/fixtures --app \"serve -p 5001\""
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -30,22 +31,39 @@
     }
   },
   "dependencies": {
-    "lodash": "^4.17.2",
-    "morphdom": "^2.2.1"
+    "morphdom": "^2.2.1",
+    "query-string": "^4.3.4"
   },
   "devDependencies": {
     "eslint": "^3.10.2",
     "gulp": "latest",
     "gulp-cli": "^1.2.2",
     "gulp-csso": "^3.0.0",
+    "gulp-if": "^2.0.2",
     "gulp-imagemin": "latest",
     "gulp-rename": "latest",
     "gulp-wrap": "latest",
+    "jest": "^19.0.2",
+    "jest-serializer-html-string": "^1.0.1",
+    "lodash": "^4.17.2",
+    "nightmare": "^2.10.0",
     "rollup": "latest",
     "rollup-plugin-babili": "latest",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "serve": "^5.0.3",
     "testcafe": "^0.14.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageReporters": [
+      "lcovonly",
+      "html"
+    ],
+    "snapshotSerializers": [
+      "jest-serializer-html-string"
+    ]
   }
 }

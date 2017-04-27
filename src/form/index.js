@@ -1,9 +1,6 @@
 const Block = require('../block');
 const template = require('./template');
-const isEmpty = require('lodash/isEmpty');
-const forEach = require('lodash/forEach');
-const trim = require('lodash/trim');
-const set = require('lodash/set');
+const qs = require('query-string');
 
 class Form extends Block {
     static get tagName() {
@@ -11,6 +8,9 @@ class Form extends Block {
     }
 
     static get properties() {
+        return {
+            action: document.location.pathname
+        }
     }
 
     get template() {
@@ -29,10 +29,9 @@ class Form extends Block {
     connectedCallback() {
         super.connectedCallback();
 
-        this.addEventListener('click', e => {
-            if (e.target.matches('[type="submit"]')) {
-                this.submit();
-            }
+        this.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.submit();
         });
     }
 
@@ -40,11 +39,11 @@ class Form extends Block {
         const formElement = this;
         const data = {};
 
-        forEach(formElement.querySelectorAll('[name]'), inputElement => {
-            const inputName = trim(inputElement.name);
-            let inputValue = trim(inputElement.value);
+        formElement.querySelectorAll('[name]').forEach(inputElement => {
+            const inputName = inputElement.name;
+            let inputValue = inputElement.value;
 
-            if (isFinite(inputValue) && inputValue.length) {
+            if (inputValue && isFinite(inputValue)) {
                 inputValue = Number(inputValue);
             }
 
@@ -52,16 +51,16 @@ class Form extends Block {
                 case 'radio': {
                     const property = get(data, inputName);
                     if (typeof property === 'undefined' || property === false) {
-                        set(data, inputName, inputElement.checked ? inputValue : false);
+                        data[inputName] = inputElement.checked ? inputValue : false;
                     }
                     break;
                 }
                 case 'checkbox': {
-                    set(data, inputName, inputElement.checked);
+                    data[inputName] = inputElement.checked;
                     break;
                 }
                 default: {
-                    set(data, inputName, inputValue);
+                    data[inputName] = inputValue;
                 }
             }
         });
@@ -73,8 +72,8 @@ class Form extends Block {
         const data = this.serialize();
         const errors = this.validate(data);
 
-        if (isEmpty(errors)) {
-            return this.save();
+        if (!errors) {
+            return this.save(data);
         } else {
             this.errors = errors;
             return errors;
@@ -84,7 +83,8 @@ class Form extends Block {
     validate() {
     }
 
-    save() {
+    save(data) {
+        document.location.href = `${this.action}?${qs.stringify(data)}`
     }
 }
 

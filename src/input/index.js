@@ -1,6 +1,8 @@
 const Block = require('../block');
 const template = require('./template');
 
+require('./styles');
+
 class Input extends Block {
     static get tagName() {
         return 'b-input';
@@ -10,7 +12,10 @@ class Input extends Block {
         return {
             label: null,
             value: null,
-            type: 'text'
+            type: 'text',
+            placeholder: null,
+            error: null,
+            name: null
         };
     }
 
@@ -21,9 +26,11 @@ class Input extends Block {
     connectedCallback() {
         super.connectedCallback();
 
-        const input = this.shadowDom.querySelector('input');
-
         this.addEventListener('keyup', e => {
+            const input = e.target;
+
+            this.removeAttribute('error');
+
             if (input.value) {
                 this.setAttribute('value', input.value);
             } else {

@@ -9,17 +9,23 @@ const imagemin = require('gulp-imagemin');
 const capitalize = require('lodash/capitalize');
 const csso = require('gulp-csso');
 const path = require('path');
+const packageJSON = require('./package.json');
+const gulpif = require('gulp-if');
+const argv = require('yargs').argv;
 
 gulp.task('default', ['rollup']);
 
 gulp.task('styles', () => {
     return gulp.src('src/**/*.css')
-        .pipe(csso())
+        .pipe(gulpif(argv.production, csso()))
         .pipe(wrap((data) => {
-            const appendStylesPath = path.relative(path.dirname(data.file.path), path.join(__dirname, '/src/_utils/appendStyles.js'));
+            const appendStylesPath = path.relative(path.dirname(data.file.path), path.join(__dirname, '/src/utils/appendStyles.js'));
+            const stylesPath = path.relative(__dirname, data.file.path);
+            const stylesID = path.join(packageJSON.name, stylesPath);
+
             return `//this file was generated automatically. Do not edit it manually.
 const appendStyles = require('${appendStylesPath}');
-appendStyles("<style>${data.contents}</style>");`;
+appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`;
         }))
         .pipe(rename({
             extname: '.js'
@@ -29,7 +35,7 @@ appendStyles("<style>${data.contents}</style>");`;
 
 gulp.task('icons', () => {
     return gulp.src('src/icons/**/*.svg')
-        .pipe(imagemin())
+        .pipe(gulpif(argv.production, imagemin()))
         .pipe(wrap('module.exports = `<%= contents %>`'))
         .pipe(rename({
             extname: '.js'
@@ -44,15 +50,24 @@ gulp.task('rollup', ['icons', 'styles'], () => {
         'form'
     ];
 
+    function getPlugins() {
+        const plugins = [
+            nodeResolve(),
+            commonjs()
+        ];
+
+        if (argv.production){
+            plugins.push(babili({
+                comments: false
+            }));
+        }
+
+        return plugins;
+    }
+
     return Promise.all(blocks.map(blockName => rollup.rollup({
         entry: `./src/${blockName}/index.js`,
-        plugins: [
-            nodeResolve(),
-            commonjs(),
-            babili({
-                comments: false
-            })
-        ]
+        plugins: getPlugins(),
     }).then(bundle => bundle.write({
         format: 'iife',
         moduleName: `Block.${capitalize(blockName)}`,
