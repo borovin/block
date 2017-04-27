@@ -1,12 +1,18 @@
 const Browser = require('../tools/browser');
 
-test('Primary button example', async () => {
-    const selector = 'b-button[color="primary"]';
-    const browser = new Browser();
+let browser;
 
+beforeEach(() => {
+    browser = new Browser();
     browser.goto('/examples/button.html');
+});
 
-    const snapshot = await browser.snapshot(selector);
+afterEach(() => {
+    browser.close();
+});
+
+test('Primary button example', async () => {
+    const snapshot = await browser.snapshot('b-button:nth-child(1)');
 
     expect(snapshot).toMatchSnapshot();
 
@@ -14,12 +20,7 @@ test('Primary button example', async () => {
 });
 
 test('Accent button example', async () => {
-    const selector = 'b-button[color="accent"]';
-    const browser = new Browser();
-
-    browser.goto('/examples/button.html');
-
-    const snapshot = await browser.snapshot(selector);
+    const snapshot = await browser.snapshot('b-button:nth-child(2)');
 
     expect(snapshot).toMatchSnapshot();
 

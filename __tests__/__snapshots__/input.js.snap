@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default text input 1`] = `
+<b-input placeholder="Input Placeholder" type="text">
+  <input type="text" placeholder="Input Placeholder">
+  <b-input-border></b-input-border>
+</b-input>
+`;
+
+exports[`Filled input 1`] = `
+<b-input value="Example Value" label="Input Label" type="text">
+  <input value="Example Value" type="text">
+  <b-input-border></b-input-border>
+  <b-input-label>Input Label</b-input-label>
+</b-input>
+`;
+
+exports[`Floating label input 1`] = `
+<b-input label="Floating Label" type="text">
+  <input type="text">
+  <b-input-border></b-input-border>
+  <b-input-label>Floating Label</b-input-label>
+</b-input>
+`;
+
+exports[`Input error 1`] = `
+<b-input value="Example Value" label="Input Label" error="some input error"
+type="text">
+  <input value="Example Value" type="text">
+  <b-input-border></b-input-border>
+  <b-input-label>Input Label</b-input-label>
+</b-input>
+`;

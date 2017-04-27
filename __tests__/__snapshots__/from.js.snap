@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Primary button example 1`] = `
+<b-form action="/examples/form.html">
+  <form>
+    <b-input name="A" label="A field" type="text"></b-input>
+    <b-input name="B" label="B field" value="default B value" type="text"></b-input>
+    <b-button color="primary">Save</b-button>
+  </form>
+</b-form>
+`;
