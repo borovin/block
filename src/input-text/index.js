@@ -1,17 +1,11 @@
 const Block = require('../block');
 const template = require('./template');
 
-const types = {
-    text: require('../input-text')
-};
+require('./styles');
 
 class Input extends Block {
     static get tagName() {
-        return 'b-input';
-    }
-
-    static get types() {
-        return types;
+        return 'b-input-text';
     }
 
     static get reflectedProperties() {
@@ -27,6 +21,22 @@ class Input extends Block {
 
     get template() {
         return template(this);
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        this.addEventListener('keyup', e => {
+            const input = e.target;
+
+            this.removeAttribute('error');
+
+            if (input.value) {
+                this.setAttribute('value', input.value);
+            } else {
+                this.removeAttribute('value');
+            }
+        });
     }
 }
 

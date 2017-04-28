@@ -1,4 +1,4 @@
-b-input {
+b-input-text {
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -9,7 +9,7 @@ b-input {
     text-align: left;
 }
 
-b-input > input {
+b-input-text > input {
     width: 100%;
     box-sizing: border-box;
     font-family: var(--b-font);
@@ -25,11 +25,11 @@ b-input > input {
     transition: background-color 0.2s;
 }
 
-b-input > input::placeholder {
+b-input-text > input::placeholder {
     color: rgba(0, 0, 0, 0.38);
 }
 
-b-input-label {
+b-input-text--label {
     transform: translate3d(0, 26px, 0);
     font-size: 16px;
     color: rgba(0, 0, 0, 0.38);
@@ -40,7 +40,7 @@ b-input-label {
     top: 4px;
 }
 
-b-input-border {
+b-input-text--border {
     height: 2px;
     width: 100%;
     display: block;
@@ -49,33 +49,33 @@ b-input-border {
     transition: border-color 0.2s;
 }
 
-b-input > input:focus ~ b-input-label {
+b-input-text > input:focus ~ b-input-text--label {
     font-size: 12px;
     transform: translate3d(0, 0, 0);
     color: var(--b-primary-color);
 }
 
-b-input > input:focus ~ b-input-border {
+b-input-text > input:focus ~ b-input-text--border {
     border-bottom: 2px solid var(--b-primary-color);
 }
 
-b-input[value] b-input-label {
+b-input-text[value] b-input-text--label {
     font-size: 12px;
     transform: translate3d(0, 0, 0);
     color: rgba(0, 0, 0, 0.54);
 }
 
-b-input[error] > input ~ b-input-label {
+b-input-text[error] > input ~ b-input-text--label {
     font-size: 12px;
     transform: translate3d(0, 0, 0);
     color: var(--b-danger-color);
 }
 
-b-input[error] > input ~ b-input-border {
+b-input-text[error] > input ~ b-input-text--border {
     border-bottom: 2px solid var(--b-danger-color);
 }
 
-b-input[error]::after {
+b-input-text[error]::after {
     content: attr(error);
     font-size: 12px;
     color: var(--b-danger-color);

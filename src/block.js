@@ -16,8 +16,12 @@ class Block extends window.HTMLElement {
         Object.assign(this, props);
     }
 
+    static get reflectedProperties() {
+        return {};
+    }
+
     static get observedAttributes() {
-        return Object.keys(this.properties || {});
+        return Object.keys(this.reflectedProperties);
     }
 
     render() {
@@ -36,9 +40,9 @@ class Block extends window.HTMLElement {
     }
 
     connectedCallback() {
-        for (let attr in this.constructor.properties) {
+        for (let attr in this.constructor.reflectedProperties) {
             const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), attr) || {};
-            const defaultValue = this[attr] || this.constructor.properties[attr];
+            const defaultValue = this[attr] || this.constructor.reflectedProperties[attr];
 
             if (!this.getAttribute(attr) && defaultValue) {
                 this.setAttribute(attr, defaultValue);

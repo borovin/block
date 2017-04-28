@@ -69,7 +69,7 @@ gulp.task('rollup', ['icons', 'styles'], () => {
         entry: `./src/${blockName}/index.js`,
         plugins: getPlugins(),
     }).then(bundle => bundle.write({
-        format: 'iife',
+        format: 'umd',
         moduleName: `Block.${capitalize(blockName)}`,
         sourceMap: true,
         dest: `./dist/${blockName}.js`

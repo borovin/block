@@ -7,7 +7,7 @@ class Form extends Block {
         return 'b-form';
     }
 
-    static get properties() {
+    static get reflectedProperties() {
         return {
             action: document.location.pathname
         }
@@ -88,6 +88,6 @@ class Form extends Block {
     }
 }
 
-window.customElements.define(Form.tagName, Form);
+window && window.customElements.define(Form.tagName, Form);
 
 module.exports = Form;

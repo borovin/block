@@ -8,7 +8,7 @@ class Button extends Block {
         return 'b-button';
     }
 
-    static get properties() {
+    static get reflectedProperties() {
         return {
             color: 'primary'
         }
@@ -19,6 +19,6 @@ class Button extends Block {
     }
 }
 
-window.customElements.define(Button.tagName, Button);
+window && window.customElements.define(Button.tagName, Button);
 
 module.exports = Button;
