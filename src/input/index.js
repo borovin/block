@@ -1,8 +1,9 @@
-const Block = require('../block');
-const template = require('./template');
+import Block from '../block';
+import template from './template';
+import InputText from '../input-text';
 
 const types = {
-    text: require('../input-text')
+    text: InputText
 };
 
 class Input extends Block {
@@ -28,8 +29,12 @@ class Input extends Block {
     get template() {
         return template(this);
     }
+
+    get _innerInputTagName() {
+        return this.constructor.types[this.type].tagName;
+    }
 }
 
 window && window.customElements.define(Input.tagName, Input);
 
-module.exports = Input;
+export default Input;

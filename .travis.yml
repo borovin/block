@@ -7,5 +7,6 @@ node_js:
 sudo: false
 env:
   - TEST_TYPE=codestyle CACHE_NAME=JOB1
+  - TEST_TYPE=unit CACHE_NAME=JOB2
 script:
   - npm run test:$TEST_TYPE -s

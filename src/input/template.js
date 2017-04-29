@@ -1,14 +1,18 @@
-const stringifyAttributes = require('../utils/stringifyAttributes');
+import stringifyAttributes from '../utils/stringifyAttributes';
 
-module.exports = block => {
+export default block => {
     const attributes = {};
+    const exclude = ['id', 'name'];
 
     for (let i = 0; i < block.attributes.length; i++) {
         const attribute = block.attributes[i];
-        attributes[attribute.nodeName] = attribute.nodeValue;
+
+        if (exclude.indexOf(attribute.nodeName) < 0) {
+            attributes[attribute.nodeName] = attribute.nodeValue;
+        }
     }
 
     return `
-        <${block.constructor.types[block.type].tagName} ${stringifyAttributes(attributes)} />
+        <${block._innerInputTagName} ${stringifyAttributes(attributes)} />
     `;
 };

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Default text input 1`] = `
-<b-input placeholder="Input Placeholder" type="text">
+<b-input name="a" placeholder="Input Placeholder" type="text">
   <b-input-text placeholder="Input Placeholder" type="text">
     <input type="text" placeholder="Input Placeholder">
     <b-input-text--border></b-input-text--border>
@@ -10,7 +10,7 @@ exports[`Default text input 1`] = `
 `;
 
 exports[`Filled input 1`] = `
-<b-input value="Example Value" label="Input Label" type="text">
+<b-input name="c" value="Example Value" label="Input Label" type="text">
   <b-input-text value="Example Value" label="Input Label" type="text">
     <input value="Example Value" type="text">
     <b-input-text--border></b-input-text--border>
@@ -20,7 +20,7 @@ exports[`Filled input 1`] = `
 `;
 
 exports[`Floating label input 1`] = `
-<b-input label="Floating Label" type="text">
+<b-input name="b" label="Floating Label" type="text">
   <b-input-text label="Floating Label" type="text">
     <input type="text">
     <b-input-text--border></b-input-text--border>
@@ -30,9 +30,13 @@ exports[`Floating label input 1`] = `
 `;
 
 exports[`Input error 1`] = `
-<b-input value="Example Value" label="Input Label" error="some input error"
+<b-input name="d" value="Example Value" label="Input Label" error="some input error"
 type="text">
   <b-input-text value="Example Value" label="Input Label" error="some input error"
-  type="text"></b-input-text>
+  type="text">
+    <input value="Example Value" type="text">
+    <b-input-text--border></b-input-text--border>
+    <b-input-text--label>Input Label</b-input-text--label>
+  </b-input-text>
 </b-input>
 `;

@@ -1,6 +1,5 @@
-const morphdom = require('morphdom');
-
-require('./styles');
+import morphdom from 'morphdom';
+import './styles';
 
 function onBeforeElChildrenUpdated(fromEl, toEl) {
     if (fromEl.content) {
@@ -32,7 +31,12 @@ class Block extends window.HTMLElement {
             onBeforeElChildrenUpdated
         };
 
-        this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0);
+        if (this._connected){
+            this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0);
+        } else {
+            morphdom(this, `<div>${this.template}</div>`, morphOptions);
+            this.renderedCallback();
+        }
     }
 
     get template() {
@@ -68,6 +72,10 @@ class Block extends window.HTMLElement {
         }, 0);
     }
 
+    renderedCallback() {
+
+    }
+
     set content(value) {
         const newContent = value;
         const oldContent = this._content;
@@ -90,4 +98,4 @@ class Block extends window.HTMLElement {
     }
 }
 
-module.exports = Block;
+export default Block;

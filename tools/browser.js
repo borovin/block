@@ -3,7 +3,7 @@ const url = require('url');
 
 class Browser {
     constructor(options) {
-        this.nightmare = Nightmare(options);
+        this.nightmare = new Nightmare(options);
     }
 
     get baseUrl() {
@@ -14,10 +14,10 @@ class Browser {
         return this.nightmare.goto(url.resolve(this.baseUrl, path));
     }
 
-    snapshot(selector) {
+    async snapshot(selector) {
         return this.nightmare
             .wait(selector)
-            .evaluate(selector => document.querySelector(selector).outerHTML, selector);
+            .evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector);
     }
 
     screenshot(selector) {

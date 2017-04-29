@@ -1,4 +1,4 @@
-function stringifyAttributes(attributesMap = {}) {
+export default (attributesMap = {}) => {
     return Object.keys(attributesMap).map(key => {
         let value = attributesMap[key];
 
@@ -13,5 +13,3 @@ function stringifyAttributes(attributesMap = {}) {
         return `${key}="${value}"`;
     }).join(' ');
 }
-
-module.exports = stringifyAttributes;

@@ -11,7 +11,7 @@ const csso = require('gulp-csso');
 const path = require('path');
 const packageJSON = require('./package.json');
 const gulpif = require('gulp-if');
-const argv = require('yargs').argv;
+const {argv} = require('yargs');
 
 gulp.task('default', ['rollup']);
 
@@ -24,7 +24,7 @@ gulp.task('styles', () => {
             const stylesID = path.join(packageJSON.name, stylesPath);
 
             return `//this file was generated automatically. Do not edit it manually.
-const appendStyles = require('${appendStylesPath}');
+import appendStyles from '${appendStylesPath}';
 appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`;
         }))
         .pipe(rename({
@@ -36,7 +36,7 @@ appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`;
 gulp.task('icons', () => {
     return gulp.src('src/icons/**/*.svg')
         .pipe(gulpif(argv.production, imagemin()))
-        .pipe(wrap('module.exports = `<%= contents %>`'))
+        .pipe(wrap('export default `<%= contents %>`'))
         .pipe(rename({
             extname: '.js'
         }))
@@ -56,7 +56,7 @@ gulp.task('rollup', ['icons', 'styles'], () => {
             commonjs()
         ];
 
-        if (argv.production){
+        if (argv.production) {
             plugins.push(babili({
                 comments: false
             }));
@@ -67,7 +67,7 @@ gulp.task('rollup', ['icons', 'styles'], () => {
 
     return Promise.all(blocks.map(blockName => rollup.rollup({
         entry: `./src/${blockName}/index.js`,
-        plugins: getPlugins(),
+        plugins: getPlugins()
     }).then(bundle => bundle.write({
         format: 'umd',
         moduleName: `Block.${capitalize(blockName)}`,

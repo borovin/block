@@ -1,6 +1,6 @@
-const stringifyAttributes = require('../utils/stringifyAttributes');
+import stringifyAttributes from '../utils/stringifyAttributes';
 
-module.exports = block => {
+export default block => {
     const label = block.label ? `<b-input-text--label>${block.label}</b-input-text--label>` : '';
 
     const inputAttributes = stringifyAttributes({

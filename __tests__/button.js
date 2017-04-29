@@ -1,6 +1,6 @@
 const Browser = require('../tools/browser');
 
-let browser;
+let browser = null;
 
 beforeEach(() => {
     browser = new Browser();

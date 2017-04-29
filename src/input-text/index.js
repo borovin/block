@@ -1,7 +1,6 @@
-const Block = require('../block');
-const template = require('./template');
-
-require('./styles');
+import Block from '../block';
+import template from './template';
+import './styles';
 
 class Input extends Block {
     static get tagName() {
@@ -26,7 +25,7 @@ class Input extends Block {
     connectedCallback() {
         super.connectedCallback();
 
-        this.addEventListener('keyup', e => {
+        this.addEventListener('change', e => {
             const input = e.target;
 
             this.removeAttribute('error');
@@ -42,4 +41,4 @@ class Input extends Block {
 
 window && window.customElements.define(Input.tagName, Input);
 
-module.exports = Input;
+export default Input;
