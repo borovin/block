@@ -9,6 +9,10 @@ env:
   - TEST_TYPE=codestyle CACHE_NAME=JOB1
   - TEST_TYPE=unit CACHE_NAME=JOB2
 before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
   - npm start &
+  - sleep 3
 script:
   - npm run test:$TEST_TYPE -s
