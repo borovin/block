@@ -25,7 +25,7 @@ class Input extends Block {
     connectedCallback() {
         super.connectedCallback();
 
-        this.addEventListener('change', e => {
+        this.addEventListener('keyup', e => {
             const input = e.target;
 
             this.removeAttribute('error');

@@ -33,6 +33,31 @@ class Input extends Block {
     get _innerInputTagName() {
         return this.constructor.types[this.type].tagName;
     }
+
+    renderedCallback() {
+        super.renderedCallback();
+
+        const innerInput = this.querySelector(this._innerInputTagName);
+
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                const {attributeName} = mutation;
+                const attributeValue = innerInput.getAttribute(attributeName);
+
+                if (attributeValue) {
+                    this.setAttribute(attributeName, attributeValue);
+                } else {
+                    this.removeAttribute(attributeName);
+                }
+            });
+        });
+
+        observer.observe(innerInput, {
+            attributes: true,
+            childList: false,
+            characterData: false
+        });
+    }
 }
 
 window && window.customElements.define(Input.tagName, Input);
