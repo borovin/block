@@ -15,6 +15,4 @@ test('Primary button example', async () => {
     const snapshot = await browser.snapshot('b-form');
 
     expect(snapshot).toMatchSnapshot();
-
-    browser.close();
 });
