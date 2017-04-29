@@ -17,7 +17,7 @@ class Browser {
     async snapshot(selector) {
         await this.nightmare
             .wait(selector)
-            .then(() => new Promise(resolve => setTimeout(resolve, 100)));
+            .then(() => new Promise(resolve => setTimeout(resolve, 1000)));
 
         return this.nightmare.evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector);
     }

@@ -5,6 +5,10 @@ cache:
 node_js:
   - "stable"
 sudo: false
+addons:
+  apt:
+    packages:
+      - xvfb
 install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
@@ -14,6 +18,5 @@ env:
   - TEST_TYPE=unit CACHE_NAME=JOB2
 before_script:
   - npm start &
-  - sleep 3
 script:
   - npm run test:$TEST_TYPE -s
