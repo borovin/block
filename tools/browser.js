@@ -15,9 +15,11 @@ class Browser {
     }
 
     async snapshot(selector) {
-        return this.nightmare
+        await this.nightmare
             .wait(selector)
-            .evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector);
+            .then(() => new Promise(resolve => setTimeout(resolve, 100)));
+
+        return this.nightmare.evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector);
     }
 
     screenshot(selector) {
