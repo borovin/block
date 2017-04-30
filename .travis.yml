@@ -9,7 +9,7 @@ env:
   - TEST_TYPE=codestyle CACHE_NAME=JOB1
   - TEST_TYPE=all CACHE_NAME=JOB2
 before_install:
-    - stty cols 80
+  - stty cols 80
 dist: trusty
 sudo: required
 addons:
