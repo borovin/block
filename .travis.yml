@@ -8,9 +8,22 @@ sudo: false
 env:
   - TEST_TYPE=codestyle CACHE_NAME=JOB1
   - TEST_TYPE=all CACHE_NAME=JOB2
+before_install:
+    - stty cols 80
+dist: trusty
+sudo: required
+addons:
+  firefox: latest
+  apt:
+    sources:
+     - google-chrome
+    packages:
+     - google-chrome-stable fluxbox
+
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+  - sleep 3
+  - fluxbox >/dev/null 2>&1 &
 script:
   - npm run test:$TEST_TYPE -s
