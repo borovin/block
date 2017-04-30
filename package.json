@@ -14,7 +14,7 @@
     "test": "npm run test:unit && npm run test:codestyle",
     "test:unit": "jest",
     "test:codestyle": "eslint ./src",
-    "test:acceptance": "testcafe all ./tests/fixtures --app \"serve -p 5001\""
+    "test:all": "testcafe all ./tests/fixtures --app \"serve -p 5001\""
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -52,6 +52,7 @@
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "serve": "^5.0.3",
+    "testcafe": "^0.15.0",
     "yargs": "latest"
   },
   "jest": {
