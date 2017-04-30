@@ -36,24 +36,24 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "gulp": "latest",
+    "gulp": "^3.9.1",
     "gulp-cli": "^1.2.2",
     "gulp-csso": "^3.0.0",
     "gulp-if": "^2.0.2",
-    "gulp-imagemin": "latest",
-    "gulp-rename": "latest",
-    "gulp-wrap": "latest",
+    "gulp-imagemin": "^3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-wrap": "^0.13.0",
     "jest": "^19.0.2",
     "jest-serializer-html-string": "^1.0.1",
     "lodash": "^4.17.2",
-    "rollup": "latest",
-    "rollup-plugin-babili": "latest",
+    "nightmare": "^2.10.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babili": "^3.0.0",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "serve": "^5.0.3",
     "testcafe": "^0.15.0",
-    "yargs": "latest",
-    "nightmare": "latest"
+    "yargs": "^7.1.0"
   },
   "jest": {
     "collectCoverageFrom": [
