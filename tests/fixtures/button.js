@@ -4,8 +4,7 @@ fixture `Button tests`
     .page `http://localhost:5001/examples/button.html`;
 
 test('Default button', async t => {
-    const button = Selector('b-button');
-    const outerHTML = await button.outerHTML;
+    const button = Selector('b-button button');
 
-    await t.expect(outerHTML).eql('<b-button color="primary">\n        <button>\n            Default button\n        </button>\n    </b-button>');
+    await t.expect(button.textContent).contains('Default button');
 });
