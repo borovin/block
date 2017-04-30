@@ -46,6 +46,7 @@
     "jest": "^19.0.2",
     "jest-serializer-html-string": "^1.0.1",
     "lodash": "^4.17.2",
+    "nightmare": "^2.10.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babili": "^3.0.0",
     "rollup-plugin-commonjs": "^8.0.2",
