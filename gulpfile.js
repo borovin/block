@@ -12,6 +12,7 @@ const path = require('path');
 const packageJSON = require('./package.json');
 const gulpif = require('gulp-if');
 const {argv} = require('yargs');
+const babel = require('rollup-plugin-babel');
 
 gulp.task('default', ['rollup']);
 
@@ -24,7 +25,7 @@ gulp.task('styles', () => {
             const stylesID = path.join(packageJSON.name, stylesPath);
 
             return `//this file was generated automatically. Do not edit it manually.
-import appendStyles from '${appendStylesPath}';
+const appendStyles = require('${appendStylesPath}');
 appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`;
         }))
         .pipe(rename({
@@ -36,11 +37,19 @@ appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`;
 gulp.task('icons', () => {
     return gulp.src('src/icons/**/*.svg')
         .pipe(gulpif(argv.production, imagemin()))
-        .pipe(wrap('export default `<%= contents %>`'))
+        .pipe(wrap('module.exports = `<%= contents %>`'))
         .pipe(rename({
             extname: '.js'
         }))
         .pipe(gulp.dest('src/icons'));
+});
+
+gulp.task('cover', function() {
+    return gulp.src(['src/**/*.js'])
+    // Covering files
+        .pipe(istanbul())
+        // Force `require` to return covered files
+        .pipe(istanbul.hookRequire());
 });
 
 gulp.task('rollup', ['icons', 'styles'], () => {
@@ -59,6 +68,12 @@ gulp.task('rollup', ['icons', 'styles'], () => {
         if (argv.production) {
             plugins.push(babili({
                 comments: false
+            }));
+        }
+
+        if (argv.coverage) {
+            plugins.push(babel({
+                plugins: ["istanbul"]
             }));
         }
 

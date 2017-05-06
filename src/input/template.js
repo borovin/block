@@ -1,8 +1,8 @@
-import stringifyAttributes from '../utils/stringifyAttributes';
+const stringifyAttributes = require('../utils/stringifyAttributes');
 
-export default block => {
+module.exports = block => {
     const attributes = {};
-    const exclude = ['id', 'name'];
+    const exclude = ['id'];
 
     for (let i = 0; i < block.attributes.length; i++) {
         const attribute = block.attributes[i];

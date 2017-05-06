@@ -1,36 +1,36 @@
+const test = require('ava');
 const Browser = require('../tools/browser');
 
-let browser = null;
+test.beforeEach(t => {
+    t.context.browser = new Browser();
 
-beforeEach(() => {
-    browser = new Browser();
-    browser.goto('/examples/input.html');
+    return t.context.browser.goto('/examples/input.html');
 });
 
-afterEach(() => {
-    browser.close();
+test.afterEach(t => {
+    return t.context.browser.close();
 });
 
-test('Default text input', async () => {
-    const snapshot = await browser.snapshot('b-input:nth-child(1)');
+test('Default text input', async t => {
+    const snapshot = await t.context.browser.snapshot('b-input:nth-child(1)');
 
-    expect(snapshot).toMatchSnapshot();
+    t.snapshot(snapshot);
 });
 
-test('Floating label input', async () => {
-    const snapshot = await browser.snapshot('b-input:nth-child(2)');
+test('Floating label input', async t => {
+    const snapshot = await t.context.browser.snapshot('b-input:nth-child(2)');
 
-    expect(snapshot).toMatchSnapshot();
+    t.snapshot(snapshot);
 });
 
-test('Filled input', async () => {
-    const snapshot = await browser.snapshot('b-input:nth-child(3)');
+test('Filled input', async t => {
+    const snapshot = await t.context.browser.snapshot('b-input:nth-child(3)');
 
-    expect(snapshot).toMatchSnapshot();
+    t.snapshot(snapshot);
 });
 
-test('Input error', async () => {
-    const snapshot = await browser.snapshot('b-input:nth-child(4)');
+test('Input error', async t => {
+    const snapshot = await t.context.browser.snapshot('b-input:nth-child(4)');
 
-    expect(snapshot).toMatchSnapshot();
+    t.snapshot(snapshot);
 });

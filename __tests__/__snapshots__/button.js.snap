@@ -1,13 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Accent button example 1`] = `
-<b-button color="accent">
-  <button>Accent button</button>
-</b-button>
+"<b-button color=\\"accent\\">
+        <button>
+            Accent button
+        </button>
+    </b-button>"
 `;
 
 exports[`Primary button example 1`] = `
-<b-button color="primary">
-  <button>Default button</button>
-</b-button>
+"<b-button color=\\"primary\\">
+        <button>
+            Default button
+        </button>
+    </b-button>"
 `;

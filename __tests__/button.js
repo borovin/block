@@ -1,24 +1,24 @@
+const test = require('ava');
 const Browser = require('../tools/browser');
 
-let browser = null;
+test.beforeEach(t => {
+    t.context.browser = new Browser();
 
-beforeEach(() => {
-    browser = new Browser();
-    browser.goto('/examples/button.html');
+    return t.context.browser.goto('/examples/button.html');
 });
 
-afterEach(() => {
-    browser.close();
+test.afterEach(t => {
+    return t.context.browser.close();
 });
 
-test('Primary button example', async () => {
-    const snapshot = await browser.snapshot('b-button:nth-child(1)');
+test('Primary button example', async t => {
+    const snapshot = await t.context.browser.snapshot('b-button:nth-child(1)');
 
-    expect(snapshot).toMatchSnapshot();
+    t.snapshot(snapshot);
 });
 
-test('Accent button example', async () => {
-    const snapshot = await browser.snapshot('b-button:nth-child(2)');
+test('Accent button example', async t => {
+    const snapshot = await t.context.browser.snapshot('b-button:nth-child(2)');
 
-    expect(snapshot).toMatchSnapshot();
+    t.snapshot(snapshot);
 });

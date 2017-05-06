@@ -1,5 +1,5 @@
-import morphdom from 'morphdom';
-import './styles';
+const morphdom = require('morphdom');
+require('./styles');
 
 function onBeforeElChildrenUpdated(fromEl, toEl) {
     if (fromEl.content) {
@@ -48,7 +48,7 @@ class Block extends window.HTMLElement {
             const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), attr) || {};
             const defaultValue = this[attr] || this.constructor.reflectedProperties[attr];
 
-            if (!this.getAttribute(attr) && defaultValue) {
+            if (this.getAttribute(attr) === null && defaultValue) {
                 this.setAttribute(attr, defaultValue);
             }
 
@@ -59,7 +59,7 @@ class Block extends window.HTMLElement {
                     this.setAttribute(attr, value);
                 },
                 get: descriptor.get || function() {
-                    return this.getAttribute(attr) || defaultValue;
+                    return this.getAttribute(attr);
                 }
             });
         }
@@ -98,4 +98,4 @@ class Block extends window.HTMLElement {
     }
 }
 
-export default Block;
+module.exports = Block;

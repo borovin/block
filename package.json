@@ -8,13 +8,15 @@
   },
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "prepublishOnly": "gulp --production",
+    "prepublishOnly": "npm run build:production",
     "build": "gulp",
+    "build:production": "gulp --production",
+    "build:coverage": "gulp --coverage",
     "start": "serve",
-    "test": "npm run test:unit && npm run test:codestyle",
-    "test:unit": "jest",
+    "test": "ava",
+    "test:coverage": "npm run build:coverage && nyc ava",
     "test:codestyle": "eslint ./src",
-    "test:all": "testcafe all ./tests/fixtures --app \"serve -p 5001\""
+    "istanbul": "istanbul"
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -35,36 +37,44 @@
     "query-string": "^4.3.4"
   },
   "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-plugin-istanbul": "^4.1.3",
     "eslint": "^3.19.0",
+    "fs-extra": "^3.0.1",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.2.2",
     "gulp-csso": "^3.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.2.0",
+    "gulp-istanbul": "^1.1.1",
     "gulp-rename": "^1.2.2",
     "gulp-wrap": "^0.13.0",
-    "jest": "^19.0.2",
-    "jest-serializer-html-string": "^1.0.1",
     "lodash": "^4.17.2",
     "nightmare": "^2.10.0",
+    "nyc": "^10.3.2",
     "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-babili": "^3.0.0",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "serve": "^5.0.3",
-    "testcafe": "^0.15.0",
     "yargs": "^7.1.0"
   },
-  "jest": {
-    "collectCoverageFrom": [
+  "nyc": {
+    "check-coverage": false,
+    "lines": 99,
+    "statements": 99,
+    "functions": 99,
+    "branches": 99,
+    "include": [
       "src/**/*.js"
     ],
-    "coverageReporters": [
+    "reporter": [
+      "text-summary",
       "lcovonly",
       "html"
     ],
-    "snapshotSerializers": [
-      "jest-serializer-html-string"
-    ]
+    "cache": true,
+    "all": true
   }
 }

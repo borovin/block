@@ -5,18 +5,21 @@ module.exports = block => {
 
     const inputAttributes = stringifyAttributes({
         value: block.value,
-        type: block.type,
-        placeholder: block.placeholder,
         name: block.name,
-        autofocus: block.autofocus,
-        disabled: block.disabled
+        disabled: block.disabled,
+        type: 'radio',
+        checked: block.checked
     });
 
     return `
-        <input ${inputAttributes} />
+        <label>
+
+            <input ${inputAttributes}/>
+    
+            <b-input-radio--icon></b-input-radio--icon>
+    
+            ${block.label ? `<b-input-radio--text>${block.label}</b-input-radio--text>` : ''}
         
-        <b-input-text--border></b-input-text--border>
-        
-        ${label}
+        </label>
     `;
 };

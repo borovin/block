@@ -2,6 +2,7 @@
 node_modules
 styles.js
 src/styles/*.js
+.nyc_output
 browser_modules
 coverage
 output

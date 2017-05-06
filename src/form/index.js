@@ -1,6 +1,6 @@
-import Block from '../block';
-import template from './template';
-import qs from 'query-string';
+const Block = require('../block');
+const template = require('./template');
+const qs = require('query-string');
 
 class Form extends Block {
     static get tagName() {
@@ -9,21 +9,13 @@ class Form extends Block {
 
     static get reflectedProperties() {
         return {
-            action: document.location.pathname
+            action: document.location.pathname,
+            errors: {}
         }
     }
 
     get template() {
         return template(this);
-    }
-
-    get errors() {
-        return this._errors;
-    }
-
-    set errors(value) {
-        this._errors = value;
-        this.render();
     }
 
     connectedCallback() {
@@ -39,7 +31,7 @@ class Form extends Block {
         const formElement = this;
         const data = {};
 
-        formElement.querySelectorAll('[name]').forEach(inputElement => {
+        formElement.querySelectorAll('input[name], textarea[name]').forEach(inputElement => {
             const inputName = inputElement.name;
             let inputValue = inputElement.value;
 
@@ -90,4 +82,4 @@ class Form extends Block {
 
 window && window.customElements.define(Form.tagName, Form);
 
-export default Form;
+module.exports = Form;

@@ -1,4 +1,4 @@
-export default block => {
+module.exports = block => {
     return `
         <form>
             ${block.content}

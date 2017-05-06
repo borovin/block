@@ -1,18 +1,18 @@
+const test = require('ava');
 const Browser = require('../tools/browser');
 
-let browser = null;
+test.beforeEach(t => {
+    t.context.browser = new Browser();
 
-beforeEach(() => {
-    browser = new Browser();
-    browser.goto('/examples/form.html');
+    return t.context.browser.goto('/examples/form.html');
 });
 
-afterEach(() => {
-    browser.close();
+test.afterEach(t => {
+    return t.context.browser.close();
 });
 
-test('Primary button example', async () => {
-    const snapshot = await browser.snapshot('b-form');
+test('Form example', async t => {
+    const snapshot = await t.context.browser.snapshot('b-form');
 
-    expect(snapshot).toMatchSnapshot();
+    t.snapshot(snapshot);
 });

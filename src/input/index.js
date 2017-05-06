@@ -1,9 +1,10 @@
-import Block from '../block';
-import template from './template';
-import InputText from '../input-text';
+const Block = require('../block');
+const template = require('./template');
 
 const types = {
-    text: InputText
+    text: require('../input-text'),
+    radio: require('../input-radio'),
+    checkbox: require('../input-checkbox')
 };
 
 class Input extends Block {
@@ -62,4 +63,4 @@ class Input extends Block {
 
 window && window.customElements.define(Input.tagName, Input);
 
-export default Input;
+module.exports = Input;

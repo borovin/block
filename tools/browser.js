@@ -1,5 +1,6 @@
 const Nightmare = require('nightmare');
 const url = require('url');
+const fs = require('fs-extra');
 
 class Browser {
     constructor(options) {
@@ -14,12 +15,10 @@ class Browser {
         return this.nightmare.goto(url.resolve(this.baseUrl, path));
     }
 
-    async snapshot(selector) {
-        await this.nightmare
+    snapshot(selector) {
+        return this.nightmare
             .wait(selector)
-            .then(() => new Promise(resolve => setTimeout(resolve, 1000)));
-
-        return this.nightmare.evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector);
+            .evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector);
     }
 
     screenshot(selector) {
@@ -41,7 +40,16 @@ class Browser {
     }
 
     close() {
-        this.nightmare.then(() => this.nightmare.end())
+        return this.nightmare
+            .evaluate(() => {
+                return window.__coverage__;
+            })
+            .then(coverage => {
+                if (coverage){
+                    fs.outputJsonSync(`.nyc_output/coverage-${Date.now()}.json`, coverage);
+                }
+            })
+            .then(() => this.nightmare.end());
     }
 }
 

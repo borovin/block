@@ -1,6 +1,6 @@
-import Block from '../block';
-import template from './template';
-import './styles';
+const Block = require('../block');
+const template = require('./template');
+require('./styles');
 
 class Button extends Block {
     static get tagName() {
@@ -20,4 +20,4 @@ class Button extends Block {
 
 window && window.customElements.define(Button.tagName, Button);
 
-export default Button;
+module.exports = Button;

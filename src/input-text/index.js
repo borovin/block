@@ -1,6 +1,6 @@
-import Block from '../block';
-import template from './template';
-import './styles';
+const Block = require('../block');
+const template = require('./template');
+require('./styles');
 
 class Input extends Block {
     static get tagName() {
@@ -41,4 +41,4 @@ class Input extends Block {
 
 window && window.customElements.define(Input.tagName, Input);
 
-export default Input;
+module.exports = Input;
