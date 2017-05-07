@@ -18,7 +18,7 @@ class Browser {
     snapshot(selector) {
         return this.nightmare
             .wait(selector)
-            .evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector);
+            .evaluate(querySelector => new Promise(resolve => resolve(document.querySelector(querySelector).outerHTML)), selector);
     }
 
     screenshot(selector) {
