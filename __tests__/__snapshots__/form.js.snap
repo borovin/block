@@ -2,30 +2,24 @@
 
 exports[`Form example 1`] = `
 "<b-form action=\\"/examples/form.html\\">
-        <form>
-            
+    <form>
         <b-input name=\\"A\\" label=\\"A field\\" type=\\"text\\">
-        <b-input-text name=\\"A\\" label=\\"A field\\" type=\\"text\\">
-        <input type=\\"text\\" name=\\"A\\">
-        
-        <b-input-text--border></b-input-text--border>
-        
-        <b-input-text--label>A field</b-input-text--label>
-    </b-input-text></b-input>
+            <b-input-text name=\\"A\\" label=\\"A field\\" type=\\"text\\">
+                <input type=\\"text\\" name=\\"A\\">
+                <b-input-text--border></b-input-text--border>
+                <b-input-text--label>A field</b-input-text--label>
+            </b-input-text>
+        </b-input>
         <b-input name=\\"B\\" label=\\"B field\\" value=\\"default B value\\" type=\\"text\\">
-        <b-input-text name=\\"B\\" label=\\"B field\\" value=\\"default B value\\" type=\\"text\\">
-        <input value=\\"default B value\\" type=\\"text\\" name=\\"B\\">
-        
-        <b-input-text--border></b-input-text--border>
-        
-        <b-input-text--label>B field</b-input-text--label>
-    </b-input-text></b-input>
+            <b-input-text name=\\"B\\" label=\\"B field\\" value=\\"default B value\\" type=\\"text\\">
+                <input value=\\"default B value\\" type=\\"text\\" name=\\"B\\">
+                <b-input-text--border></b-input-text--border>
+                <b-input-text--label>B field</b-input-text--label>
+            </b-input-text>
+        </b-input>
         <b-button color=\\"primary\\">
-        <button>
-            Save
-        </button>
-    </b-button>
-    
-        </form>
-    </b-form>"
+            <button>Save</button>
+        </b-button>
+    </form>
+</b-form>"
 `;

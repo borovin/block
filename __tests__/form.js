@@ -1,5 +1,6 @@
 const test = require('ava');
 const Browser = require('../tools/browser');
+const {prettyPrint} = require('html');
 
 test.beforeEach(t => {
     t.context.browser = new Browser();
@@ -14,5 +15,5 @@ test.afterEach(t => {
 test('Form example', async t => {
     const snapshot = await t.context.browser.snapshot('b-form');
 
-    t.snapshot(snapshot);
+    t.snapshot(prettyPrint(snapshot));
 });

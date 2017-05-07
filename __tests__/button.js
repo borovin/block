@@ -1,5 +1,6 @@
 const test = require('ava');
 const Browser = require('../tools/browser');
+const {prettyPrint} = require('html');
 
 test.beforeEach(t => {
     t.context.browser = new Browser();
@@ -14,11 +15,11 @@ test.afterEach(t => {
 test('Primary button example', async t => {
     const snapshot = await t.context.browser.snapshot('b-button:nth-child(1)');
 
-    t.snapshot(snapshot);
+    t.snapshot(prettyPrint(snapshot));
 });
 
 test('Accent button example', async t => {
     const snapshot = await t.context.browser.snapshot('b-button:nth-child(2)');
 
-    t.snapshot(snapshot);
+    t.snapshot(prettyPrint(snapshot));
 });
