@@ -1,0 +1,19 @@
+{
+  "env": {
+    "production": {
+      "presets": [
+        [
+          "babili",
+          {
+            "comments": false
+          }
+        ]
+      ]
+    },
+    "coverage": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
+}
