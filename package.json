@@ -13,7 +13,7 @@
     "build:production": "NODE_ENV=production gulp",
     "build:coverage": "NODE_ENV=coverage gulp",
     "start": "serve",
-    "test": "ava",
+    "test": "npm run build && ava",
     "test:coverage": "npm run build:coverage && nyc ava",
     "test:codestyle": "eslint ./src"
   },

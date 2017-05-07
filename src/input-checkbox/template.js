@@ -1,8 +1,6 @@
 const stringifyAttributes = require('../utils/stringifyAttributes');
 
 module.exports = block => {
-    const label = block.label ? `<b-input-text--label>${block.label}</b-input-text--label>` : '';
-
     const inputAttributes = stringifyAttributes({
         name: block.name,
         disabled: block.disabled,
