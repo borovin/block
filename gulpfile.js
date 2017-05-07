@@ -11,8 +11,16 @@ const path = require('path');
 const packageJSON = require('./package.json');
 const gulpif = require('gulp-if');
 const babel = require('rollup-plugin-babel');
+const fs = require('fs-extra');
 
 const isProduction = process.env.NODE_ENV === 'production';
+
+function getBlocks(srcpath = path.join(__dirname, 'src')) {
+    const exclude = ['utils', 'styles'];
+
+    return fs.readdirSync(srcpath)
+        .filter(file => (fs.statSync(path.join(srcpath, file)).isDirectory() && !exclude.includes(file)))
+}
 
 gulp.task('default', ['rollup']);
 
@@ -44,15 +52,21 @@ gulp.task('icons', () => {
         .pipe(gulp.dest('src/icons'));
 });
 
-gulp.task('rollup', ['icons', 'styles'], () => {
-    const blocks = [
-        'button',
-        'input',
-        'form'
-    ];
+gulp.task('generateIndex', () => {
+    const blocks = getBlocks();
+    const list = blocks.map(blockName => `'${blockName}': require('./${blockName}'),`).join('\n');
+
+    fs.outputFileSync('src/index.js', `//this file was generated automatically. Do not edit it manually.
+module.exports = {\n${list}\n};`)
+});
+
+gulp.task('rollup', ['icons', 'styles', 'generateIndex'], () => {
+    fs.removeSync('./dist');
+
+    const blocks = getBlocks().concat('index');
 
     return Promise.all(blocks.map(blockName => rollup.rollup({
-        entry: `./src/${blockName}/index.js`,
+        entry: blockName === 'index' ? './src/index.js' : `./src/${blockName}/index.js`,
         plugins: [
             nodeResolve(),
             commonjs(),
@@ -60,7 +74,7 @@ gulp.task('rollup', ['icons', 'styles'], () => {
         ]
     }).then(bundle => bundle.write({
         format: 'umd',
-        moduleName: `Block.${capitalize(blockName)}`,
+        moduleName: blockName === 'index' ? 'Block' : `Block.${blockName}`,
         sourceMap: true,
         dest: `./dist/${blockName}.js`
     }))));
