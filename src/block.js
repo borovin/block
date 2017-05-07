@@ -56,10 +56,24 @@ class Block extends window.HTMLElement {
                 configurable: true,
                 enumerable: false,
                 set: descriptor.set || function(value) {
-                    this.setAttribute(attr, value);
+                    if (value === false){
+                        this.removeAttribute(attr);
+                    } else if (typeof value === 'string') {
+                        this.setAttribute(attr, value);
+                    } else {
+                        this.setAttribute(attr, JSON.stringify(value));
+                    }
                 },
                 get: descriptor.get || function() {
-                    return this.getAttribute(attr);
+                    let json;
+
+                    try {
+                        json = JSON.parse(this.getAttribute(attr))
+                    } catch (err) {
+                        json = this.getAttribute(attr);
+                    }
+
+                    return json;
                 }
             });
         }

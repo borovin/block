@@ -10,7 +10,7 @@ class Form extends Block {
     static get reflectedProperties() {
         return {
             action: document.location.pathname,
-            errors: {}
+            errors: false
         }
     }
 
