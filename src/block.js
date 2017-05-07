@@ -65,14 +65,16 @@ class Block extends window.HTMLElement {
                     }
                 },
                 get: descriptor.get || function() {
-                    let json = this.getAttribute(attr);
+                    const attrValue = this.getAttribute(attr);
+                    let attrJson = null;
 
                     try {
-                        json = JSON.parse(json)
+                        attrJson = JSON.parse(attrValue)
                     } catch (err) {
+                        attrJson = attrValue;
                     }
 
-                    return json;
+                    return attrJson;
                 }
             });
         }
