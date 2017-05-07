@@ -31,7 +31,7 @@ class Block extends window.HTMLElement {
             onBeforeElChildrenUpdated
         };
 
-        if (this._connected){
+        if (this._connected) {
             this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0);
         } else {
             morphdom(this, `<div>${this.template}</div>`, morphOptions);
@@ -56,7 +56,7 @@ class Block extends window.HTMLElement {
                 configurable: true,
                 enumerable: false,
                 set: descriptor.set || function(value) {
-                    if (value === false){
+                    if (value === false) {
                         this.removeAttribute(attr);
                     } else if (typeof value === 'string') {
                         this.setAttribute(attr, value);
@@ -65,12 +65,11 @@ class Block extends window.HTMLElement {
                     }
                 },
                 get: descriptor.get || function() {
-                    let json;
+                    let json = this.getAttribute(attr);
 
                     try {
-                        json = JSON.parse(this.getAttribute(attr))
+                        json = JSON.parse(json)
                     } catch (err) {
-                        json = this.getAttribute(attr);
                     }
 
                     return json;
