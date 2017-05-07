@@ -1,0 +1,15 @@
+language: node_js
+cache:
+  directories:
+    - node_modules
+node_js:
+  - "stable"
+env:
+  - TEST_TYPE=codestyle CACHE_NAME=JOB1
+  - TEST_TYPE=coverage CACHE_NAME=JOB2
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+script:
+  - npm run test:$TEST_TYPE -s
