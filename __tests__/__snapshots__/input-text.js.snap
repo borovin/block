@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default text input 1`] = `
+"<b-input-text name=\\"a\\" placeholder=\\"Input Placeholder\\" type=\\"text\\">
+    <input type=\\"text\\" placeholder=\\"Input Placeholder\\" name=\\"a\\">
+    <b-input-text--border></b-input-text--border>
+</b-input-text>"
+`;
+
+exports[`Filled input 1`] = `
+"<b-input-text name=\\"c\\" value=\\"Example Value\\" label=\\"Input Label\\" type=\\"text\\">
+    <input value=\\"Example Value\\" type=\\"text\\" name=\\"c\\">
+    <b-input-text--border></b-input-text--border>
+    <b-input-text--label>Input Label</b-input-text--label>
+</b-input-text>"
+`;
+
+exports[`Floating label input 1`] = `
+"<b-input-text name=\\"b\\" label=\\"Floating Label\\" type=\\"text\\">
+    <input type=\\"text\\" name=\\"b\\">
+    <b-input-text--border></b-input-text--border>
+    <b-input-text--label>Floating Label</b-input-text--label>
+</b-input-text>"
+`;
+
+exports[`Input error 1`] = `
+"<b-input-text name=\\"d\\" value=\\"Example Value\\" label=\\"Input Label\\" error=\\"some input error\\"
+type=\\"text\\">
+    <input value=\\"Example Value\\" type=\\"text\\" name=\\"d\\">
+    <b-input-text--border></b-input-text--border>
+    <b-input-text--label>Input Label</b-input-text--label>
+</b-input-text>"
+`;
+
+exports[`Input password 1`] = `
+"<b-input-text name=\\"e\\" type=\\"password\\" value=\\"password\\" label=\\"Password\\">
+    <input value=\\"password\\" type=\\"password\\" name=\\"e\\">
+    <b-input-text--border></b-input-text--border>
+    <b-input-text--label>Password</b-input-text--label>
+</b-input-text>"
+`;
