@@ -1,4 +1,5 @@
 gulpfile.js
 tools
 examples
-index.html
+coverage
+__tests__

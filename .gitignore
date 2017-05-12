@@ -11,3 +11,4 @@ dist
 npm-debug.log
 build
 src/index.js
+.npmrc

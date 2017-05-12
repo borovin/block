@@ -15,6 +15,10 @@ class Browser {
         return this.nightmare.goto(url.resolve(this.baseUrl, path));
     }
 
+    check(selector){
+        return this.nightmare.check(selector);
+    }
+
     snapshot(selector) {
         return this.nightmare
             .wait(selector)

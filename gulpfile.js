@@ -54,28 +54,33 @@ gulp.task('icons', () => {
 
 gulp.task('generateIndex', () => {
     const blocks = getBlocks();
-    const list = blocks.map(blockName => `'${blockName}': require('./${blockName}'),`).join('\n');
+    const list = blocks.map(blockName => `Block['${blockName}'] = require('./${blockName}');`).join('\n');
 
     fs.outputFileSync('src/index.js', `//this file was generated automatically. Do not edit it manually.
-module.exports = {\n${list}\n};`)
+const Block = require('./block');
+${list}
+module.exports = Block;`)
 });
 
 gulp.task('rollup', ['icons', 'styles', 'generateIndex'], () => {
     fs.removeSync('./dist');
 
-    const blocks = getBlocks().concat('index');
+    const blocks = getBlocks();
+    const rootFiles = ['index', 'block'];
 
-    return Promise.all(blocks.map(blockName => rollup.rollup({
-        entry: blockName === 'index' ? './src/index.js' : `./src/${blockName}/index.js`,
+    const rollupBlocks = blocks.concat(rootFiles).map(name => rollup.rollup({
+        entry: rootFiles.includes(name) ? `./src/${name}.js` : `./src/${name}/index.js`,
         plugins: [
             nodeResolve(),
             commonjs(),
             babel()
         ]
     }).then(bundle => bundle.write({
-        format: 'umd',
-        moduleName: blockName === 'index' ? 'Block' : `Block.${blockName}`,
+        format: 'iife',
+        moduleName: rootFiles.includes(name) ? 'Block' : `Block.${name}`,
         sourceMap: true,
-        dest: `./dist/${blockName}.js`
-    }))));
+        dest: `./dist/${name}.js`
+    })));
+
+    return Promise.all(rollupBlocks);
 });

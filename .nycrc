@@ -1,0 +1,22 @@
+{
+  "require": [
+    "babel-register"
+  ],
+  "sourceMap": false,
+  "instrument": false,
+  "check-coverage": false,
+  "lines": 99,
+  "statements": 99,
+  "functions": 99,
+  "branches": 99,
+  "include": [
+    "src/**/*.js"
+  ],
+  "reporter": [
+    "text-summary",
+    "lcovonly",
+    "html"
+  ],
+  "cache": true,
+  "all": true
+}

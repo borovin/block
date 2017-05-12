@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/examples/examples.css"/>
     <script src="//unpkg.com/@webcomponents/custom-elements/custom-elements.min.js"></script>
+    <script src="//unpkg.com/@webcomponents/custom-elements/src/native-shim.js"></script>
     <script src="/dist/form.js"></script>
     <script src="/dist/button.js"></script>
-    <script src="/dist/input.js"></script>
+    <script src="/dist/input-text.js"></script>
 </head>
 <body>
 <div id="example">
     <b-form>
-        <b-input name="A" label="A field"></b-input>
-        <b-input name="B" label="B field" value="default B value"></b-input>
+        <b-input-text name="A" label="A field"></b-input-text>
+        <b-input-text name="B" label="B field" value="default B value"></b-input-text>
         <b-button>Save</b-button>
     </b-form>
 </div>

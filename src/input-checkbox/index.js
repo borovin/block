@@ -12,13 +12,30 @@ class Input extends Block {
             label: null,
             value: null,
             error: null,
-            name: null,
-            checked: false
+            name: null
         };
+    }
+
+    get checked() {
+        return this.querySelector('input').checked;
+    }
+
+    set checked(value) {
+        return this.querySelector('input').checked = !!value;
     }
 
     get template() {
         return template(this);
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        this.addEventListener('change', e => {
+            const input = e.target;
+
+            this.checked = input.checked;
+        });
     }
 }
 

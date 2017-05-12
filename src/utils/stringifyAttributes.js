@@ -16,4 +16,4 @@ module.exports = (attributesMap = {}) => {
 
         return `${key}="${value}"`;
     }).join(' ');
-}
+};

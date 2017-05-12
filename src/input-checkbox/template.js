@@ -5,7 +5,7 @@ module.exports = block => {
         name: block.name,
         disabled: block.disabled,
         type: 'checkbox',
-        checked: block.checked
+        checked: block.getAttribute('checked')
     });
 
     return `
