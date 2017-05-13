@@ -21,18 +21,6 @@
   },
   "author": "a@borovin.com",
   "license": "MIT",
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 6
-    },
-    "extends": "eslint:recommended",
-    "env": {
-      "node": true,
-      "commonjs": true,
-      "browser": true,
-      "jest": true
-    }
-  },
   "dependencies": {
     "@webcomponents/custom-elements": "^1.0.0",
     "keycode": "^2.1.9",
