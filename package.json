@@ -1,7 +1,7 @@
 {
   "name": "@basket/block",
   "description": "UI blocks based on Custom Elements v1 spec.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/borovin/block.git"
@@ -65,6 +65,9 @@
     "standard": "^10.0.2"
   },
   "pre-commit": {
-    "run": ["codestyle", "test:coverage"]
+    "run": [
+      "codestyle",
+      "test:coverage"
+    ]
   }
 }
