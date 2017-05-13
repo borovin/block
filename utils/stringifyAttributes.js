@@ -1,19 +1,19 @@
 module.exports = (attributesMap = {}) => {
-    return Object.keys(attributesMap).map(key => {
-        let value = attributesMap[key];
+  return Object.keys(attributesMap).map(key => {
+    let value = attributesMap[key]
 
-        if (value === null || typeof value === 'undefined' || value === false){
-            return '';
-        }
+    if (value === null || typeof value === 'undefined' || value === false) {
+      return ''
+    }
 
-        if (value === true || value === ''){
-            return key;
-        }
+    if (value === true || value === '') {
+      return key
+    }
 
-        if (typeof value === 'object') {
-            value = JSON.stringify(value);
-        }
+    if (typeof value === 'object') {
+      value = JSON.stringify(value)
+    }
 
-        return `${key}="${value}"`;
-    }).join(' ');
-};
+    return `${key}="${value}"`
+  }).join(' ')
+}

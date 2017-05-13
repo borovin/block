@@ -1,15 +1,15 @@
-const stringifyAttributes = require('../utils/stringifyAttributes');
+const stringifyAttributes = require('../utils/stringifyAttributes')
 
 module.exports = block => {
-    const inputAttributes = stringifyAttributes({
-        value: block.value,
-        name: block.name,
-        disabled: block.disabled,
-        type: 'radio',
-        checked: block.getAttribute('checked')
-    });
+  const inputAttributes = stringifyAttributes({
+    value: block.value,
+    name: block.name,
+    disabled: block.disabled,
+    type: 'radio',
+    checked: block.getAttribute('checked')
+  })
 
-    return `
+  return `
         <label>
 
             <input ${inputAttributes}/>
@@ -19,5 +19,5 @@ module.exports = block => {
             ${block.label ? `<b-input-radio--text>${block.label}</b-input-radio--text>` : ''}
         
         </label>
-    `;
-};
+    `
+}

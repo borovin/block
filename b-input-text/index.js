@@ -1,44 +1,44 @@
-const Block = require('../block');
-const template = require('./template');
-require('./styles');
+const Block = require('../block')
+const template = require('./template')
+require('./styles')
 
 class Input extends Block {
-    static get tagName() {
-        return 'b-input-text';
+  static get tagName () {
+    return 'b-input-text'
+  }
+
+  static get reflectedProperties () {
+    return {
+      label: null,
+      value: null,
+      type: 'text',
+      placeholder: null,
+      error: null,
+      name: null
     }
+  }
 
-    static get reflectedProperties() {
-        return {
-            label: null,
-            value: null,
-            type: 'text',
-            placeholder: null,
-            error: null,
-            name: null
-        };
-    }
+  get template () {
+    return template(this)
+  }
 
-    get template() {
-        return template(this);
-    }
+  connectedCallback () {
+    super.connectedCallback()
 
-    connectedCallback() {
-        super.connectedCallback();
+    this.addEventListener('keyup', e => {
+      const input = e.target
 
-        this.addEventListener('keyup', e => {
-            const input = e.target;
+      this.removeAttribute('error')
 
-            this.removeAttribute('error');
-
-            if (input.value) {
-                this.setAttribute('value', input.value);
-            } else {
-                this.removeAttribute('value');
-            }
-        });
-    }
+      if (input.value) {
+        this.setAttribute('value', input.value)
+      } else {
+        this.removeAttribute('value')
+      }
+    })
+  }
 }
 
-window && window.customElements.define(Input.tagName, Input);
+window && window.customElements.define(Input.tagName, Input)
 
-module.exports = Input;
+module.exports = Input

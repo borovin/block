@@ -1,14 +1,14 @@
-const stringifyAttributes = require('../utils/stringifyAttributes');
+const stringifyAttributes = require('../utils/stringifyAttributes')
 
 module.exports = block => {
-    const inputAttributes = stringifyAttributes({
-        name: block.name,
-        disabled: block.disabled,
-        type: 'checkbox',
-        checked: block.getAttribute('checked')
-    });
+  const inputAttributes = stringifyAttributes({
+    name: block.name,
+    disabled: block.disabled,
+    type: 'checkbox',
+    checked: block.getAttribute('checked')
+  })
 
-    return `
+  return `
         <label>
 
             <input ${inputAttributes} />
@@ -22,5 +22,5 @@ module.exports = block => {
             ${block.label ? `<b-input-checkbox--text>${block.label}</b-input-checkbox--text>` : ''}
     
         </label>
-    `;
-};
+    `
+}

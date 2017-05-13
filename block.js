@@ -1,116 +1,116 @@
-const morphdom = require('morphdom');
-require('./styles');
+const morphdom = require('morphdom')
+require('./styles')
 
-function onBeforeElChildrenUpdated(fromEl, toEl) {
-    if (fromEl.content) {
-        fromEl.content = toEl.innerHTML;
-        return false;
-    }
+function onBeforeElChildrenUpdated (fromEl, toEl) {
+  if (fromEl.content) {
+    fromEl.content = toEl.innerHTML
+    return false
+  }
 }
 
 class Block extends window.HTMLElement {
-    constructor(props = {}) {
-        super();
+  constructor (props = {}) {
+    super()
 
-        Object.assign(this, props);
+    Object.assign(this, props)
+  }
+
+  static get reflectedProperties () {
+    return {}
+  }
+
+  static get observedAttributes () {
+    return Object.keys(this.reflectedProperties)
+  }
+
+  render () {
+    this._renderTimeout && clearTimeout(this._renderTimeout)
+
+    const morphOptions = {
+      childrenOnly: true,
+      onBeforeElChildrenUpdated
     }
 
-    static get reflectedProperties() {
-        return {};
+    if (this._connected) {
+      this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0)
+    } else {
+      morphdom(this, `<div>${this.template}</div>`, morphOptions)
+      this.renderedCallback()
     }
+  }
 
-    static get observedAttributes() {
-        return Object.keys(this.reflectedProperties);
-    }
+  get template () {
+    return `<div>Block</div>`
+  }
 
-    render() {
-        this._renderTimeout && clearTimeout(this._renderTimeout);
+  connectedCallback () {
+    for (let attr in this.constructor.reflectedProperties) {
+      const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), attr) || {}
+      const defaultValue = this[attr] || this.constructor.reflectedProperties[attr]
 
-        const morphOptions = {
-            childrenOnly: true,
-            onBeforeElChildrenUpdated
-        };
+      if (this.getAttribute(attr) === null && defaultValue) {
+        this.setAttribute(attr, defaultValue)
+      }
 
-        if (this._connected) {
-            this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0);
-        } else {
-            morphdom(this, `<div>${this.template}</div>`, morphOptions);
-            this.renderedCallback();
+      Object.defineProperty(this, attr, {
+        configurable: true,
+        enumerable: false,
+        set: descriptor.set || function (value) {
+          if (value === false) {
+            this.removeAttribute(attr)
+          } else if (typeof value === 'string') {
+            this.setAttribute(attr, value)
+          } else {
+            this.setAttribute(attr, JSON.stringify(value))
+          }
+        },
+        get: descriptor.get || function () {
+          const attrValue = this.getAttribute(attr)
+          let attrJson = null
+
+          try {
+            attrJson = JSON.parse(attrValue)
+          } catch (err) {
+            attrJson = attrValue
+          }
+
+          return attrJson
         }
+      })
     }
 
-    get template() {
-        return `<div>Block</div>`
+    setTimeout(() => {
+      this.content = this.innerHTML
+      this.innerHTML = ''
+      this.render()
+      this._connected = true
+    }, 0)
+  }
+
+  renderedCallback () {
+
+  }
+
+  set content (value) {
+    const newContent = value
+    const oldContent = this._content
+
+    this._content = newContent
+
+    if (this._connected && (oldContent !== newContent)) {
+      this.render()
     }
+  }
 
-    connectedCallback() {
-        for (let attr in this.constructor.reflectedProperties) {
-            const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), attr) || {};
-            const defaultValue = this[attr] || this.constructor.reflectedProperties[attr];
+  get content () {
+    return this._content
+  }
 
-            if (this.getAttribute(attr) === null && defaultValue) {
-                this.setAttribute(attr, defaultValue);
-            }
-
-            Object.defineProperty(this, attr, {
-                configurable: true,
-                enumerable: false,
-                set: descriptor.set || function(value) {
-                    if (value === false) {
-                        this.removeAttribute(attr);
-                    } else if (typeof value === 'string') {
-                        this.setAttribute(attr, value);
-                    } else {
-                        this.setAttribute(attr, JSON.stringify(value));
-                    }
-                },
-                get: descriptor.get || function() {
-                    const attrValue = this.getAttribute(attr);
-                    let attrJson = null;
-
-                    try {
-                        attrJson = JSON.parse(attrValue)
-                    } catch (err) {
-                        attrJson = attrValue;
-                    }
-
-                    return attrJson;
-                }
-            });
-        }
-
-        setTimeout(() => {
-            this.content = this.innerHTML;
-            this.innerHTML = '';
-            this.render();
-            this._connected = true;
-        }, 0);
+  attributeChangedCallback (attrName, oldVal, newVal) {
+    if (this._connected && (oldVal !== newVal)) {
+      this.render()
     }
-
-    renderedCallback() {
-
-    }
-
-    set content(value) {
-        const newContent = value;
-        const oldContent = this._content;
-
-        this._content = newContent;
-
-        if (this._connected && (oldContent !== newContent)) {
-            this.render();
-        }
-    }
-
-    get content() {
-        return this._content;
-    }
-
-    attributeChangedCallback(attrName, oldVal, newVal) {
-        if (this._connected && (oldVal !== newVal)) {
-            this.render();
-        }
-    }
+  }
 }
 
-module.exports = Block;
+module.exports = Block

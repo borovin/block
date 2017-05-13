@@ -1,82 +1,82 @@
-const gulp = require('gulp');
-const wrap = require('gulp-wrap');
-const rename = require('gulp-rename');
-const rollup = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
-const nodeResolve = require('rollup-plugin-node-resolve');
-const imagemin = require('gulp-imagemin');
-const csso = require('gulp-csso');
-const path = require('path');
-const packageJSON = require('./package.json');
-const gulpif = require('gulp-if');
-const babel = require('rollup-plugin-babel');
-const fs = require('fs-extra');
+const gulp = require('gulp')
+const wrap = require('gulp-wrap')
+const rename = require('gulp-rename')
+const rollup = require('rollup')
+const commonjs = require('rollup-plugin-commonjs')
+const nodeResolve = require('rollup-plugin-node-resolve')
+const imagemin = require('gulp-imagemin')
+const csso = require('gulp-csso')
+const path = require('path')
+const packageJSON = require('./package.json')
+const gulpif = require('gulp-if')
+const babel = require('rollup-plugin-babel')
+const fs = require('fs-extra')
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production'
 
-function getBlocks() {
-    return fs.readdirSync(__dirname).filter(fileName => (fileName.indexOf('b-') === 0))
+function getBlocks () {
+  return fs.readdirSync(__dirname).filter(fileName => (fileName.indexOf('b-') === 0))
 }
 
-gulp.task('default', ['rollup']);
+gulp.task('default', ['rollup'])
 
 gulp.task('styles', () => {
-    return gulp.src(['./b-**/*.css', './styles/**/*.css'], {base: "./"})
+  return gulp.src(['./b-**/*.css', './styles/**/*.css'], {base: './'})
         .pipe(gulpif(isProduction, csso()))
         .pipe(wrap((data) => {
-            const appendStylesPath = path.relative(path.dirname(data.file.path), path.join(__dirname, '/utils/appendStyles.js'));
-            const stylesPath = path.relative(__dirname, data.file.path);
-            const stylesID = path.join(packageJSON.name, stylesPath);
+          const appendStylesPath = path.relative(path.dirname(data.file.path), path.join(__dirname, '/utils/appendStyles.js'))
+          const stylesPath = path.relative(__dirname, data.file.path)
+          const stylesID = path.join(packageJSON.name, stylesPath)
 
-            return `//this file was generated automatically. Do not edit it manually.
+          return `//this file was generated automatically. Do not edit it manually.
 const appendStyles = require('${appendStylesPath}');
-appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`;
+appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`
         }))
         .pipe(rename({
-            extname: '.js'
+          extname: '.js'
         }))
-        .pipe(gulp.dest('./'));
-});
+        .pipe(gulp.dest('./'))
+})
 
 gulp.task('icons', () => {
-    return gulp.src('icons/**/*.svg')
+  return gulp.src('icons/**/*.svg')
         .pipe(gulpif(isProduction, imagemin()))
         .pipe(wrap('module.exports = `<%= contents %>`'))
         .pipe(rename({
-            extname: '.js'
+          extname: '.js'
         }))
-        .pipe(gulp.dest('icons'));
-});
+        .pipe(gulp.dest('icons'))
+})
 
 gulp.task('kit', () => {
-    const blocks = getBlocks();
-    const list = blocks.map(blockName => `Block['${blockName}'] = require('./${blockName}');`).join('\n');
+  const blocks = getBlocks()
+  const list = blocks.map(blockName => `Block['${blockName}'] = require('./${blockName}');`).join('\n')
 
-    fs.outputFileSync('kit.js', `//this file was generated automatically. Do not edit it manually.
+  fs.outputFileSync('kit.js', `//this file was generated automatically. Do not edit it manually.
 const Block = require('./block');
 ${list}
 module.exports = Block;`)
-});
+})
 
 gulp.task('rollup', ['icons', 'styles', 'kit'], () => {
-    fs.removeSync('./dist');
+  fs.removeSync('./dist')
 
-    const blocks = getBlocks();
-    const rootFiles = ['kit', 'block'];
+  const blocks = getBlocks()
+  const rootFiles = ['kit', 'block']
 
-    const rollupBlocks = blocks.concat(rootFiles).map(name => rollup.rollup({
-        entry: rootFiles.includes(name) ? `./${name}.js` : `./${name}/index.js`,
-        plugins: [
-            nodeResolve(),
-            commonjs(),
-            babel()
-        ]
-    }).then(bundle => bundle.write({
-        format: 'umd',
-        moduleName: rootFiles.includes(name) ? 'Block' : `Block.${name}`,
-        sourceMap: true,
-        dest: `./dist/${name}.js`
-    })));
+  const rollupBlocks = blocks.concat(rootFiles).map(name => rollup.rollup({
+    entry: rootFiles.includes(name) ? `./${name}.js` : `./${name}/index.js`,
+    plugins: [
+      nodeResolve(),
+      commonjs(),
+      babel()
+    ]
+  }).then(bundle => bundle.write({
+    format: 'umd',
+    moduleName: rootFiles.includes(name) ? 'Block' : `Block.${name}`,
+    sourceMap: true,
+    dest: `./dist/${name}.js`
+  })))
 
-    return Promise.all(rollupBlocks);
-});
+  return Promise.all(rollupBlocks)
+})

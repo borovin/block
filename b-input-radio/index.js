@@ -1,44 +1,44 @@
-const Block = require('../block');
-const template = require('./template');
-require('./styles');
+const Block = require('../block')
+const template = require('./template')
+require('./styles')
 
 class Input extends Block {
-    static get tagName() {
-        return 'b-input-radio';
+  static get tagName () {
+    return 'b-input-radio'
+  }
+
+  static get reflectedProperties () {
+    return {
+      label: null,
+      value: null,
+      error: null,
+      name: null
     }
+  }
 
-    static get reflectedProperties() {
-        return {
-            label: null,
-            value: null,
-            error: null,
-            name: null
-        };
-    }
+  get checked () {
+    return this.querySelector('input').checked
+  }
 
-    get checked() {
-        return this.querySelector('input').checked;
-    }
+  set checked (value) {
+    this.querySelector('input').checked = Boolean(value)
+  }
 
-    set checked(value) {
-        this.querySelector('input').checked = Boolean(value);
-    }
+  get template () {
+    return template(this)
+  }
 
-    get template() {
-        return template(this);
-    }
+  connectedCallback () {
+    super.connectedCallback()
 
-    connectedCallback() {
-        super.connectedCallback();
+    this.addEventListener('change', e => {
+      const input = e.target
 
-        this.addEventListener('change', e => {
-            const input = e.target;
-
-            this.checked = input.checked;
-        });
-    }
+      this.checked = input.checked
+    })
+  }
 }
 
-window && window.customElements.define(Input.tagName, Input);
+window && window.customElements.define(Input.tagName, Input)
 
-module.exports = Input;
+module.exports = Input

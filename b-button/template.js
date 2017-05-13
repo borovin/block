@@ -1,15 +1,15 @@
-const stringifyAttributes = require('../utils/stringifyAttributes');
+const stringifyAttributes = require('../utils/stringifyAttributes')
 
 module.exports = block => {
-    const tagName = block.href ? 'a' : 'button';
+  const tagName = block.href ? 'a' : 'button'
 
-    const buttonAttributes = stringifyAttributes({
-        href: block.href
-    });
+  const buttonAttributes = stringifyAttributes({
+    href: block.href
+  })
 
-    return `
+  return `
         <${tagName} ${buttonAttributes}>
             ${block.content}
         </${tagName}>
-    `;
-};
+    `
+}

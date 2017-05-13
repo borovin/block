@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Block Docs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/examples/examples.css"/>
+    <script src="//unpkg.com/@webcomponents/custom-elements/custom-elements.min.js"></script>
+    <script src="/dist/kit.js"></script>
+</head>
+<body>
+<div id="example">
+    <b-button>Open dialog</b-button>
+</div>
+<b-dialog>
+    test
+</b-dialog>
+<script>
+    document.querySelector('b-button').addEventListener('click', e => document.querySelector('b-dialog').open());
+</script>
+</body>
+</html>

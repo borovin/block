@@ -1,7 +1,7 @@
 module.exports = block => {
   return `
-        <form>
+        <b-dialog--card>
             ${block.content}
-        </form>
+        </b-dialog--card>
     `
 }

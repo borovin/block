@@ -1,60 +1,60 @@
-const Nightmare = require('nightmare');
-const url = require('url');
-const fs = require('fs-extra');
+const Nightmare = require('nightmare')
+const url = require('url')
+const fs = require('fs-extra')
 
 class Browser {
-    constructor(options) {
-        this.nightmare = new Nightmare(options);
-    }
+  constructor (options) {
+    this.nightmare = new Nightmare(options)
+  }
 
-    get baseUrl() {
-        return process.env.BASE_URL || 'http://localhost:5000';
-    }
+  get baseUrl () {
+    return process.env.BASE_URL || 'http://localhost:5000'
+  }
 
-    goto(path) {
-        return this.nightmare.goto(url.resolve(this.baseUrl, path));
-    }
+  goto (path) {
+    return this.nightmare.goto(url.resolve(this.baseUrl, path))
+  }
 
-    check(selector){
-        return this.nightmare.check(selector);
-    }
+  check (selector) {
+    return this.nightmare.check(selector)
+  }
 
-    snapshot(selector) {
-        return this.nightmare
+  snapshot (selector) {
+    return this.nightmare
             .wait(selector)
-            .evaluate(querySelector => new Promise(resolve => resolve(document.querySelector(querySelector).outerHTML)), selector);
-    }
+            .evaluate(querySelector => new Promise(resolve => resolve(document.querySelector(querySelector).outerHTML)), selector)
+  }
 
-    screenshot(selector) {
-        return this.nightmare
+  screenshot (selector) {
+    return this.nightmare
             .wait(selector)
             .evaluate(query => {
-                const rect = document.querySelector(query).getBoundingClientRect();
+              const rect = document.querySelector(query).getBoundingClientRect()
 
-                return {
-                    x: Math.ceil(rect.left),
-                    y: Math.ceil(rect.top),
-                    height: Math.ceil(rect.height),
-                    width: Math.ceil(rect.width)
-                };
+              return {
+                x: Math.ceil(rect.left),
+                y: Math.ceil(rect.top),
+                height: Math.ceil(rect.height),
+                width: Math.ceil(rect.width)
+              }
             }, selector)
             .then(rect => {
-                return this.nightmare.screenshot(null, rect)
-            });
-    }
+              return this.nightmare.screenshot(null, rect)
+            })
+  }
 
-    close() {
-        return this.nightmare
+  close () {
+    return this.nightmare
             .evaluate(() => {
-                return window.__coverage__;
+              return window.__coverage__
             })
             .then(coverage => {
-                if (coverage){
-                    fs.outputJsonSync(`.nyc_output/coverage-${Date.now()}.json`, coverage);
-                }
+              if (coverage) {
+                fs.outputJsonSync(`.nyc_output/coverage-${Date.now()}.json`, coverage)
+              }
             })
-            .then(() => this.nightmare.end());
-    }
+            .then(() => this.nightmare.end())
+  }
 }
 
-module.exports = Browser;
+module.exports = Browser

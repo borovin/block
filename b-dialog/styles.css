@@ -1,0 +1,47 @@
+b-dialog {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    white-space: nowrap;
+    overflow: scroll;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    font-family: var(--b-font);
+}
+
+b-dialog:after {
+    content: "";
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+b-dialog[opened] {
+    opacity: 1;
+    pointer-events: all;
+}
+
+b-dialog--card {
+    display: inline-block;
+    position: relative;
+    background-color: #fff;
+    padding: 40px;
+    vertical-align: middle;
+    white-space: normal;
+    max-width: 50%;
+    top: -40px;
+    transition: top 0.5s;
+}
+
+b-dialog[opened] b-dialog--card {
+    top: 0;
+}
