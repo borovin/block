@@ -1,5 +1,5 @@
 gulpfile.js
-tools
+__tests__/tools
 examples
 coverage
 __tests__

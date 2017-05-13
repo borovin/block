@@ -28,8 +28,8 @@ class Browser {
     screenshot(selector) {
         return this.nightmare
             .wait(selector)
-            .evaluate(selector => {
-                const rect = document.querySelector(selector).getBoundingClientRect();
+            .evaluate(query => {
+                const rect = document.querySelector(query).getBoundingClientRect();
 
                 return {
                     x: Math.ceil(rect.left),

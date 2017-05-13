@@ -1,14 +1,12 @@
 .idea
 node_modules
 styles.js
-src/styles/*.js
+styles/*.js
 .nyc_output
-browser_modules
 coverage
-output
 .DS_Store
 dist
+kit.js
 npm-debug.log
-build
-src/index.js
+src/kit.js
 .npmrc

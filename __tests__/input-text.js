@@ -1,5 +1,5 @@
 const test = require('ava');
-const Browser = require('../tools/browser');
+const Browser = require('./helpers/browser');
 const {prettyPrint} = require('html');
 
 test.beforeEach(t => {

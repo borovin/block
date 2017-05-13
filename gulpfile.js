@@ -5,7 +5,6 @@ const rollup = require('rollup');
 const commonjs = require('rollup-plugin-commonjs');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const imagemin = require('gulp-imagemin');
-const capitalize = require('lodash/capitalize');
 const csso = require('gulp-csso');
 const path = require('path');
 const packageJSON = require('./package.json');
@@ -15,20 +14,17 @@ const fs = require('fs-extra');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-function getBlocks(srcpath = path.join(__dirname, 'src')) {
-    const exclude = ['utils', 'styles'];
-
-    return fs.readdirSync(srcpath)
-        .filter(file => (fs.statSync(path.join(srcpath, file)).isDirectory() && !exclude.includes(file)))
+function getBlocks() {
+    return fs.readdirSync(__dirname).filter(fileName => (fileName.indexOf('b-') === 0))
 }
 
 gulp.task('default', ['rollup']);
 
 gulp.task('styles', () => {
-    return gulp.src('src/**/*.css')
+    return gulp.src(['./b-**/*.css', './styles/**/*.css'], {base: "./"})
         .pipe(gulpif(isProduction, csso()))
         .pipe(wrap((data) => {
-            const appendStylesPath = path.relative(path.dirname(data.file.path), path.join(__dirname, '/src/utils/appendStyles.js'));
+            const appendStylesPath = path.relative(path.dirname(data.file.path), path.join(__dirname, '/utils/appendStyles.js'));
             const stylesPath = path.relative(__dirname, data.file.path);
             const stylesID = path.join(packageJSON.name, stylesPath);
 
@@ -39,44 +35,44 @@ appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`;
         .pipe(rename({
             extname: '.js'
         }))
-        .pipe(gulp.dest('src'));
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('icons', () => {
-    return gulp.src('src/icons/**/*.svg')
+    return gulp.src('icons/**/*.svg')
         .pipe(gulpif(isProduction, imagemin()))
         .pipe(wrap('module.exports = `<%= contents %>`'))
         .pipe(rename({
             extname: '.js'
         }))
-        .pipe(gulp.dest('src/icons'));
+        .pipe(gulp.dest('icons'));
 });
 
-gulp.task('generateIndex', () => {
+gulp.task('kit', () => {
     const blocks = getBlocks();
     const list = blocks.map(blockName => `Block['${blockName}'] = require('./${blockName}');`).join('\n');
 
-    fs.outputFileSync('src/index.js', `//this file was generated automatically. Do not edit it manually.
+    fs.outputFileSync('kit.js', `//this file was generated automatically. Do not edit it manually.
 const Block = require('./block');
 ${list}
 module.exports = Block;`)
 });
 
-gulp.task('rollup', ['icons', 'styles', 'generateIndex'], () => {
+gulp.task('rollup', ['icons', 'styles', 'kit'], () => {
     fs.removeSync('./dist');
 
     const blocks = getBlocks();
-    const rootFiles = ['index', 'block'];
+    const rootFiles = ['kit', 'block'];
 
     const rollupBlocks = blocks.concat(rootFiles).map(name => rollup.rollup({
-        entry: rootFiles.includes(name) ? `./src/${name}.js` : `./src/${name}/index.js`,
+        entry: rootFiles.includes(name) ? `./${name}.js` : `./${name}/index.js`,
         plugins: [
             nodeResolve(),
             commonjs(),
             babel()
         ]
     }).then(bundle => bundle.write({
-        format: 'iife',
+        format: 'umd',
         moduleName: rootFiles.includes(name) ? 'Block' : `Block.${name}`,
         sourceMap: true,
         dest: `./dist/${name}.js`

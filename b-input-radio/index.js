@@ -21,7 +21,7 @@ class Input extends Block {
     }
 
     set checked(value) {
-        return this.querySelector('input').checked = !!value;
+        this.querySelector('input').checked = Boolean(value);
     }
 
     get template() {
