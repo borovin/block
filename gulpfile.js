@@ -29,8 +29,8 @@ gulp.task('styles', () => {
           const stylesID = path.join(packageJSON.name, stylesPath)
 
           return `//this file was generated automatically. Do not edit it manually.
-const appendStyles = require('${appendStylesPath}');
-appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`
+import appendStyles from '${appendStylesPath}'
+export default appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`)`
         }))
         .pipe(rename({
           extname: '.js'
@@ -41,7 +41,7 @@ appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`);`
 gulp.task('icons', () => {
   return gulp.src('icons/**/*.svg')
         .pipe(gulpif(isProduction, imagemin()))
-        .pipe(wrap('module.exports = `<%= contents %>`'))
+        .pipe(wrap('export default `<%= contents %>`'))
         .pipe(rename({
           extname: '.js'
         }))

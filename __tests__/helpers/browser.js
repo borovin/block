@@ -1,6 +1,6 @@
-const Nightmare = require('nightmare')
-const url = require('url')
-const fs = require('fs-extra')
+import Nightmare from 'nightmare'
+import url from 'url'
+import fs from 'fs-extra'
 
 class Browser {
   constructor (options) {
@@ -57,4 +57,4 @@ class Browser {
   }
 }
 
-module.exports = Browser
+export default Browser

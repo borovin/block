@@ -1,4 +1,4 @@
-module.exports = stylesTemplate => {
+export default stylesTemplate => {
   if (!document) {
     return
   }

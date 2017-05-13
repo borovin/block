@@ -1,6 +1,6 @@
-const Block = require('../block')
-const template = require('./template')
-const qs = require('query-string')
+import Block from '../block'
+import template from './template'
+import qs from 'query-string'
 
 class Form extends Block {
   static get tagName () {
@@ -82,4 +82,4 @@ class Form extends Block {
 
 window && window.customElements.define(Form.tagName, Form)
 
-module.exports = Form
+export default Form

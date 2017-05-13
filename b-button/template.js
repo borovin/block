@@ -1,6 +1,6 @@
-const stringifyAttributes = require('../utils/stringifyAttributes')
+import stringifyAttributes from '../utils/stringifyAttributes'
 
-module.exports = block => {
+export default block => {
   const tagName = block.href ? 'a' : 'button'
 
   const buttonAttributes = stringifyAttributes({

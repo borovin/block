@@ -1,6 +1,6 @@
-const test = require('ava')
-const Browser = require('./helpers/browser')
-const {prettyPrint} = require('html')
+import test from 'ava'
+import Browser from './helpers/browser'
+import {prettyPrint} from 'html'
 
 test.beforeEach(t => {
   t.context.browser = new Browser()

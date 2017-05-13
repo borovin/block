@@ -1,7 +1,7 @@
-const Block = require('../block')
-const template = require('./template')
-const keycode = require('keycode')
-require('./styles')
+import Block from '../block'
+import template from './template'
+import keycode from 'keycode'
+import './styles'
 
 class Dialog extends Block {
   static get tagName () {
@@ -49,4 +49,4 @@ if (document) {
 
 window && window.customElements.define(Dialog.tagName, Dialog)
 
-module.exports = Dialog
+export default Dialog

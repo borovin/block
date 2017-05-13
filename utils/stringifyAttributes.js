@@ -1,4 +1,4 @@
-module.exports = (attributesMap = {}) => {
+export default (attributesMap = {}) => {
   return Object.keys(attributesMap).map(key => {
     let value = attributesMap[key]
 

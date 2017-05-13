@@ -1,6 +1,6 @@
-const stringifyAttributes = require('../utils/stringifyAttributes')
+import stringifyAttributes from '../utils/stringifyAttributes'
 
-module.exports = block => {
+export default block => {
   const inputAttributes = stringifyAttributes({
     value: block.value,
     name: block.name,
