@@ -11,6 +11,14 @@
       ]
     },
     "coverage": {
+      "presets": [
+        [
+          "babili",
+          {
+            "comments": false
+          }
+        ]
+      ],
       "plugins": [
         "istanbul"
       ]

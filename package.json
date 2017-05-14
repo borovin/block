@@ -9,16 +9,16 @@
   "main": "block.js",
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "prepublish": "npm run build:production",
     "build": "gulp",
     "build:production": "cross-env NODE_ENV=production gulp",
     "build:coverage": "cross-env NODE_ENV=coverage gulp",
     "start": "serve",
-    "test": "npm run build && ava",
-    "test:update": "npm run build && ava -u",
+    "test": "ava",
+    "test:update": "ava -u",
     "test:coverage": "npm run build:coverage && nyc ava",
     "codestyle": "standard",
-    "fix": "standard --fix"
+    "fix": "standard --fix",
+    "dist": "npm run build:production && np"
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -56,7 +56,7 @@
   "pre-commit": {
     "run": [
       "codestyle",
-      "test"
+      "test:coverage"
     ]
   }
 }
