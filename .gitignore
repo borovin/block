@@ -2,6 +2,7 @@
 node_modules
 styles.js
 styles/*.js
+styles/initial.css
 .nyc_output
 coverage
 .DS_Store

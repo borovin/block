@@ -20,7 +20,7 @@ function getBlocks () {
 
 gulp.task('default', ['rollup'])
 
-gulp.task('styles', () => {
+gulp.task('styles', ['resetStyles'], () => {
   return gulp.src(['./b-**/*.css', './styles/**/*.css'], {base: './'})
         .pipe(gulpif(isProduction, csso()))
         .pipe(wrap((data) => {
@@ -30,12 +30,20 @@ gulp.task('styles', () => {
 
           return `//this file was generated automatically. Do not edit it manually.
 import appendStyles from '${appendStylesPath}'
-export default appendStyles(\`<style id="${stylesID}">${data.contents}</style>\`)`
+export default appendStyles(\`<style>${data.contents}</style>\`, '${stylesID}')`
         }))
         .pipe(rename({
           extname: '.js'
         }))
         .pipe(gulp.dest('./'))
+})
+
+gulp.task('resetStyles', () => {
+  const blocks = getBlocks()
+
+  fs.outputFileSync('styles/initial.css', `/*this file was generated automatically. Do not edit it manually.*/
+${blocks.join(', ')} {all: initial}
+  `)
 })
 
 gulp.task('icons', () => {

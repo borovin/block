@@ -1,4 +1,6 @@
-export default stylesTemplate => {
+const cache = [];
+
+export default (stylesTemplate, stylesId) => {
   if (!document) {
     return
   }
@@ -7,8 +9,10 @@ export default stylesTemplate => {
   container.innerHTML = stylesTemplate
 
   const styles = container.querySelector('style')
+  const id = document.getElementById(styles.id) || stylesId;
 
-  if (typeof stylesTemplate === 'string' && !document.getElementById(styles.id)) {
+  if (typeof stylesTemplate === 'string' && !cache.includes(id)) {
     document.head.appendChild(styles)
+    cache.push(id);
   }
 }

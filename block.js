@@ -1,5 +1,6 @@
-const morphdom = require('morphdom')
-require('./styles')
+import morphdom from 'morphdom'
+import './styles'
+import './styles/initial'
 
 function onBeforeElChildrenUpdated (fromEl, toEl) {
   if (fromEl.content) {
@@ -121,4 +122,4 @@ class Block extends window.HTMLElement {
   }
 }
 
-module.exports = Block
+export default Block;
