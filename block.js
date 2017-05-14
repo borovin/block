@@ -122,4 +122,4 @@ class Block extends window.HTMLElement {
   }
 }
 
-export default Block;
+export default Block
