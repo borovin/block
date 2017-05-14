@@ -31,11 +31,11 @@ b-input-radio--icon {
 }
 
 b-input-radio--icon ~ b-input-radio--text {
-    margin-left: 16px;
+    margin: 0 16px;
 }
 
 b-input-radio--text ~ b-input-radio--icon {
-    margin-left: 16px;
+    margin: 0 16px;
 }
 
 b-input-radio--icon::before {

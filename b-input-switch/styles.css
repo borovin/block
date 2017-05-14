@@ -1,0 +1,89 @@
+b-input-switch {
+    font-family: var(--b-font);
+    text-align: left;
+    display: inline-block;
+}
+
+b-input-switch label {
+    cursor: pointer;
+}
+
+b-input-switch--text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    height: 100%;
+    font-size: 16px;
+    vertical-align: middle;
+    user-select: none;
+}
+
+b-input-switch--icon {
+    display: inline-block;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    color: #fff;
+    vertical-align: middle;
+}
+
+b-input-switch--icon ~ b-input-switch--text {
+    margin: 0 16px;
+}
+
+b-input-switch--text ~ b-input-switch--icon {
+    margin: 0 16px;
+}
+
+b-input-switch--icon::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -8px;
+    margin-left: -16px;
+    width: 32px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: #000000;
+    opacity: 0.38;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+
+b-input-switch--icon::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -10px;
+    margin-left: -20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #FAFAFA;
+    box-shadow: 0 0 4px #333;
+    transition: background-color 0.2s, margin 0.2s;
+}
+
+b-input-switch input {
+    visibility: hidden;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+}
+
+b-input-switch input:checked ~ b-input-switch--icon::before {
+    background-color: var(--b-primary-color);
+    opacity: 0.5;
+}
+
+b-input-switch input:checked ~ b-input-switch--icon::after {
+    background-color: var(--b-primary-color);
+    margin-left: 0;
+}

@@ -29,11 +29,11 @@ b-input-checkbox--icon {
 }
 
 b-input-checkbox--icon ~ b-input-checkbox--text {
-    margin-left: 16px;
+    margin: 0 16px;
 }
 
 b-input-checkbox--text ~ b-input-checkbox--icon {
-    margin-left: 16px;
+    margin: 0 16px;
 }
 
 b-input-checkbox--icon::before {

@@ -4,7 +4,7 @@ import './styles'
 
 class Input extends Block {
   static get tagName () {
-    return 'b-input-checkbox'
+    return 'b-input-switch'
   }
 
   static get reflectedProperties () {
