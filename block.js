@@ -73,7 +73,7 @@ class Block extends window.HTMLElement {
           }
 
           if (attrValue === null) {
-            return defaultValue;
+            return defaultValue
           }
 
           try {
