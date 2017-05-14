@@ -9,7 +9,7 @@
   "main": "block.js",
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "prepublish": "npm run build:production",
+    "prepublishOnly": "npm run build:production",
     "build": "gulp",
     "build:production": "cross-env NODE_ENV=production gulp",
     "build:coverage": "cross-env NODE_ENV=coverage gulp",
