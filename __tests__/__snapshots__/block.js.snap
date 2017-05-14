@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test block example 1`] = `
+"<b-test a=\\"\\" b=\\"\\" d=\\"0\\" e=\\"1\\" f=\\"1.2\\" g=\\"string\\">this.a: true:boolean
+    <br>this.b: true:boolean
+    <br>this.c: null:object
+    <br>this.d: 0:number
+    <br>this.e: 1:number
+    <br>this.f: 1.2:number
+    <br>this.g: string:string
+    <br>this.h: false:boolean
+    <br>
+</b-test>"
+`;

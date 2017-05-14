@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Block Docs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/examples/examples.css"/>
+    <script src="//unpkg.com/@webcomponents/custom-elements/custom-elements.min.js"></script>
+    <script src="/dist/kit.js"></script>
+    <script>
+        class TestBlock extends Block {
+          static get reflectedProperties(){
+            return {
+              a: false,
+              b: true,
+              c: null,
+              d: 0,
+              e: 1,
+              f: 1.2,
+              g: 'string',
+              h: false
+            }
+          }
+
+          get template() {
+            return `
+                this.a: ${this.a}:${typeof this.a}<br />
+                this.b: ${this.b}:${typeof this.b}<br />
+                this.c: ${this.c}:${typeof this.c}<br />
+                this.d: ${this.d}:${typeof this.d}<br />
+                this.e: ${this.e}:${typeof this.e}<br />
+                this.f: ${this.f}:${typeof this.f}<br />
+                this.g: ${this.g}:${typeof this.g}<br />
+                this.h: ${this.h}:${typeof this.h}<br />
+            `
+          }
+        }
+
+        window.customElements.define('b-test', TestBlock);
+    </script>
+</head>
+<body>
+<div id="example">
+    <b-test a>test block</b-test>
+</div>
+</body>
+</html>

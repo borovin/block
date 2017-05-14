@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checked checkbox 1`] = `
+"<b-input-checkbox name=\\"f\\" checked=\\"\\" label=\\"checkbox\\">
+    <label>
+        <input name=\\"f\\" type=\\"checkbox\\" checked=\\"\\">
+        <b-input-checkbox--icon>
+            <svg viewBox=\\"0 0 24 24\\">
+                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+            </svg>
+        </b-input-checkbox--icon>
+        <b-input-checkbox--text>checkbox</b-input-checkbox--text>
+    </label>
+</b-input-checkbox>"
+`;
+
+exports[`Unchecked checkbox 1`] = `
+"<b-input-checkbox name=\\"g\\" label=\\"checkbox\\">
+    <label>
+        <input name=\\"g\\" type=\\"checkbox\\">
+        <b-input-checkbox--icon>
+            <svg viewBox=\\"0 0 24 24\\">
+                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+            </svg>
+        </b-input-checkbox--icon>
+        <b-input-checkbox--text>checkbox</b-input-checkbox--text>
+    </label>
+</b-input-checkbox>"
+`;

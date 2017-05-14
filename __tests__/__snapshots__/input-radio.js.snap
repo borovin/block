@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checked radio input 1`] = `
+"<b-input-radio name=\\"e\\" checked=\\"\\" value=\\"radio 1\\" label=\\"radio button 1\\">
+    <label>
+        <input value=\\"radio 1\\" name=\\"e\\" type=\\"radio\\" checked=\\"\\">
+        <b-input-radio--icon></b-input-radio--icon>
+        <b-input-radio--text>radio button 1</b-input-radio--text>
+    </label>
+</b-input-radio>"
+`;
+
+exports[`Unchecked radio input 1`] = `
+"<b-input-radio name=\\"e\\" value=\\"radio 2\\" label=\\"radio button 2\\">
+    <label>
+        <input value=\\"radio 2\\" name=\\"e\\" type=\\"radio\\">
+        <b-input-radio--icon></b-input-radio--icon>
+        <b-input-radio--text>radio button 2</b-input-radio--text>
+    </label>
+</b-input-radio>"
+`;

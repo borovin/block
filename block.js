@@ -44,29 +44,37 @@ class Block extends window.HTMLElement {
   }
 
   connectedCallback () {
-    for (let attr in this.constructor.reflectedProperties) {
-      const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), attr) || {}
-      const defaultValue = this[attr] || this.constructor.reflectedProperties[attr]
+    for (let propName in this.constructor.reflectedProperties) {
+      const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), propName) || {}
+      const defaultValue = this[propName] || this.constructor.reflectedProperties[propName]
 
-      if (this.getAttribute(attr) === null && defaultValue) {
-        this.setAttribute(attr, defaultValue)
+      if (this.getAttribute(propName) === null && defaultValue !== null && defaultValue !== false) {
+        this.setAttribute(propName, defaultValue === true ? '' : defaultValue)
       }
 
-      Object.defineProperty(this, attr, {
+      Object.defineProperty(this, propName, {
         configurable: true,
         enumerable: false,
         set: descriptor.set || function (value) {
           if (value === false) {
-            this.removeAttribute(attr)
+            this.removeAttribute(propName)
           } else if (typeof value === 'string') {
-            this.setAttribute(attr, value)
+            this.setAttribute(propName, value)
           } else {
-            this.setAttribute(attr, JSON.stringify(value))
+            this.setAttribute(propName, JSON.stringify(value))
           }
         },
         get: descriptor.get || function () {
-          const attrValue = this.getAttribute(attr)
+          const attrValue = this.getAttribute(propName)
           let attrJson = null
+
+          if (attrValue === '') {
+            return true
+          }
+
+          if (attrValue === null) {
+            return defaultValue;
+          }
 
           try {
             attrJson = JSON.parse(attrValue)
