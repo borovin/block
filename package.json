@@ -9,16 +9,19 @@
   "main": "block.js",
   "homepage": "https://github.com/borovin/block",
   "scripts": {
+    "prepush": "if-env PREPUSH=no && echo 111 || npm run test:full",
     "build": "gulp",
     "build:production": "cross-env NODE_ENV=production gulp",
     "build:coverage": "cross-env NODE_ENV=coverage gulp",
     "start": "serve",
     "test": "ava",
+    "test:full": "npm run lint && npm run cleanup && npm install && npm run build:production && npm test",
     "test:update": "ava -u",
     "test:coverage": "npm run build:coverage && nyc ava",
-    "codestyle": "standard",
+    "lint": "standard",
     "fix": "standard --fix",
-    "dist": "npm run build:production && np"
+    "cleanup": "rm -rf node_modules dist",
+    "dist": "cross-env PREPUSH=no np"
   },
   "author": "a@borovin.com",
   "license": "MIT",
@@ -42,10 +45,11 @@
     "gulp-rename": "^1.2.2",
     "gulp-wrap": "^0.13.0",
     "html": "^1.0.0",
+    "husky": "^0.13.3",
+    "if-env": "^1.0.0",
     "lodash": "^4.17.2",
     "nightmare": "^2.10.0",
     "nyc": "^10.3.2",
-    "pre-commit": "^1.2.2",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
@@ -53,10 +57,11 @@
     "serve": "^5.0.3",
     "standard": "^10.0.2"
   },
-  "pre-commit": {
-    "run": [
-      "codestyle",
-      "test:coverage"
-    ]
-  }
+  "pre-commit": [
+    "lint",
+    "cleanup",
+    "install",
+    "build:production",
+    "test"
+  ]
 }
