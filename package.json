@@ -16,11 +16,11 @@
     "start": "serve",
     "test": "ava",
     "test:update": "ava -u",
-    "test:full": "npm run lint && npm install && npm run build:production && npm test",
+    "test:full": "npm run test:codestyle && rm -rf node_modules && npm install && npm run build:production && npm test",
     "test:coverage": "npm run build:coverage && nyc ava",
-    "lint": "standard",
+    "test:codestyle": "standard",
     "fix": "standard --fix",
-    "dist": "cross-env PREPUSH=no np"
+    "dist": "cross-env PREPUSH=no npm run build:production && np"
   },
   "author": "a@borovin.com",
   "license": "MIT",
