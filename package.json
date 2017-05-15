@@ -21,7 +21,7 @@
     "test:coverage": "npm run build:coverage && nyc ava",
     "test:codestyle": "standard",
     "fix": "standard --fix",
-    "dist": "cross-env PREPUSH=no && np"
+    "dist": "cross-env PREPUSH=no np"
   },
   "author": "a@borovin.com",
   "license": "MIT",
