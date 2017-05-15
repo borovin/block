@@ -9,6 +9,7 @@
   "main": "block.js",
   "homepage": "https://github.com/borovin/block",
   "scripts": {
+    "prepublishOnly": "npm run build:production",
     "prepush": "if-env PREPUSH=no || npm run test:full",
     "build": "gulp",
     "build:production": "cross-env NODE_ENV=production gulp",
@@ -20,7 +21,7 @@
     "test:coverage": "npm run build:coverage && nyc ava",
     "test:codestyle": "standard",
     "fix": "standard --fix",
-    "dist": "cross-env PREPUSH=no npm run build:production && np"
+    "dist": "cross-env PREPUSH=no && np"
   },
   "author": "a@borovin.com",
   "license": "MIT",
