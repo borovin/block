@@ -19,9 +19,9 @@ test('Form example', async t => {
 })
 
 test('Form action prop', async t => {
-  const browser = t.context.browser;
+  const browser = t.context.browser
 
-  await browser.type('input[name="A"]', 'test');
+  await browser.type('input[name="A"]', 'test')
   await browser.setProps('b-form', {
     action: '/test'
   })

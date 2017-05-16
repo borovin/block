@@ -41,7 +41,7 @@ class Block extends window.HTMLElement {
     } else {
       morphdom(this, `<div>${this.template}</div>`, morphOptions)
       const slot = this.querySelector('slot')
-      slot && (slot.innerHTML = this._slot);
+      slot && (slot.innerHTML = this._slot)
       this.renderedCallback()
     }
   }
@@ -113,8 +113,8 @@ class Block extends window.HTMLElement {
     this.__slot = newContent
 
     if (this._connected && (oldContent !== newContent)) {
-      const slot = this.querySelector('slot');
-      slot && (slot.innerHTML = this.__slot);
+      const slot = this.querySelector('slot')
+      slot && (slot.innerHTML = this.__slot)
     }
   }
 

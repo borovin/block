@@ -19,7 +19,7 @@ class Browser {
     return this.nightmare.check(...arguments)
   }
 
-  type() {
+  type () {
     return this.nightmare.type(...arguments)
   }
 
@@ -29,7 +29,7 @@ class Browser {
             .evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector)
   }
 
-  setProps(selector, props) {
+  setProps (selector, props) {
     return this.nightmare
       .wait(selector)
       .evaluate((opt) => Object.assign(document.querySelector(opt.selector), opt.props), {selector, props})
