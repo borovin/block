@@ -1,7 +1,7 @@
-export default block => {
+export default () => {
   return `
         <form>
-            ${block.content}
+            <slot></slot>
         </form>
     `
 }

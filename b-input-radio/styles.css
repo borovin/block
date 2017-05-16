@@ -2,6 +2,7 @@ b-input-radio {
     font-family: var(--b-font);
     display: inline-block;
     text-align: left;
+    vertical-align: middle;
 }
 
 b-input-radio label {
@@ -85,4 +86,10 @@ b-input-radio input:checked ~ b-input-radio--icon::before {
 
 b-input-radio input:checked ~ b-input-radio--icon::after {
     opacity: 1;
+}
+
+b-input-radio[disabled] {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
 }

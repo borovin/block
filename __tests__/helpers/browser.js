@@ -15,14 +15,24 @@ class Browser {
     return this.nightmare.goto(url.resolve(this.baseUrl, path))
   }
 
-  check (selector) {
-    return this.nightmare.check(selector)
+  check () {
+    return this.nightmare.check(...arguments)
+  }
+
+  type() {
+    return this.nightmare.type(...arguments)
   }
 
   snapshot (selector) {
     return this.nightmare
             .wait(selector)
-            .evaluate(querySelector => new Promise(resolve => resolve(document.querySelector(querySelector).outerHTML)), selector)
+            .evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector)
+  }
+
+  setProps(selector, props) {
+    return this.nightmare
+      .wait(selector)
+      .evaluate((opt) => Object.assign(document.querySelector(opt.selector), opt.props), {selector, props})
   }
 
   screenshot (selector) {

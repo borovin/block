@@ -25,7 +25,6 @@
   "author": "a@borovin.com",
   "license": "MIT",
   "dependencies": {
-    "@webcomponents/custom-elements": "^1.0.0",
     "keycode": "^2.1.9",
     "morphdom": "^2.2.1",
     "query-string": "^4.3.4"

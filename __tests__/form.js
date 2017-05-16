@@ -17,3 +17,16 @@ test('Form example', async t => {
 
   t.snapshot(prettyPrint(snapshot))
 })
+
+test('Form action prop', async t => {
+  const browser = t.context.browser;
+
+  await browser.type('input[name="A"]', 'test');
+  await browser.setProps('b-form', {
+    action: '/test'
+  })
+
+  const snapshot = await browser.snapshot('b-form')
+
+  t.snapshot(prettyPrint(snapshot))
+})

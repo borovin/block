@@ -3,8 +3,12 @@ import './styles'
 import './styles/initial'
 
 function onBeforeElChildrenUpdated (fromEl, toEl) {
-  if (fromEl.content) {
-    fromEl.content = toEl.innerHTML
+  if (fromEl instanceof Block && (fromEl.tagName === toEl.tagName)) {
+    fromEl._slot = toEl.innerHTML
+    return false
+  }
+
+  if (fromEl.tagName === 'SLOT' && (fromEl.tagName === toEl.tagName)) {
     return false
   }
 }
@@ -36,6 +40,8 @@ class Block extends window.HTMLElement {
       this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0)
     } else {
       morphdom(this, `<div>${this.template}</div>`, morphOptions)
+      const slot = this.querySelector('slot')
+      slot && (slot.innerHTML = this._slot);
       this.renderedCallback()
     }
   }
@@ -89,7 +95,7 @@ class Block extends window.HTMLElement {
     }
 
     setTimeout(() => {
-      this.content = this.innerHTML
+      this._slot = this.innerHTML
       this.innerHTML = ''
       this.render()
       this._connected = true
@@ -100,19 +106,20 @@ class Block extends window.HTMLElement {
 
   }
 
-  set content (value) {
+  set _slot (value) {
     const newContent = value
-    const oldContent = this._content
+    const oldContent = this._slot
 
-    this._content = newContent
+    this.__slot = newContent
 
     if (this._connected && (oldContent !== newContent)) {
-      this.render()
+      const slot = this.querySelector('slot');
+      slot && (slot.innerHTML = this.__slot);
     }
   }
 
-  get content () {
-    return this._content
+  get _slot () {
+    return this.__slot
   }
 
   attributeChangedCallback (attrName, oldVal, newVal) {

@@ -2,12 +2,16 @@
 
 exports[`Accent button example 1`] = `
 "<b-button color=\\"accent\\">
-    <button>Accent button</button>
+    <button>
+        <slot>Accent button</slot>
+    </button>
 </b-button>"
 `;
 
 exports[`Primary button example 1`] = `
 "<b-button color=\\"primary\\">
-    <button>Default button</button>
+    <button>
+        <slot>Default button</slot>
+    </button>
 </b-button>"
 `;

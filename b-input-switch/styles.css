@@ -2,6 +2,7 @@ b-input-switch {
     font-family: var(--b-font);
     text-align: left;
     display: inline-block;
+    vertical-align: middle;
 }
 
 b-input-switch label {
