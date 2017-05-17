@@ -4,13 +4,18 @@ import './styles/initial'
 
 function onBeforeElChildrenUpdated (fromEl, toEl) {
   if (fromEl instanceof Block && (fromEl.tagName === toEl.tagName)) {
-    fromEl._slot = toEl.innerHTML
+    fromEl.content = toEl.innerHTML
     return false
   }
 
   if (fromEl.tagName === 'SLOT' && (fromEl.tagName === toEl.tagName)) {
     return false
   }
+}
+
+const morphOptions = {
+  childrenOnly: true,
+  onBeforeElChildrenUpdated
 }
 
 class Block extends window.HTMLElement {
@@ -31,17 +36,12 @@ class Block extends window.HTMLElement {
   render () {
     this._renderTimeout && clearTimeout(this._renderTimeout)
 
-    const morphOptions = {
-      childrenOnly: true,
-      onBeforeElChildrenUpdated
-    }
-
     if (this._connected) {
       this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0)
     } else {
       morphdom(this, `<div>${this.template}</div>`, morphOptions)
       const slot = this.querySelector('slot')
-      slot && (slot.innerHTML = this._slot)
+      slot && (slot.innerHTML = this.content)
       this.renderedCallback()
     }
   }
@@ -95,7 +95,7 @@ class Block extends window.HTMLElement {
     }
 
     setTimeout(() => {
-      this._slot = this.innerHTML
+      this._content = this.innerHTML
       this.innerHTML = ''
       this.render()
       this._connected = true
@@ -106,20 +106,22 @@ class Block extends window.HTMLElement {
 
   }
 
-  set _slot (value) {
-    const newContent = value
+  set content (newContent) {
     const oldContent = this._slot
 
-    this.__slot = newContent
+    this._content = newContent
 
     if (this._connected && (oldContent !== newContent)) {
       const slot = this.querySelector('slot')
-      slot && (slot.innerHTML = this.__slot)
+
+      if (slot){
+        morphdom(slot, `<div>${newContent}</div>`, morphOptions)
+      }
     }
   }
 
-  get _slot () {
-    return this.__slot
+  get content () {
+    return this._content
   }
 
   attributeChangedCallback (attrName, oldVal, newVal) {

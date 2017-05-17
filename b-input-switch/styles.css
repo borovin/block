@@ -1,40 +1,32 @@
 b-input-switch {
     font-family: var(--b-font);
-    text-align: left;
     display: inline-block;
+    text-align: left;
     vertical-align: middle;
+    position: relative;
 }
 
 b-input-switch label {
     cursor: pointer;
-}
-
-b-input-switch--text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     display: inline-block;
     height: 100%;
+    vertical-align: top;
+}
+
+b-input-switch label > slot {
+    display: block;
     font-size: 16px;
-    vertical-align: middle;
-    user-select: none;
+    padding-top: 14px;
+    margin-left: 56px;
+    line-height: 1.6em;
 }
 
 b-input-switch--icon {
-    display: inline-block;
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     color: #fff;
-    vertical-align: middle;
-}
-
-b-input-switch--icon ~ b-input-switch--text {
-    margin: 0 16px;
-}
-
-b-input-switch--text ~ b-input-switch--icon {
-    margin: 0 16px;
+    float: left;
 }
 
 b-input-switch--icon::before {
@@ -66,7 +58,7 @@ b-input-switch--icon::after {
     height: 20px;
     border-radius: 100%;
     background-color: #FAFAFA;
-    box-shadow: 0 0 4px #333;
+    box-shadow: var(--b-shadow-1);
     transition: background-color 0.2s, margin 0.2s;
 }
 

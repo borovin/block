@@ -18,10 +18,10 @@ test('Form example', async t => {
   t.snapshot(prettyPrint(snapshot))
 })
 
-test('Form action prop', async t => {
+test('Form action prop change', async t => {
   const browser = t.context.browser
 
-  await browser.type('input[name="A"]', 'test')
+  await browser.type('input[name="a"]', 'test')
   await browser.setProps('b-form', {
     action: '/test'
   })

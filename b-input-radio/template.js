@@ -11,13 +11,11 @@ export default block => {
 
   return `
         <label>
-
             <input ${inputAttributes}/>
     
             <b-input-radio--icon></b-input-radio--icon>
     
-            ${block.label ? `<b-input-radio--text>${block.label}</b-input-radio--text>` : ''}
-        
+            <slot></slot>
         </label>
     `
 }

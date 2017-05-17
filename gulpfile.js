@@ -42,7 +42,7 @@ gulp.task('resetStyles', () => {
   const blocks = getBlocks()
 
   fs.outputFileSync('styles/initial.css', `/*this file was generated automatically. Do not edit it manually.*/
-${blocks.join(', ')} {all: initial}
+${blocks.join(', ')} {all: initial; display: block}
   `)
 })
 

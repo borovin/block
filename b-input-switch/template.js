@@ -15,7 +15,7 @@ export default block => {
     
             <b-input-switch--icon></b-input-switch--icon>
     
-            ${block.label ? `<b-input-switch--text>${block.label}</b-input-switch--text>` : ''}
+            <slot></slot>
     
         </label>
     `

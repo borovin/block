@@ -27,16 +27,6 @@ class Input extends Block {
   get template () {
     return template(this)
   }
-
-  connectedCallback () {
-    super.connectedCallback()
-
-    this.addEventListener('change', e => {
-      const input = e.target
-
-      this.checked = input.checked
-    })
-  }
 }
 
 window && window.customElements.define(Input.tagName, Input)

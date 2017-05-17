@@ -3,40 +3,30 @@ b-input-radio {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
+    position: relative;
 }
 
 b-input-radio label {
     cursor: pointer;
-    position: relative;
-    height: 48px;
-    line-height: 48px;
-}
-
-b-input-radio--text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     display: inline-block;
     height: 100%;
+    vertical-align: top;
+}
+
+b-input-radio label > slot {
+    display: block;
     font-size: 16px;
-    vertical-align: middle;
+    padding-top: 14px;
+    margin-left: 56px;
+    line-height: 1.6em;
 }
 
 b-input-radio--icon {
-    display: inline-block;
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     color: #fff;
-    vertical-align: middle;
-}
-
-b-input-radio--icon ~ b-input-radio--text {
-    margin: 0 16px;
-}
-
-b-input-radio--text ~ b-input-radio--icon {
-    margin: 0 16px;
+    float: left;
 }
 
 b-input-radio--icon::before {

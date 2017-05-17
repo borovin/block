@@ -15,6 +15,8 @@ b-action-button {
     line-height: 55px;
     width: 56px;
     height: 56px;
+    color: #fff;
+    font-size: 20px;
 }
 
 b-action-button[small] {
@@ -41,10 +43,10 @@ b-action-button:hover::before {
 }
 
 b-action-button a, b-action-button button {
-    color: #fff;
+    color: inherit;
+    display: block;
     text-transform: uppercase;
     background: transparent;
-    display: inline-block;
     text-align: center;
     padding: 0;
     height: 100%;
@@ -52,31 +54,32 @@ b-action-button a, b-action-button button {
     position: relative;
     cursor: pointer;
     vertical-align: middle;
-    font-size: 14px;
+    font-size: inherit;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
     border: none;
     outline: none;
     font-family: var(--b-font);
     box-sizing: content-box;
 }
 
-b-action-button[disabled] {
-    background-color: rgba(0, 0, 0, 0.12);
-    color: rgba(0, 0, 0, 0.26);
-    box-shadow: none !important;
-    cursor: default;
-}
-
-b-action-button[loading] {
-    animation: progress-bar-stripes 2s linear infinite;
-    background-size: 40px 40px !important;
-    background-image: linear-gradient(45deg, rgba(255, 255, 255, .25) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .25) 50%, rgba(255, 255, 255, .25) 75%, transparent 75%, transparent) !important;
-}
-
 b-action-button input {
     display: none;
+}
+
+b-action-button[flat] {
+    color: var(--b-primary-color);
+}
+
+b-action-button[flat][color="accent"] {
+    color: var(--b-accent-color);
+}
+
+b-action-button[flat][color="warning"] {
+    color: var(--b-focus-color);
+}
+
+b-action-button[flat][color="danger"] {
+    color: var(--b-danger-color);
 }
 
 b-action-button[color="accent"]::before {
@@ -84,41 +87,26 @@ b-action-button[color="accent"]::before {
 }
 
 b-action-button[color="warning"]::before {
-    background-color: #F9A825;
+    background-color: var(--b-focus-color);
 }
 
 b-action-button[color="danger"]::before {
-    background-color: #E53935;
+    background-color: var(--b-danger-color);
 }
 
 b-action-button[color="white"]::before {
     background-color: #fff;
 }
 
-b-action-button[flat][color="danger"]::before {
-    opacity: 0.5;
-}
-
-b-action-button[flat] {
-    box-shadow: none !important;
-}
-
-b-action-button[flat] a, b-action-button[flat] button {
-    color: var(--b-primary-color);
-}
-
-b-action-button[color="white"] a, b-action-button[color="white"] button {
+b-action-button[color="white"] {
     color: var(--b-primary-color);
 }
 
 b-action-button[flat]::before {
     opacity: 0;
+    box-shadow: none;
 }
 
 b-action-button[flat]:hover::before {
     opacity: 0.12;
-}
-
-b-action-button[flat][disabled] {
-    background-color: transparent;
 }

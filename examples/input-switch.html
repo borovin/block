@@ -9,9 +9,20 @@
     <script src="/dist/kit.js"></script>
 </head>
 <body>
-<div id="example">
-    <b-input-switch name="f" checked label="switch 1"></b-input-switch>
-    <b-input-switch name="g" label="switch 2"></b-input-switch>
+<div id="example" style="text-align: left">
+    <div>
+        <b-input-switch name="switch_1" checked></b-input-switch>
+    </div>
+    <div>
+        <b-input-switch name="switch_2">switch button</b-input-switch>
+    </div>
+    <div>
+        <b-input-switch name="switch_3">
+            On/off <strong>switches</strong> toggle the state of a single settings option.
+            The option that the switch controls, as well as the state it’s in, should be made clear from the corresponding inline label.
+            Switches take on the same visual properties of the radio button.
+        </b-input-switch>
+    </div>
 </div>
 </body>
 </html>

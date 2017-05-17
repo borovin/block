@@ -3,38 +3,30 @@ b-input-checkbox {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
+    position: relative;
 }
 
 b-input-checkbox label {
     cursor: pointer;
     display: inline-block;
     height: 100%;
+    vertical-align: top;
 }
 
-b-input-checkbox--text {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: inline-block;
-    height: 100%;
+b-input-checkbox label > slot {
+    display: block;
     font-size: 16px;
-    vertical-align: middle;
+    padding-top: 14px;
+    margin-left: 56px;
+    line-height: 1.6em;
 }
 
 b-input-checkbox--icon {
-    display: inline-block;
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     color: #fff;
-    vertical-align: middle;
-}
-
-b-input-checkbox--icon ~ b-input-checkbox--text {
-    margin: 0 16px;
-}
-
-b-input-checkbox--text ~ b-input-checkbox--icon {
-    margin: 0 16px;
+    float: left;
 }
 
 b-input-checkbox--icon::before {

@@ -12,13 +12,13 @@ test.afterEach(t => {
   return t.context.browser.close()
 })
 
-test('Checked radio input', async t => {
+test('Unchecked radio input', async t => {
   const snapshot = await t.context.browser.snapshot('b-input-radio:nth-child(1)')
 
   t.snapshot(prettyPrint(snapshot))
 })
 
-test('Unchecked radio input', async t => {
+test('Checked radio input', async t => {
   const snapshot = await t.context.browser.snapshot('b-input-radio:nth-child(2)')
 
   t.snapshot(prettyPrint(snapshot))

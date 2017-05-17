@@ -10,7 +10,6 @@ export default block => {
 
   return `
         <label>
-
             <input ${inputAttributes} />
     
             <b-input-checkbox--icon>
@@ -19,8 +18,7 @@ export default block => {
                 </svg>
             </b-input-checkbox--icon>
     
-            ${block.label ? `<b-input-checkbox--text>${block.label}</b-input-checkbox--text>` : ''}
-    
+            <slot></slot>
         </label>
     `
 }

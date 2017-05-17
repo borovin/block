@@ -1,6 +1,6 @@
 b-input-text {
     position: relative;
-    display: block;
+    display: inline-block;
     box-sizing: border-box;
     min-height: 72px;
     padding-top: 20px;

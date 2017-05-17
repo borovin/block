@@ -13,13 +13,13 @@ test.afterEach(t => {
 })
 
 test('Primary button example', async t => {
-  const snapshot = await t.context.browser.snapshot('b-button:nth-child(1)')
+  const snapshot = await t.context.browser.snapshot('b-button[color="primary"]')
 
   t.snapshot(prettyPrint(snapshot))
 })
 
-test('Accent button example', async t => {
-  const snapshot = await t.context.browser.snapshot('b-button:nth-child(2)')
+test('Primary flat button example', async t => {
+  const snapshot = await t.context.browser.snapshot('b-button[color="primary"][flat]')
 
   t.snapshot(prettyPrint(snapshot))
 })
