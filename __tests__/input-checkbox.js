@@ -13,13 +13,13 @@ test.afterEach(t => {
 })
 
 test('Checked checkbox', async t => {
-  const snapshot = await t.context.browser.snapshot('b-input-checkbox:nth-child(1)')
+  const snapshot = await t.context.browser.snapshot('b-input-checkbox[name="checkbox_1"]')
 
   t.snapshot(prettyPrint(snapshot))
 })
 
 test('Unchecked checkbox', async t => {
-  const snapshot = await t.context.browser.snapshot('b-input-checkbox:nth-child(2)')
+  const snapshot = await t.context.browser.snapshot('b-input-checkbox[name="checkbox_1"]')
 
   t.snapshot(prettyPrint(snapshot))
 })

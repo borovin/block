@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checked switch 1`] = `
-"<b-input-switch name=\\"f\\" checked=\\"\\" label=\\"switch 1\\">
+"<b-input-switch name=\\"switch_1\\" checked=\\"\\">
     <label>
-        <input name=\\"f\\" type=\\"checkbox\\" checked=\\"\\">
+        <input name=\\"switch_1\\" type=\\"checkbox\\" checked=\\"\\">
         <b-input-switch--icon></b-input-switch--icon>
-        <b-input-switch--text>switch 1</b-input-switch--text>
+        <slot></slot>
     </label>
 </b-input-switch>"
 `;
 
 exports[`Unchecked switch 1`] = `
-"<b-input-switch name=\\"g\\" label=\\"switch 2\\">
+"<b-input-switch name=\\"switch_2\\">
     <label>
-        <input name=\\"g\\" type=\\"checkbox\\">
+        <input name=\\"switch_2\\" type=\\"checkbox\\">
         <b-input-switch--icon></b-input-switch--icon>
-        <b-input-switch--text>switch 2</b-input-switch--text>
+        <slot>switch button</slot>
     </label>
 </b-input-switch>"
 `;

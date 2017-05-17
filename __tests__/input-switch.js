@@ -13,13 +13,13 @@ test.afterEach(t => {
 })
 
 test('Checked switch', async t => {
-  const snapshot = await t.context.browser.snapshot('b-input-switch:nth-child(1)')
+  const snapshot = await t.context.browser.snapshot('b-input-switch[name="switch_1"]')
 
   t.snapshot(prettyPrint(snapshot))
 })
 
 test('Unchecked switch', async t => {
-  const snapshot = await t.context.browser.snapshot('b-input-switch:nth-child(2)')
+  const snapshot = await t.context.browser.snapshot('b-input-switch[name="switch_2"]')
 
   t.snapshot(prettyPrint(snapshot))
 })

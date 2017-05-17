@@ -24,25 +24,260 @@ exports[`Form action prop 1`] = `
 </b-form>"
 `;
 
+exports[`Form action prop change 1`] = `
+"<b-form action=\\"/test\\">
+    <form>
+        <slot>
+            <div>
+                <b-input-text style=\\"width: 100%\\" name=\\"a\\" label=\\"A field\\" type=\\"text\\"
+                value=\\"test\\">
+                    <input type=\\"text\\" name=\\"a\\" value=\\"test\\">
+                    <b-input-text--border></b-input-text--border>
+                    <b-input-text--label>A field</b-input-text--label>
+                </b-input-text>
+                <b-input-text style=\\"width: 100%\\" name=\\"b\\" label=\\"B field\\" value=\\"default B value\\"
+                type=\\"text\\">
+                    <input value=\\"default B value\\" type=\\"text\\" name=\\"b\\">
+                    <b-input-text--border></b-input-text--border>
+                    <b-input-text--label>B field</b-input-text--label>
+                </b-input-text>
+            </div>
+            <div>
+                <b-input-checkbox name=\\"checkbox_1\\" checked=\\"\\">
+                    <label>
+                        <input name=\\"checkbox_1\\" type=\\"checkbox\\" checked=\\"\\">
+                        <b-input-checkbox--icon>
+                            <svg viewBox=\\"0 0 24 24\\">
+                                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+                            </svg>
+                        </b-input-checkbox--icon>
+                        <slot></slot>
+                    </label>
+                </b-input-checkbox>
+            </div>
+            <div>
+                <b-input-checkbox name=\\"checkbox_2\\">
+                    <label>
+                        <input name=\\"checkbox_2\\" type=\\"checkbox\\">
+                        <b-input-checkbox--icon>
+                            <svg viewBox=\\"0 0 24 24\\">
+                                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+                            </svg>
+                        </b-input-checkbox--icon>
+                        <slot>checkbox</slot>
+                    </label>
+                </b-input-checkbox>
+            </div>
+            <div>
+                <b-input-checkbox name=\\"checkbox_3\\">
+                    <label>
+                        <input name=\\"checkbox_3\\" type=\\"checkbox\\">
+                        <b-input-checkbox--icon>
+                            <svg viewBox=\\"0 0 24 24\\">
+                                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+                            </svg>
+                        </b-input-checkbox--icon>
+                        <slot> <strong>Checkboxes</strong> allow the user to select multiple options from
+                            a set. If you have a single option, avoid using a checkbox and use an on/off
+                            switch instead.</slot>
+                    </label>
+                </b-input-checkbox>
+            </div>
+            <div>
+                <b-input-radio name=\\"radio\\" value=\\"radio 1\\">
+                    <label>
+                        <input value=\\"radio 1\\" name=\\"radio\\" type=\\"radio\\">
+                        <b-input-radio--icon></b-input-radio--icon>
+                        <slot></slot>
+                    </label>
+                </b-input-radio>
+            </div>
+            <div>
+                <b-input-radio name=\\"radio\\" value=\\"radio 2\\" checked=\\"\\">
+                    <label>
+                        <input value=\\"radio 2\\" name=\\"radio\\" type=\\"radio\\" checked=\\"\\">
+                        <b-input-radio--icon></b-input-radio--icon>
+                        <slot>radio button</slot>
+                    </label>
+                </b-input-radio>
+            </div>
+            <div>
+                <b-input-radio name=\\"radio\\" value=\\"radio 3\\">
+                    <label>
+                        <input value=\\"radio 3\\" name=\\"radio\\" type=\\"radio\\">
+                        <b-input-radio--icon></b-input-radio--icon>
+                        <slot> <strong>Radio buttons</strong> allow the user to select one option from
+                            a set. Use radio buttons for exclusive selection if you think that the
+                            user needs to see all available options side-by-side.</slot>
+                    </label>
+                </b-input-radio>
+            </div>
+            <div>
+                <b-input-switch name=\\"switch_1\\" checked=\\"\\">
+                    <label>
+                        <input name=\\"switch_1\\" type=\\"checkbox\\" checked=\\"\\">
+                        <b-input-switch--icon></b-input-switch--icon>
+                        <slot></slot>
+                    </label>
+                </b-input-switch>
+            </div>
+            <div>
+                <b-input-switch name=\\"switch_2\\">
+                    <label>
+                        <input name=\\"switch_2\\" type=\\"checkbox\\">
+                        <b-input-switch--icon></b-input-switch--icon>
+                        <slot>switch button</slot>
+                    </label>
+                </b-input-switch>
+            </div>
+            <div>
+                <b-input-switch name=\\"switch_3\\">
+                    <label>
+                        <input name=\\"switch_3\\" type=\\"checkbox\\">
+                        <b-input-switch--icon></b-input-switch--icon>
+                        <slot>On/off <strong>switches</strong> toggle the state of a single settings option.
+                            The option that the switch controls, as well as the state it’s in, should
+                            be made clear from the corresponding inline label. Switches take on the
+                            same visual properties of the radio button.</slot>
+                    </label>
+                </b-input-switch>
+            </div>
+            <div style=\\"padding-top: 40px;\\">
+                <b-button color=\\"primary\\">
+                    <button>
+                        <slot>Save</slot>
+                    </button>
+                </b-button>
+            </div>
+        </slot>
+    </form>
+</b-form>"
+`;
+
 exports[`Form example 1`] = `
 "<b-form action=\\"/examples/form.html\\">
     <form>
         <slot>
-            <b-input-text name=\\"A\\" label=\\"A field\\" type=\\"text\\">
-                <input type=\\"text\\" name=\\"A\\">
-                <b-input-text--border></b-input-text--border>
-                <b-input-text--label>A field</b-input-text--label>
-            </b-input-text>
-            <b-input-text name=\\"B\\" label=\\"B field\\" value=\\"default B value\\" type=\\"text\\">
-                <input value=\\"default B value\\" type=\\"text\\" name=\\"B\\">
-                <b-input-text--border></b-input-text--border>
-                <b-input-text--label>B field</b-input-text--label>
-            </b-input-text>
-            <b-button color=\\"primary\\">
-                <button>
-                    <slot>Save</slot>
-                </button>
-            </b-button>
+            <div>
+                <b-input-text style=\\"width: 100%\\" name=\\"a\\" label=\\"A field\\" type=\\"text\\">
+                    <input type=\\"text\\" name=\\"a\\">
+                    <b-input-text--border></b-input-text--border>
+                    <b-input-text--label>A field</b-input-text--label>
+                </b-input-text>
+                <b-input-text style=\\"width: 100%\\" name=\\"b\\" label=\\"B field\\" value=\\"default B value\\"
+                type=\\"text\\">
+                    <input value=\\"default B value\\" type=\\"text\\" name=\\"b\\">
+                    <b-input-text--border></b-input-text--border>
+                    <b-input-text--label>B field</b-input-text--label>
+                </b-input-text>
+            </div>
+            <div>
+                <b-input-checkbox name=\\"checkbox_1\\" checked=\\"\\">
+                    <label>
+                        <input name=\\"checkbox_1\\" type=\\"checkbox\\" checked=\\"\\">
+                        <b-input-checkbox--icon>
+                            <svg viewBox=\\"0 0 24 24\\">
+                                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+                            </svg>
+                        </b-input-checkbox--icon>
+                        <slot></slot>
+                    </label>
+                </b-input-checkbox>
+            </div>
+            <div>
+                <b-input-checkbox name=\\"checkbox_2\\">
+                    <label>
+                        <input name=\\"checkbox_2\\" type=\\"checkbox\\">
+                        <b-input-checkbox--icon>
+                            <svg viewBox=\\"0 0 24 24\\">
+                                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+                            </svg>
+                        </b-input-checkbox--icon>
+                        <slot>checkbox</slot>
+                    </label>
+                </b-input-checkbox>
+            </div>
+            <div>
+                <b-input-checkbox name=\\"checkbox_3\\">
+                    <label>
+                        <input name=\\"checkbox_3\\" type=\\"checkbox\\">
+                        <b-input-checkbox--icon>
+                            <svg viewBox=\\"0 0 24 24\\">
+                                <path d=\\"M9 16.17l-4.17-4.17-1.415 1.415 5.585 5.585 12-12-1.415-1.415z\\"></path>
+                            </svg>
+                        </b-input-checkbox--icon>
+                        <slot> <strong>Checkboxes</strong> allow the user to select multiple options from
+                            a set. If you have a single option, avoid using a checkbox and use an on/off
+                            switch instead.</slot>
+                    </label>
+                </b-input-checkbox>
+            </div>
+            <div>
+                <b-input-radio name=\\"radio\\" value=\\"radio 1\\">
+                    <label>
+                        <input value=\\"radio 1\\" name=\\"radio\\" type=\\"radio\\">
+                        <b-input-radio--icon></b-input-radio--icon>
+                        <slot></slot>
+                    </label>
+                </b-input-radio>
+            </div>
+            <div>
+                <b-input-radio name=\\"radio\\" value=\\"radio 2\\" checked=\\"\\">
+                    <label>
+                        <input value=\\"radio 2\\" name=\\"radio\\" type=\\"radio\\" checked=\\"\\">
+                        <b-input-radio--icon></b-input-radio--icon>
+                        <slot>radio button</slot>
+                    </label>
+                </b-input-radio>
+            </div>
+            <div>
+                <b-input-radio name=\\"radio\\" value=\\"radio 3\\">
+                    <label>
+                        <input value=\\"radio 3\\" name=\\"radio\\" type=\\"radio\\">
+                        <b-input-radio--icon></b-input-radio--icon>
+                        <slot> <strong>Radio buttons</strong> allow the user to select one option from
+                            a set. Use radio buttons for exclusive selection if you think that the
+                            user needs to see all available options side-by-side.</slot>
+                    </label>
+                </b-input-radio>
+            </div>
+            <div>
+                <b-input-switch name=\\"switch_1\\" checked=\\"\\">
+                    <label>
+                        <input name=\\"switch_1\\" type=\\"checkbox\\" checked=\\"\\">
+                        <b-input-switch--icon></b-input-switch--icon>
+                        <slot></slot>
+                    </label>
+                </b-input-switch>
+            </div>
+            <div>
+                <b-input-switch name=\\"switch_2\\">
+                    <label>
+                        <input name=\\"switch_2\\" type=\\"checkbox\\">
+                        <b-input-switch--icon></b-input-switch--icon>
+                        <slot>switch button</slot>
+                    </label>
+                </b-input-switch>
+            </div>
+            <div>
+                <b-input-switch name=\\"switch_3\\">
+                    <label>
+                        <input name=\\"switch_3\\" type=\\"checkbox\\">
+                        <b-input-switch--icon></b-input-switch--icon>
+                        <slot>On/off <strong>switches</strong> toggle the state of a single settings option.
+                            The option that the switch controls, as well as the state it’s in, should
+                            be made clear from the corresponding inline label. Switches take on the
+                            same visual properties of the radio button.</slot>
+                    </label>
+                </b-input-switch>
+            </div>
+            <div style=\\"padding-top: 40px;\\">
+                <b-button color=\\"primary\\">
+                    <button>
+                        <slot>Save</slot>
+                    </button>
+                </b-button>
+            </div>
         </slot>
     </form>
 </b-form>"
