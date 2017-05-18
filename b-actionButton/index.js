@@ -1,6 +1,7 @@
 import Block from '../block'
 import template from './template'
 import './styles'
+import '../b-icon'
 
 class Button extends Block {
   static get tagName () {
@@ -10,7 +11,8 @@ class Button extends Block {
   static get reflectedProperties () {
     return {
       color: 'primary',
-      small: false
+      small: false,
+      icon: false
     }
   }
 

@@ -19,6 +19,10 @@ b-action-button {
     font-size: 20px;
 }
 
+b-action-button b-icon {
+    margin-top: -5px;
+}
+
 b-action-button[small] {
     width: 40px;
     height: 40px;
@@ -53,13 +57,18 @@ b-action-button a, b-action-button button {
     width: 100%;
     position: relative;
     cursor: pointer;
-    vertical-align: middle;
     font-size: inherit;
     user-select: none;
     border: none;
     outline: none;
     font-family: var(--b-font);
     box-sizing: content-box;
+}
+
+b-action-button a > slot, b-action-button button > slot {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
 }
 
 b-action-button input {

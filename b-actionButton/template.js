@@ -9,7 +9,7 @@ export default block => {
 
   return `
         <${tagName} ${buttonAttributes}>
-            ${block.content}
+            ${block.icon ? `<b-icon size="24" src="${block.icon}"></b-icon>` : '<slot></slot>'}
         </${tagName}>
     `
 }
