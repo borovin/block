@@ -4,3 +4,5 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 UI blocks based on Custom Elements v1 spec.
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/borovin/block.svg)](https://greenkeeper.io/)
