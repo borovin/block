@@ -10,6 +10,7 @@
   "homepage": "https://github.com/borovin/block",
   "scripts": {
     "prepush": "if-env PREPUSH=no || npm run test:full",
+    "commitmsg": "validate-commit-msg",
     "build": "gulp",
     "build:production": "cross-env NODE_ENV=production gulp",
     "build:coverage": "cross-env NODE_ENV=coverage gulp",
@@ -53,7 +54,8 @@
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "serve": "^5.0.3",
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "validate-commit-msg": "^2.12.1"
   },
   "pre-commit": [
     "lint",
