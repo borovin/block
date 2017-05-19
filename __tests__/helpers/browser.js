@@ -26,13 +26,13 @@ class Browser {
   snapshot (selector) {
     return this.nightmare
             .wait(selector)
-            .evaluate(querySelector => document.querySelector(querySelector).outerHTML, selector)
+            .evaluate(querySelector => new Promise(resolve => resolve(document.querySelector(querySelector).outerHTML)), selector)
   }
 
   setProps (selector, props) {
     return this.nightmare
       .wait(selector)
-      .evaluate((opt) => Object.assign(document.querySelector(opt.selector), opt.props), {selector, props})
+      .evaluate(opt => Object.assign(document.querySelector(opt.selector), opt.props), {selector, props})
   }
 
   screenshot (selector) {
