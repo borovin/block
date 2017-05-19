@@ -3,6 +3,10 @@ import './styles'
 
 const iconsCache = {}
 
+function isExternal (src) {
+  return (src.indexOf('/') === 0) || (src.indexOf('http') === 0) || (src.indexOf('.') === 0)
+}
+
 function loadIcon (src) {
   if (iconsCache[src]) {
     return iconsCache[src]
@@ -34,12 +38,12 @@ class Icon extends Block {
   get src () {
     const src = this.getAttribute('src')
 
-    if (src && (src.indexOf('/') !== 0)) {
+    if (src && !isExternal(src)) {
       const nameParts = src.split('/')
       const iconGroup = nameParts[0].toLowerCase()
       const iconName = nameParts[1].split(' ').join('_')
 
-      return `//unpkg.com/material-design-icons/${iconGroup}/svg/production/ic_${iconName}_24px.svg`
+      return `https://unpkg.com/material-design-icons/${iconGroup}/svg/production/ic_${iconName}_24px.svg`
     }
 
     return src

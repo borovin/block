@@ -1,5 +1,4 @@
 import Block from '../block'
-import template from './template'
 import './styles'
 import '../b-icon'
 
@@ -16,8 +15,14 @@ class Button extends Block {
     }
   }
 
-  get template () {
-    return template(this)
+  render () {
+    const icon = `${this.icon ? `<b-icon size="24" src="${this.icon}"></b-icon>` : `<slot>${this.content}</slot>`}`
+
+    if (this.href) {
+      this.innerHTML = `<a href="${this.href}">${icon}</a>`
+    } else {
+      this.innerHTML = `<button>${icon}</button>`
+    }
   }
 }
 
