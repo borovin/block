@@ -1,0 +1,35 @@
+b-tabs {
+    font-family: var(--b-font);
+    white-space: nowrap;
+    overflow: auto;
+}
+
+b-tabs--item {
+    text-transform: uppercase;
+    color: var(--b-primary-color);
+    border-bottom: 3px solid transparent;
+    height: 48px;
+    padding: 0 12px;
+    line-height: 48px;
+    opacity: 0.7;
+    display: inline-block;
+    font-size: 14px;
+    max-width: 264px;
+    min-width: 72px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+b-tabs--item[active] {
+    border-bottom-color: var(--b-primary-color);
+    opacity: 1;
+}
+
+b-tabs--content {
+    display: none;
+}
+
+b-tabs--content[active] {
+    display: block;
+}

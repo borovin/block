@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Block Docs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/examples/examples.css"/>
+    <script src="//unpkg.com/@webcomponents/custom-elements/custom-elements.min.js"></script>
+    <script src="/dist/kit.js"></script>
+</head>
+<body>
+<div id="example" style="text-align: left">
+    <b-tabs>
+        <b-tabs--item href="#item1">Item One</b-tabs--item>
+        <b-tabs--item href="#item2" active>Item Two</b-tabs--item>
+        <b-tabs--item href="#item3">Item Three</b-tabs--item>
+    </b-tabs>
+    <div style="padding-bottom: 20px;"></div>
+    <b-tabs--content id="item1">
+        Tabs enable content organization at a high level, such as switching between views, data sets, or functional aspects of an app.
+    </b-tabs--content>
+    <b-tabs--content id="item2" active>
+        Tabs enable content organization at a high level, such as switching between views, data sets, or functional aspects of an app.
+
+        Present tabs as a single row above their associated content. Tab labels should succinctly describe the content within.
+    </b-tabs--content>
+    <b-tabs--content id="item3">
+        Because swipe gestures are used for navigating between tabs, don't pair tabs with content that also supports swiping.
+    </b-tabs--content>
+</div>
+</body>
+</html>
