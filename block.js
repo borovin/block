@@ -114,7 +114,7 @@ class Block extends window.HTMLElement {
     if (this._connected && (oldContent !== newContent)) {
       const slot = this.querySelector('slot')
 
-      if (slot){
+      if (slot) {
         morphdom(slot, `<div>${newContent}</div>`, morphOptions)
       }
     }

@@ -10,13 +10,17 @@
 b-action-button {
     display: inline-block;
     vertical-align: middle;
-    font-weight: 500;
     position: relative;
-    line-height: 55px;
     width: 56px;
     height: 56px;
     color: #fff;
-    font-size: 20px;
+}
+
+b-action-button b-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 b-action-button[small] {
@@ -53,13 +57,21 @@ b-action-button a, b-action-button button {
     width: 100%;
     position: relative;
     cursor: pointer;
-    vertical-align: middle;
     font-size: inherit;
     user-select: none;
     border: none;
     outline: none;
-    font-family: var(--b-font);
     box-sizing: content-box;
+}
+
+b-action-button a > slot, b-action-button button > slot {
+    display: inline-block;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 b-action-button input {

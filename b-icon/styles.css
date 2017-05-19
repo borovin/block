@@ -1,0 +1,104 @@
+b-icon {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    color: inherit;
+    cursor: inherit;
+    user-select: none;
+    font-size: 44px;
+}
+
+b-icon[size="18"] {
+    width: 18px;
+    height: 18px;
+}
+
+b-icon[size="24"] {
+    width: 24px;
+    height: 24px;
+}
+
+b-icon[size="36"] {
+    width: 36px;
+    height: 36px;
+}
+
+b-icon-src {
+    display: block;
+    width: 44px;
+    height: 44px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    border-radius: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+
+b-icon[size="18"] b-icon-src {
+    width: 18px;
+    height: 18px;
+}
+
+b-icon[size="24"] b-icon-src {
+    width: 24px;
+    height: 24px;
+}
+
+b-icon[size="36"] b-icon-src {
+    width: 36px;
+    height: 36px;
+}
+
+b-icon > svg {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    display: block;
+    fill: currentColor;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+b-icon[size="18"] > svg {
+    width: 18px;
+    height: 18px;
+}
+
+b-icon[size="24"] > svg {
+    width: 24px;
+    height: 24px;
+}
+
+b-icon[size="36"] > svg {
+    width: 36px;
+    height: 36px;
+}
+
+b-icon slot {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 44px;
+}
+
+b-icon[size="18"] slot {
+    font-size: 18px;
+}
+
+b-icon[size="24"] slot {
+    font-size: 24px;
+}
+
+b-icon[size="36"] slot {
+    font-size: 36px;
+}
