@@ -6,7 +6,8 @@ function navigate (targetTab) {
   const parentNode = targetTab.parentNode
 
   if (targetHref && targetHref.indexOf('#') === 0) {
-    document.getElementById(targetHref.substr(1)).setAttribute('active', '')
+    const targetElement = document.getElementById(targetHref.substr(1))
+    targetElement && targetElement.setAttribute('active', '')
   }
 
   for (let i = 0; i < parentNode.children.length; ++i) {
@@ -18,7 +19,8 @@ function navigate (targetTab) {
     }
 
     if (siblingTab !== targetTab && siblingHref && siblingHref.indexOf('#') === 0) {
-      document.getElementById(siblingHref.substr(1)).removeAttribute('active')
+      const siblingElement = document.getElementById(siblingHref.substr(1))
+      siblingElement && siblingElement.removeAttribute('active')
     }
   }
 
@@ -30,8 +32,8 @@ class Tabs extends Block {
     return 'b-tabs'
   }
 
-  render () {
-    this.innerHTML = `<slot>${this.content}</slot>`
+  get template() {
+    return '<slot></slot>'
   }
 
   connectedCallback () {

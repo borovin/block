@@ -2,11 +2,17 @@ b-tabs {
     font-family: var(--b-font);
     white-space: nowrap;
     overflow: auto;
+    color: var(--b-primary-color);
+    border-bottom-color: var(--b-primary-color);
+}
+
+b-tabs::-webkit-scrollbar {
+    display: none;
 }
 
 b-tabs--item {
     text-transform: uppercase;
-    color: var(--b-primary-color);
+    color: inherit;
     border-bottom: 3px solid transparent;
     height: 48px;
     padding: 0 12px;
@@ -21,8 +27,12 @@ b-tabs--item {
     cursor: pointer;
 }
 
+b-tabs--item:hover {
+    opacity: 1;
+}
+
 b-tabs--item[active] {
-    border-bottom-color: var(--b-primary-color);
+    border-bottom-color: inherit;
     opacity: 1;
 }
 

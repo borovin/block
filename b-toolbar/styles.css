@@ -1,0 +1,65 @@
+b-toolbar {
+    font-family: var(--b-font);
+    white-space: nowrap;
+    min-height: 56px;
+    padding-top: 8px;
+    background-color: var(--b-primary-color);
+    color: #fff;
+    box-sizing: border-box;
+    position: relative;
+}
+
+b-toolbar::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    display: block;
+    position: absolute;
+    z-index: -1;
+    box-shadow: var(--b-shadow-2);
+}
+
+b-toolbar--left-actions {
+    float: left;
+    margin-left: 8px;
+    height: 40px;
+}
+
+b-toolbar--right-actions {
+    float: right;
+    margin-right: 8px;
+    height: 40px;
+}
+
+b-toolbar--title {
+    float: left;
+    height: 40px;
+    line-height: 39px;
+    font-size: 20px;
+    padding-left: 24px;
+}
+
+b-toolbar b-action-button {
+    width: 40px;
+    height: 40px;
+}
+
+b-toolbar b-action-button::before {
+    box-shadow: none;
+    background-color: #fff;
+    opacity: 0;
+}
+
+b-toolbar b-action-button:hover::before {
+    box-shadow: none;
+    opacity: 0.12;
+}
+
+b-toolbar b-tabs {
+    clear: both;
+    color: #fff;
+    border-bottom-color: #fff;
+    padding: 0 8px;
+}

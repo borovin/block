@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Block Docs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/examples/examples.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="//unpkg.com/@webcomponents/custom-elements/custom-elements.min.js"></script>
+    <script src="/dist/kit.js"></script>
+</head>
+<body>
+<div id="example">
+    <b-toolbar>
+        <b-toolbar--left-actions>
+            <b-action-button icon="navigation/menu"></b-action-button>
+        </b-toolbar--left-actions>
+        <b-toolbar--title>Title</b-toolbar--title>
+        <b-toolbar--right-actions>
+            <b-action-button icon="action/favorite"></b-action-button>
+            <b-action-button icon="action/search"></b-action-button>
+            <b-action-button icon="navigation/more_vert"></b-action-button>
+        </b-toolbar--right-actions>
+        <b-tabs>
+            <b-tabs--item href="#item1">Item One</b-tabs--item>
+            <b-tabs--item href="#item2" active>Item Two</b-tabs--item>
+            <b-tabs--item href="#item3">Item Three</b-tabs--item>
+            <b-tabs--item href="#item4">Item Four</b-tabs--item>
+        </b-tabs>
+    </b-toolbar>
+</div>
+</body>
+</html>
