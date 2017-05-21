@@ -6,7 +6,7 @@ class Toolbar extends Block {
     return 'b-toolbar'
   }
 
-  get template() {
+  get template () {
     return '<slot></slot>'
   }
 }

@@ -32,7 +32,7 @@ class Tabs extends Block {
     return 'b-tabs'
   }
 
-  get template() {
+  get template () {
     return '<slot></slot>'
   }
 

@@ -49,7 +49,7 @@ b-button a, b-button button {
     user-select: none;
     border: none;
     outline: none;
-    font-family: var(--b-font);
+    font-family: var(--b-font-family);
     min-width: 64px;
     box-sizing: content-box;
 }

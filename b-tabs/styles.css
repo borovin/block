@@ -1,5 +1,5 @@
 b-tabs {
-    font-family: var(--b-font);
+    font-family: var(--b-font-family);
     white-space: nowrap;
     overflow: auto;
     color: var(--b-primary-color);

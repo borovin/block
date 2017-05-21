@@ -5,7 +5,7 @@ b-input-text {
     min-height: 72px;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-family: var(--b-font);
+    font-family: var(--b-font-family);
     text-align: left;
     vertical-align: middle;
 }
@@ -13,7 +13,7 @@ b-input-text {
 b-input-text > input {
     width: 100%;
     box-sizing: border-box;
-    font-family: var(--b-font);
+    font-family: var(--b-font-family);
     font-size: 16px;
     outline: none;
     background: none;

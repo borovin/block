@@ -1,5 +1,5 @@
 b-toolbar {
-    font-family: var(--b-font);
+    font-family: var(--b-font-family);
     white-space: nowrap;
     min-height: 56px;
     padding-top: 8px;
