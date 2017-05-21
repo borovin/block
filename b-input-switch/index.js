@@ -9,22 +9,30 @@ class Input extends Block {
 
   static get reflectedProperties () {
     return {
-      label: null,
-      error: null,
-      name: null
+      error: false,
+      name: false,
+      checked: false
     }
-  }
-
-  get checked () {
-    return this.querySelector('input').checked
-  }
-
-  set checked (value) {
-    this.querySelector('input').checked = Boolean(value)
   }
 
   get template () {
     return template(this)
+  }
+
+  connectedCallback () {
+    super.connectedCallback()
+
+    this.addEventListener('change', e => {
+      const input = e.target
+
+      this.removeAttribute('error')
+
+      if (input.checked) {
+        this.setAttribute('checked', '')
+      } else {
+        this.removeAttribute('checked')
+      }
+    })
   }
 }
 

@@ -27,7 +27,7 @@ class Icon extends Block {
   static get reflectedProperties () {
     return {
       src: false,
-      size: false
+      size: 48
     }
   }
 

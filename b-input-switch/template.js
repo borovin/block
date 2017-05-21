@@ -5,7 +5,7 @@ export default block => {
     name: block.name,
     disabled: block.disabled,
     type: 'checkbox',
-    checked: block.getAttribute('checked')
+    checked: block.checked
   })
 
   return `

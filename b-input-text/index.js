@@ -9,12 +9,12 @@ class Input extends Block {
 
   static get reflectedProperties () {
     return {
-      label: null,
-      value: null,
+      label: false,
+      value: false,
       type: 'text',
-      placeholder: null,
-      error: null,
-      name: null
+      placeholder: false,
+      error: false,
+      name: false
     }
   }
 
