@@ -5,7 +5,7 @@ import {prettyPrint} from 'html'
 test.beforeEach(t => {
   t.context.browser = new Browser()
 
-  return t.context.browser.goto('/examples/input-radio.html')
+  return t.context.browser.goto('/examples/b-input-radio.html')
 })
 
 test.afterEach(t => {

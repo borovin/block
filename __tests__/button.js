@@ -5,7 +5,7 @@ import {prettyPrint} from 'html'
 test.beforeEach(t => {
   t.context.browser = new Browser()
 
-  return t.context.browser.goto('/examples/button.html')
+  return t.context.browser.goto('/examples/b-button.html')
 })
 
 test.afterEach(t => {

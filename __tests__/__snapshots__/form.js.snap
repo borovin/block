@@ -155,7 +155,7 @@ exports[`Form action prop change 1`] = `
 `;
 
 exports[`Form example 1`] = `
-"<b-form action=\\"/examples/form.html\\">
+"<b-form action=\\"/examples/b-form.html\\">
     <form>
         <slot>
             <div>
