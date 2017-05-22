@@ -10,20 +10,20 @@ All blocks follow material design guidelines.
 
 # Philosophy
 
-The web is awesome. It is one of the best platform for applying your creativity and introducing new ideas. It could takes just few hours from imagination to publishing new web app or component. In 2017 there are more than 400 000 modules available on npm. 400 000 ways for resolving your problem and creating new project. But behind this fantastic ecosystem the danger hides in horrible segmentation and difficulties in making decisions. You may create app prototype in few hours but then it could take months for choosing correct tech stack, testing different frameworks/libs and take part in infinite holly wars :)
+The web is awesome. It is one of the best platform for applying your creativity and introducing new ideas. It could take just few hours from imagination to publishing new web app or component. In 2017 there are more than 400 000 modules available on npm. 400 000 ways for resolving your problem and creating new project. But behind this fantastic ecosystem the danger is confusing variety and difficulties in making decisions. You may create app prototype in few hours but later it could take months for choosing correct tech stack, testing different frameworks/libs and taking part in infinite holly wars :)
 But the biggest problem here that we can't share and reuse our work between the projects based on different technologies.
 
 I believe that it is time to change something and start to develop with pleasure ;) Scaling from prototype to production should depends only on human creativity not on tech quirks.
 
-If we look back at the past, the most efficient tool we have found to share our knowledge and products with other people and communities are standards. Standards help us to create spaceships, cars, medical equipment and other awesome things using the full power of human community and creativity. Web development is quite young industry so standardization here is under active development. But last years was very impressive and productive. A lot of new standards and cool features was appeared and we can (actually we should) use it now.
+If we look back at the past, the most efficient tool we have found to share our knowledge and products with other people and communities are standards. Standards help us to create spaceships, cars, medical equipment and other awesome things using the full power of human community and creativity. Web development is quite young industry so standardization here is under active development. But last years were very impressive and productive. A lot of new standards and cool features was appeared and we can (actually we should) use it now.
 
-The most obsolete and friezed part of web standards was UI. We use standard HTML elements like inputs, forms, lists, etc... for 10s years. At the same time the web industry experiencing rapid growth. It is absolutely impossible to satisfy all modern business requirements using the 20 years old standards. That's why so many custom UI frameworks and libraries was introduced during the last few years. Some of those libs are perfectly do its work.
-The bad thing is that those libs breaks JS community into disconnected groups without any way to share the same components between different projects. If you wrote your UI application using React it is almost impossible to reuse your React components in Angular project and vice versa.
+The most obsolete and frozen part of web standards was UI. We use standard HTML elements like inputs, forms, lists, etc... 10s years. At the same time the web industry experiencing rapid growth. It is absolutely impossible to satisfy all modern business requirements using the 20 years old standards. That's why so many custom UI frameworks and libraries was introduced during the last few years. Some of those libs are perfectly do its work.
+The bad thing is that those libs break up JS community into disconnected groups without any way to reuse the same components between different projects. If you wrote your UI application using React it is almost impossible to reuse your React components in Angular project and vice versa.
 
 #### Web components to the rescue
 
-Web components is a set of Web standards which are designed to change the situation. The foundation of
-those standards is Custom Elements API which got living standard status recently. Here is great article describing it https://developers.google.com/web/fundamentals/getting-started/primers/customelements. Some browsers don't support it for now but all of them actively work on implementation. But there are very small polyfill for unsupported browsers: https://www.npmjs.com/package/@webcomponents/custom-elements which also got stable version 1.0 recently.
+Web components are set of Web standards which are designed to change the situation. The foundation of
+those standards is Custom Elements API which got living standard status recently. Here is great article describing it https://developers.google.com/web/fundamentals/getting-started/primers/customelements. Some browsers don't support this API for now but all of them actively work on implementation. To fill the gap there is very small polyfill (~4kb): https://www.npmjs.com/package/@webcomponents/custom-elements which also got stable version 1.0 recently.
 
 In short, that's why I choose Custom Elements API for building yet another UI kit :)
 
@@ -35,7 +35,7 @@ The simplest way to use this kit is including this script tag in your web app:
 <script src="https://unpkg.com/@basket/block/dist/kit.js"></script>
 ```
 
-After that you will be able to use any of custom elements described below.
+After that you will be able to use any of custom elements described below. Just insert the proper tag anywhere in your markup.
 
 If you use some module bundler like Webpack or Rollup you could install this lib through npm:
 
@@ -49,7 +49,7 @@ and use elements separately:
 import '@basket/block/b-input-text'
 ```
 
-All blocks use ES modules standard for import and export its API so be sure your module bundler support this standard.
+All blocks use ES modules standard for imports and exports so be sure your module bundler supports ES modules.
 
 # Blocks (Custom Elements)
 
