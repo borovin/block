@@ -8,7 +8,7 @@
 Set of UI blocks based on Custom Elements v1 spec and minimalistic core for creating your own custom elements from scratch.
 All blocks follow material design guidelines.
 
-# Philosophy
+# Motivation
 
 The web is awesome. It is one of the best platform for applying your creativity and introducing new ideas. It could take just few hours from imagination to publishing new web app or component. In 2017 there are more than 400 000 modules available on npm. 400 000 ways for resolving your problem and creating new project. But behind this fantastic ecosystem the danger is confusing variety and difficulties in making decisions. You may create app prototype in few hours but later it could take months for choosing correct tech stack, testing different frameworks/libs and taking part in infinite holly wars :)
 But the biggest problem here that we can't share and reuse our work between the projects based on different technologies.
