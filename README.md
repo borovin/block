@@ -10,7 +10,7 @@ All blocks follow material design guidelines.
 
 # Philosophy
 
-The web is awesome. It is one of the best platform for applying your creativity and introducing your ideas. It could takes just few hours from imagination to publishing new web app or component. In 2017 there are more than 300 000 modules available on npm. 300 000 ways for resolving your problem and creating new project. But behind this fantastic ecosystem the danger hides in horrible segmentation and difficulties in making decisions. You may create app prototype in few hours but then it could take months for choosing correct tech stack, testing different frameworks/libs and take part in infinite holly wars :)
+The web is awesome. It is one of the best platform for applying your creativity and introducing new ideas. It could takes just few hours from imagination to publishing new web app or component. In 2017 there are more than 400 000 modules available on npm. 400 000 ways for resolving your problem and creating new project. But behind this fantastic ecosystem the danger hides in horrible segmentation and difficulties in making decisions. You may create app prototype in few hours but then it could take months for choosing correct tech stack, testing different frameworks/libs and take part in infinite holly wars :)
 But the biggest problem here that we can't share and reuse our work between the projects based on different technologies.
 
 I believe that it is time to change something and start to develop with pleasure ;) Scaling from prototype to production should depends only on human creativity not on tech quirks.
