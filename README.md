@@ -56,7 +56,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-action-button
 **Spec**: https://material.io/guidelines/components/buttons-floating-action-button.html
 
-**Example**: https://block.basket.org/examples/b-action-button.html
+**Example**: https://block.basketjs.com/examples/b-action-button.html
 
 ```
 <b-action-button></b-action-button>
@@ -70,7 +70,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-button
 **Spec**: https://material.io/guidelines/components/buttons.html
 
-**Example**: https://block.basket.org/examples/b-button.html
+**Example**: https://block.basketjs.com/examples/b-button.html
 
 ```
 <b-button>Button text</b-button>
@@ -82,7 +82,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-dialog
 **Spec**: https://material.io/guidelines/components/dialogs.html
 
-**Example**: https://block.basket.org/examples/b-dialog.html
+**Example**: https://block.basketjs.com/examples/b-dialog.html
 
 ```
 <b-dialog>Dialog content</b-dialog>
@@ -92,7 +92,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 * **opened**: false
 
 ## b-form
-**Example**: https://block.basket.org/examples/b-form.html
+**Example**: https://block.basketjs.com/examples/b-form.html
 
 ```
 <b-form>Form content</b-form>
@@ -104,7 +104,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-icon
 **Spec**: https://material.io/guidelines/style/icons.html
 
-**Example**: https://block.basket.org/examples/b-icon.html
+**Example**: https://block.basketjs.com/examples/b-icon.html
 
 ```
 <b-icon></b-icon>
@@ -117,7 +117,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-input-checkbox
 **Spec**: https://material.io/guidelines/components/selection-controls.html#selection-controls-checkbox
 
-**Example**: https://block.basket.org/examples/b-input-checkbox.html
+**Example**: https://block.basketjs.com/examples/b-input-checkbox.html
 
 ```
 <b-input-checkbox>Checkbox label</b-input-checkbox>
@@ -130,7 +130,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-input-radio
 **Spec**: https://material.io/guidelines/components/selection-controls.html#selection-controls-radio-button
 
-**Example**: https://block.basket.org/examples/b-input-radio.html
+**Example**: https://block.basketjs.com/examples/b-input-radio.html
 
 ```
 <b-input-radio>Radio button label</b-input-radio>
@@ -144,7 +144,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-input-switch
 **Spec**: https://material.io/guidelines/components/selection-controls.html#selection-controls-switch
 
-**Example**: https://block.basket.org/examples/b-input-switch.html
+**Example**: https://block.basketjs.com/examples/b-input-switch.html
 
 ```
 <b-input-switch>Switch button label</b-input-switch>
@@ -157,7 +157,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-input-text
 **Spec**: https://material.io/guidelines/components/text-fields.html
 
-**Example**: https://block.basket.org/examples/b-input-text.html
+**Example**: https://block.basketjs.com/examples/b-input-text.html
 
 ```
 <b-input-text></b-input-text>
@@ -174,7 +174,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-progress-circular
 **Spec**: https://material.io/guidelines/components/progress-activity.html
 
-**Example**: https://block.basket.org/examples/b-progress-circular.html
+**Example**: https://block.basketjs.com/examples/b-progress-circular.html
 
 ```
 <b-progress-circular></b-progress-circular>
@@ -186,7 +186,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-progress-linear
 **Spec**: https://material.io/guidelines/components/progress-activity.html
 
-**Example**: https://block.basket.org/examples/b-progress-linear.html
+**Example**: https://block.basketjs.com/examples/b-progress-linear.html
 
 ```
 <b-progress-linear></b-progress-linear>
@@ -198,7 +198,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-tabs
 **Spec**: https://material.io/guidelines/components/tabs.html
 
-**Example**: https://block.basket.org/examples/b-tabs.html
+**Example**: https://block.basketjs.com/examples/b-tabs.html
 
 ```
 <b-tabs>
@@ -211,7 +211,7 @@ All blocks use ES modules standard for import and export its API so be sure your
 ## b-toolbar
 **Spec**: https://material.io/guidelines/components/toolbars.html
 
-**Example**: https://block.basket.org/examples/b-toolbar.html
+**Example**: https://block.basketjs.com/examples/b-toolbar.html
 
 ```
 <b-toolbar>Toolbar content</b-toolbar>
