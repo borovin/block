@@ -48,13 +48,12 @@ class TabItem extends Block {
     }
   }
 
-  get isExternal() {
+  get isExternal () {
     return this.href && this.href.indexOf('#') !== 0
   }
 
   connectedCallback () {
     super.connectedCallback()
-
 
     this.addEventListener('click', e => {
       if (!this.isExternal) {

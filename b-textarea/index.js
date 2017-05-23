@@ -29,7 +29,7 @@ class Input extends Block {
   }
 
   set value (value) {
-    this._value = value;
+    this._value = value
 
     const textarea = this.querySelector('textarea')
 
