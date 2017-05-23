@@ -222,7 +222,7 @@ All blocks use ES modules standard for imports and exports so be sure your modul
 
 
 ```
-<b-toolbar>Toolbar content</b-toolbar>
+<b-textarea>Textarea value</b-textarea>
 ```
 
 ## b-toolbar
