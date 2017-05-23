@@ -27,6 +27,10 @@ b-tabs--item {
     cursor: pointer;
 }
 
+b-tabs--item a {
+    text-decoration: none;
+}
+
 b-tabs--item:hover {
     opacity: 1;
 }

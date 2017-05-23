@@ -1,9 +1,9 @@
 import Block from '../block'
 import './styles'
 
-function navigate (targetTab) {
-  const targetHref = targetTab.getAttribute('href')
-  const parentNode = targetTab.parentNode
+function navigate () {
+  const targetHref = this.getAttribute('href')
+  const parentNode = this.parentNode
 
   if (targetHref && targetHref.indexOf('#') === 0) {
     const targetElement = document.getElementById(targetHref.substr(1))
@@ -14,17 +14,17 @@ function navigate (targetTab) {
     const siblingTab = parentNode.children[i]
     const siblingHref = siblingTab.getAttribute('href')
 
-    if (siblingTab !== targetTab) {
+    if (siblingTab !== this) {
       siblingTab.removeAttribute('active')
     }
 
-    if (siblingTab !== targetTab && siblingHref && siblingHref.indexOf('#') === 0) {
+    if (siblingTab !== this && siblingHref && siblingHref.indexOf('#') === 0) {
       const siblingElement = document.getElementById(siblingHref.substr(1))
       siblingElement && siblingElement.removeAttribute('active')
     }
   }
 
-  targetTab.setAttribute('active', '')
+  this.setAttribute('active', '')
 }
 
 class Tabs extends Block {
@@ -35,18 +35,44 @@ class Tabs extends Block {
   get template () {
     return '<slot></slot>'
   }
+}
+
+class TabItem extends Block {
+  static get tagName () {
+    return 'b-tabs--item'
+  }
+
+  static get reflectedProperties () {
+    return {
+      href: false
+    }
+  }
+
+  get isExternal() {
+    return this.href && this.href.indexOf('#') !== 0
+  }
 
   connectedCallback () {
     super.connectedCallback()
 
+
     this.addEventListener('click', e => {
-      if (e.target.tagName === 'B-TABS--ITEM') {
-        navigate.call(this, e.target)
+      if (!this.isExternal) {
+        navigate.call(this)
       }
     })
+  }
+
+  get template () {
+    if (this.isExternal) {
+      return `<a href="${this.href}"><slot></slot></a>`
+    } else {
+      return '<slot></slot>'
+    }
   }
 }
 
 window && window.customElements.define(Tabs.tagName, Tabs)
+window && window.customElements.define(TabItem.tagName, TabItem)
 
 export default Tabs

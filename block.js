@@ -95,7 +95,7 @@ class Block extends window.HTMLElement {
     }
 
     setTimeout(() => {
-      this._content = this.innerHTML
+      this.content = this.innerHTML
       this.innerHTML = ''
       this.render()
       this._connected = true
@@ -107,16 +107,13 @@ class Block extends window.HTMLElement {
   }
 
   set content (newContent) {
-    const oldContent = this._slot
+    const oldContent = this._content
+    const slot = this.querySelector('slot')
 
     this._content = newContent
 
-    if (this._connected && (oldContent !== newContent)) {
-      const slot = this.querySelector('slot')
-
-      if (slot) {
-        morphdom(slot, `<div>${newContent}</div>`, morphOptions)
-      }
+    if (this._connected && slot && (oldContent !== newContent)) {
+      morphdom(slot, `<div>${newContent}</div>`, morphOptions)
     }
   }
 

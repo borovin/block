@@ -1,10 +1,10 @@
 import stringifyAttributes from '../utils/stringifyAttributes'
 
 export default block => {
-  const label = block.label ? `<b-input-text--label>${block.label}</b-input-text--label>` : ''
+  const label = block.label ? `<b-textarea--label>${block.label}</b-textarea--label>` : ''
 
   const inputAttributes = stringifyAttributes({
-    value: block.value,
+    rows: block.rows,
     type: block.type,
     placeholder: block.placeholder,
     name: block.name,
@@ -12,9 +12,9 @@ export default block => {
   })
 
   return `
-        <input ${inputAttributes} />
+        <textarea ${inputAttributes}>${block.value}</textarea>
         
-        <b-input-text--border></b-input-text--border>
+        <b-textarea--border></b-textarea--border>
         
         ${label}
     `

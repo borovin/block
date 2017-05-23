@@ -208,6 +208,23 @@ All blocks use ES modules standard for import and export its API so be sure your
 </b-tabs>
 ```
 
+## b-textarea
+**Spec**: https://material.io/guidelines/components/text-fields.html
+
+**Example**: https://block.basketjs.com/examples/b-textarea.html
+
+**Reflected properties**:
+* **label** false
+* **placeholder** false
+* **error** false
+* **name** false
+* **rows** 1
+
+
+```
+<b-toolbar>Toolbar content</b-toolbar>
+```
+
 ## b-toolbar
 **Spec**: https://material.io/guidelines/components/toolbars.html
 
