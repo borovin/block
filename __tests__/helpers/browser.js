@@ -30,7 +30,7 @@ class Browser {
   snapshot (selector) {
     return this.nightmare
             .wait(selector)
-            .evaluate(querySelector => new Promise(resolve => resolve(document.querySelector(querySelector).outerHTML)), selector)
+            .evaluate(querySelector => new Promise(resolve => setTimeout(() => resolve(document.querySelector(querySelector).outerHTML), 1)), selector)
   }
 
   setProps (selector, props) {
