@@ -43,6 +43,18 @@ exports[`Form action prop change 1`] = `
                 </b-input-text>
             </div>
             <div>
+                <b-textarea style=\\"width: 100%\\" name=\\"c\\" label=\\"C field\\" rows=\\"1\\">
+                    <textarea rows=\\"1\\" name=\\"c\\" style=\\"overflow: hidden; word-wrap: break-word; height: 35px;\\"></textarea>
+                    <b-textarea--border></b-textarea--border>
+                    <b-textarea--label>C field</b-textarea--label>
+                </b-textarea>
+                <b-textarea style=\\"width: 100%\\" name=\\"d\\" label=\\"D field\\" rows=\\"1\\" value=\\"\\">
+                    <textarea rows=\\"1\\" name=\\"d\\" style=\\"overflow: hidden; word-wrap: break-word; height: 35px;\\">default D value</textarea>
+                    <b-textarea--border></b-textarea--border>
+                    <b-textarea--label>D field</b-textarea--label>
+                </b-textarea>
+            </div>
+            <div>
                 <b-input-checkbox name=\\"checkbox_1\\" checked=\\"\\">
                     <label>
                         <input name=\\"checkbox_1\\" type=\\"checkbox\\" checked=\\"\\">
@@ -170,6 +182,18 @@ exports[`Form example 1`] = `
                     <b-input-text--border></b-input-text--border>
                     <b-input-text--label>B field</b-input-text--label>
                 </b-input-text>
+            </div>
+            <div>
+                <b-textarea style=\\"width: 100%\\" name=\\"c\\" label=\\"C field\\" rows=\\"1\\">
+                    <textarea rows=\\"1\\" name=\\"c\\" style=\\"overflow: hidden; word-wrap: break-word; height: 35px;\\"></textarea>
+                    <b-textarea--border></b-textarea--border>
+                    <b-textarea--label>C field</b-textarea--label>
+                </b-textarea>
+                <b-textarea style=\\"width: 100%\\" name=\\"d\\" label=\\"D field\\" rows=\\"1\\" value=\\"\\">
+                    <textarea rows=\\"1\\" name=\\"d\\" style=\\"overflow: hidden; word-wrap: break-word; height: 35px;\\">default D value</textarea>
+                    <b-textarea--border></b-textarea--border>
+                    <b-textarea--label>D field</b-textarea--label>
+                </b-textarea>
             </div>
             <div>
                 <b-input-checkbox name=\\"checkbox_1\\" checked=\\"\\">

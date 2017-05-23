@@ -15,12 +15,16 @@ class Browser {
     return this.nightmare.goto(url.resolve(this.baseUrl, path))
   }
 
-  check () {
-    return this.nightmare.check(...arguments)
+  check (selector) {
+    return this.nightmare
+      .wait(selector)
+      .check(...arguments)
   }
 
-  type () {
-    return this.nightmare.type(...arguments)
+  type (selector) {
+    return this.nightmare
+      .wait(selector)
+      .type(...arguments)
   }
 
   snapshot (selector) {
