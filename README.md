@@ -65,7 +65,7 @@ All blocks use ES modules standard for imports and exports so be sure your modul
 **Reflected properties**:
 * **color**: 'primary'
 * **small**: false
-* **icon**: false // path to icon file (svg supported) or any material design icon: {iconGroup}/{iconName}
+* **icon**: false // path to icon file (svg supported) or any material design icon name
 
 ## b-button
 **Spec**: https://material.io/guidelines/components/buttons.html
@@ -111,7 +111,7 @@ All blocks use ES modules standard for imports and exports so be sure your modul
 ```
 
 **Reflected properties**:
-* **src**: false // path to icon file (svg supported) or any material design icon: {iconGroup}/{iconName}
+* **src**: false // path to icon file (svg supported) or any material design icon name
 * **size**: 48 // 18, 24, 36 or 56
 
 ## b-input-checkbox
