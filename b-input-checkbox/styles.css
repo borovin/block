@@ -1,4 +1,6 @@
-b-input-checkbox {
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+:host {
     font-family: var(--b-font-family);
     display: inline-block;
     text-align: left;
@@ -6,14 +8,14 @@ b-input-checkbox {
     position: relative;
 }
 
-b-input-checkbox label {
+label {
     cursor: pointer;
     display: inline-block;
     height: 100%;
     vertical-align: top;
 }
 
-b-input-checkbox label > slot {
+b-input-checkbox__content {
     display: block;
     font-size: 16px;
     padding-top: 14px;
@@ -21,48 +23,16 @@ b-input-checkbox label > slot {
     line-height: 1.6em;
 }
 
-b-input-checkbox--icon {
+b-input-checkbox__icon {
     position: relative;
     width: 56px;
     height: 56px;
-    color: #fff;
+    color: #333;
     float: left;
 }
 
-b-input-checkbox--icon::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -10px;
-    margin-left: -10px;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(0, 0, 0, 0.54);
-    border-radius: 2px;
-    background-color: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.2s, background-color 0.2s;
-}
-
-b-input-checkbox--icon::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -12px;
-    margin-left: -12px;
-    width: 24px;
-    height: 24px;
-    border-radius: 100%;
-    background-color: #2196F3;
-    opacity: 0;
-}
-
-b-input-checkbox--icon > svg {
-    --size: 18px;
+b-icon {
+    --size: 24px;
     position: absolute;
     width: var(--size);
     height: var(--size);
@@ -73,7 +43,12 @@ b-input-checkbox--icon > svg {
     fill: currentColor;
 }
 
-b-input-checkbox input {
+b-input-checkbox__icon[checked] {
+    display: none;
+    color: var(--b-primary-color);
+}
+
+input {
     visibility: hidden;
     position: absolute;
     margin: 0;
@@ -82,12 +57,10 @@ b-input-checkbox input {
     top: 0;
 }
 
-b-input-checkbox input:checked ~ b-input-checkbox--icon::before {
-    border-color: #2196F3;
-    background-color: #2196F3;
+input:checked ~ b-input-checkbox__icon[checked] {
+    display: block;
 }
 
-
-.checkbox_clicked input:checked:not([disabled]) ~ b-input-checkbox--icon::after {
-    animation: check 0.4s;
+input:checked ~ b-input-checkbox__icon[unchecked] {
+    display: none;
 }

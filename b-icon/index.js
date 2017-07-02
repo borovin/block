@@ -17,7 +17,7 @@ function loadSvg (src) {
 
 function iconType (src) {
   if (!src) {
-    return 'markup'
+    return null
   }
 
   if (src && src.split('.').pop() === 'svg') {
@@ -63,10 +63,6 @@ class Icon extends Block {
       case 'font':
         this.innerHTML = `<i style="font-size: ${this.size}px" class="material-icons">${this.src.split(' ').join('_')}</i>`
         break
-      case 'markup':
-        break
-      default:
-        this.innerHTML = this.src
     }
   }
 }
