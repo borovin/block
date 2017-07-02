@@ -1,14 +1,11 @@
 import morphdom from 'morphdom'
-import './styles'
-import './styles/initial'
+import styles from './styles'
+import appendStyles from './utils/appendStyles'
 
-function onBeforeElChildrenUpdated (fromEl, toEl) {
-  if (fromEl instanceof Block && (fromEl.tagName === toEl.tagName)) {
-    fromEl.content = toEl.innerHTML
-    return false
-  }
+appendStyles(styles, 'b-styles')
 
-  if (fromEl.tagName === 'SLOT' && (fromEl.tagName === toEl.tagName)) {
+function onBeforeElChildrenUpdated(fromEl, toEl) {
+  if (fromEl.tagName === 'SLOT' && toEl.tagName === 'SLOT') {
     return false
   }
 }
@@ -23,6 +20,8 @@ class Block extends window.HTMLElement {
     super()
 
     Object.assign(this, props)
+
+    this._shadowRoot = this.attachShadow({mode: 'open'})
   }
 
   static get reflectedProperties () {
@@ -35,15 +34,7 @@ class Block extends window.HTMLElement {
 
   render () {
     this._renderTimeout && clearTimeout(this._renderTimeout)
-
-    if (this._connected) {
-      this._renderTimeout = setTimeout(() => morphdom(this, `<div>${this.template}</div>`, morphOptions), 0)
-    } else {
-      morphdom(this, `<div>${this.template}</div>`, morphOptions)
-      const slot = this.querySelector('slot')
-      slot && (slot.innerHTML = this.content)
-      this.renderedCallback()
-    }
+    this._renderTimeout = setTimeout(() => morphdom(this._shadowRoot, `<div>${this.template}</div>`, morphOptions), 0)
   }
 
   get template () {
@@ -94,31 +85,9 @@ class Block extends window.HTMLElement {
       })
     }
 
-    setTimeout(() => {
-      this.content = this.innerHTML
-      this.innerHTML = ''
-      this.render()
-      this._connected = true
-    }, 0)
-  }
+    this.render()
 
-  renderedCallback () {
-
-  }
-
-  set content (newContent) {
-    const oldContent = this._content
-    const slot = this.querySelector('slot')
-
-    this._content = newContent
-
-    if (this._connected && slot && (oldContent !== newContent)) {
-      morphdom(slot, `<div>${newContent}</div>`, morphOptions)
-    }
-  }
-
-  get content () {
-    return this._content
+    this._connected = true
   }
 
   attributeChangedCallback (attrName, oldVal, newVal) {

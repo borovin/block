@@ -1,4 +1,4 @@
-b-icon {
+:host {
     width: 48px;
     height: 48px;
     display: inline-block;
@@ -12,25 +12,25 @@ b-icon {
     font-size: 48px;
 }
 
-b-icon[size="18"] {
+:host([size="18"]) {
     width: 18px;
     height: 18px;
     font-size: 18px;
 }
 
-b-icon[size="24"] {
+:host([size="24"]) {
     width: 24px;
     height: 24px;
     font-size: 24px;
 }
 
-b-icon[size="36"] {
+:host([size="36"]) {
     width: 36px;
     height: 36px;
     font-size: 36px;
 }
 
-b-icon--src {
+::slotted(b-icon__src) {
     display: block;
     width: 100%;
     height: 100%;
@@ -44,7 +44,7 @@ b-icon--src {
     left: 50%;
 }
 
-b-icon > svg {
+::slotted(svg) {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -55,7 +55,7 @@ b-icon > svg {
     transform: translate(-50%, -50%);
 }
 
-b-icon .material-icons {
+::slotted(.material-icons) {
     display: inline-block;
     position: absolute;
     top: 50%;

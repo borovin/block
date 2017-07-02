@@ -7,7 +7,7 @@
     }
 }
 
-b-button {
+:host {
     display: inline-block;
     vertical-align: middle;
     font-weight: 500;
@@ -17,7 +17,7 @@ b-button {
     color: #fff;
 }
 
-b-button::before {
+:host::before {
     content: "";
     position: absolute;
     top: 0;
@@ -30,11 +30,11 @@ b-button::before {
     box-shadow: var(--b-shadow-1);
 }
 
-b-button:hover::before {
+:host(:hover)::before {
     box-shadow: var(--b-shadow-2);
 }
 
-b-button a, b-button button {
+a, button {
     color: inherit;
     display: block;
     text-transform: uppercase;
@@ -54,51 +54,51 @@ b-button a, b-button button {
     box-sizing: content-box;
 }
 
-b-button input {
+input {
     display: none;
 }
 
-b-button[flat][color="accent"] {
+:host([flat][color="accent"]) {
     color: var(--b-accent-color);
 }
 
-b-button[flat][color="warning"] {
+:host([flat][color="warning"]) {
     color: var(--b-focus-color);
 }
 
-b-button[flat][color="danger"] {
+:host([flat][color="danger"]) {
     color: var(--b-danger-color);
 }
 
-b-button[color="accent"]::before {
+:host([color="accent"])::before {
     background-color: var(--b-accent-color);
 }
 
-b-button[color="warning"]::before {
+:host([color="warning"])::before {
     background-color: var(--b-focus-color);
 }
 
-b-button[color="danger"]::before {
+:host([color="danger"])::before {
     background-color: var(--b-danger-color);
 }
 
-b-button[color="white"] {
+:host([color="white"]) {
     color: var(--b-primary-color);
 }
 
-b-button[color="white"]::before {
+:host([color="white"])::before {
     background-color: #fff;
 }
 
-b-button[flat] {
+:host([flat]) {
     color: var(--b-primary-color);
 }
 
-b-button[flat]::before {
+:host([flat])::before {
     opacity: 0;
     box-shadow: none;
 }
 
-b-button[flat]:hover::before {
+:host([flat]:hover)::before {
     opacity: 0.12;
 }

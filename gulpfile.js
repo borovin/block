@@ -6,8 +6,6 @@ const commonjs = require('rollup-plugin-commonjs')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const imagemin = require('gulp-imagemin')
 const csso = require('gulp-csso')
-const path = require('path')
-const packageJSON = require('./package.json')
 const gulpif = require('gulp-if')
 const babel = require('rollup-plugin-babel')
 const fs = require('fs-extra')
@@ -24,13 +22,8 @@ gulp.task('styles', ['resetStyles'], () => {
   return gulp.src(['./b-**/*.css', './styles/**/*.css'], {base: './'})
         .pipe(gulpif(isProduction, csso()))
         .pipe(wrap((data) => {
-          const appendStylesPath = path.relative(path.dirname(data.file.path), path.join(__dirname, '/utils/appendStyles.js'))
-          const stylesPath = path.relative(__dirname, data.file.path)
-          const stylesID = path.join(packageJSON.name, stylesPath)
-
           return `//this file was generated automatically. Do not edit it manually.
-import appendStyles from '${appendStylesPath}'
-export default appendStyles(\`<style>${data.contents}</style>\`, '${stylesID}')`
+export default \`<style>${data.contents}</style>\``
         }))
         .pipe(rename({
           extname: '.js'

@@ -1,5 +1,5 @@
 import Block from '../block'
-import './styles'
+import styles from './styles'
 
 const iconsCache = {}
 
@@ -16,6 +16,10 @@ function loadSvg (src) {
 }
 
 function iconType (src) {
+  if (!src) {
+    return 'markup'
+  }
+
   if (src && src.split('.').pop() === 'svg') {
     return 'svg'
   }
@@ -30,6 +34,11 @@ function iconType (src) {
 }
 
 class Icon extends Block {
+  constructor () {
+    super()
+    this._shadowRoot.innerHTML = `${styles}<slot></slot>`
+  }
+
   static get tagName () {
     return 'b-icon'
   }
@@ -49,13 +58,15 @@ class Icon extends Block {
         })
         break
       case 'external':
-        this.innerHTML = `<b-icon--src style="background-image: url('${this.src}')"></b-icon--src>`
+        this.innerHTML = `<b-icon__src style="background-image: url('${this.src}')"></b-icon__src>`
         break
       case 'font':
-        this.innerHTML = `<i class="material-icons">${this.src.split(' ').join('_')}</i>`
+        this.innerHTML = `<i style="font-size: ${this.size}px" class="material-icons">${this.src.split(' ').join('_')}</i>`
         break
+      case 'markup':
+        break;
       default:
-        this.innerHTML = `<slot>${this.content}</slot>`
+        this.innerHTML = this.src
     }
   }
 }

@@ -1,4 +1,5 @@
 import stringifyAttributes from '../utils/stringifyAttributes'
+import styles from './styles'
 
 export default block => {
   const tagName = block.href ? 'a' : 'button'
@@ -7,7 +8,7 @@ export default block => {
     href: block.href
   })
 
-  return `
+  return `${styles}
         <${tagName} ${buttonAttributes}>
             <slot></slot>
         </${tagName}>
