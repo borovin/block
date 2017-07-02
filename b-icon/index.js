@@ -64,7 +64,7 @@ class Icon extends Block {
         this.innerHTML = `<i style="font-size: ${this.size}px" class="material-icons">${this.src.split(' ').join('_')}</i>`
         break
       case 'markup':
-        break;
+        break
       default:
         this.innerHTML = this.src
     }

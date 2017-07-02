@@ -4,7 +4,7 @@ import appendStyles from './utils/appendStyles'
 
 appendStyles(styles, 'b-styles')
 
-function onBeforeElChildrenUpdated(fromEl, toEl) {
+function onBeforeElChildrenUpdated (fromEl, toEl) {
   if (fromEl.tagName === 'SLOT' && toEl.tagName === 'SLOT') {
     return false
   }

@@ -9,7 +9,7 @@
   "main": "block.js",
   "homepage": "https://github.com/borovin/block",
   "scripts": {
-    "precommit": "npm run test:codestyle",
+    "prepush": "npm run test:codestyle",
     "commitmsg": "validate-commit-msg",
     "build": "gulp",
     "build:production": "cross-env NODE_ENV=production gulp",
