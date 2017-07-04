@@ -11,9 +11,7 @@ class Input extends Block {
     return {
       error: false,
       name: false,
-      checked: false,
-      checkedIcon: false,
-      uncheckedIcon: false
+      checked: false
     }
   }
 
