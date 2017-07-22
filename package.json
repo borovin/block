@@ -28,7 +28,7 @@
     "autosize": "^3.0.21",
     "keycode": "^2.1.9",
     "morphdom": "^2.2.1",
-    "query-string": "^4.3.4"
+    "query-string": "^5.0.0"
   },
   "devDependencies": {
     "ava": "^0.19.1",
