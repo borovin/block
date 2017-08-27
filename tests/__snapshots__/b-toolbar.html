@@ -1,0 +1,17 @@
+<b-toolbar><slot>
+    <b-toolbar--left-actions>
+        <b-action-button icon="menu" color="primary"><button><b-icon size="24" src="menu"><i class="material-icons">menu</i></b-icon></button></b-action-button>
+    </b-toolbar--left-actions>
+    <b-toolbar--title>Title</b-toolbar--title>
+    <b-toolbar--right-actions>
+        <b-action-button icon="favorite" color="primary"><button><b-icon size="24" src="favorite"><i class="material-icons">favorite</i></b-icon></button></b-action-button>
+        <b-action-button icon="search" color="primary"><button><b-icon size="24" src="search"><i class="material-icons">search</i></b-icon></button></b-action-button>
+        <b-action-button icon="more vert" color="primary"><button><b-icon size="24" src="more vert"><i class="material-icons">more_vert</i></b-icon></button></b-action-button>
+    </b-toolbar--right-actions>
+    <b-tabs><slot>
+        <b-tabs--item href="#item1"><slot>Item One</slot></b-tabs--item>
+        <b-tabs--item href="#item2" active=""><slot>Item Two</slot></b-tabs--item>
+        <b-tabs--item href="#item3"><slot>Item Three</slot></b-tabs--item>
+        <b-tabs--item href="#item4"><slot>Item Four</slot></b-tabs--item>
+    </slot></b-tabs>
+</slot></b-toolbar>
