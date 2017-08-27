@@ -3,7 +3,6 @@ const pretty = require('pretty')
 const fs = require('fs-extra')
 
 class Test extends Helper {
-
   // before/after hooks
   _before () {
     // remove if not used
