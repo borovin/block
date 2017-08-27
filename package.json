@@ -10,7 +10,7 @@
   "homepage": "https://github.com/borovin/block",
   "scripts": {
     "clean": "rimraf .nyc_output dist",
-    "precommit": "npm run test:codestyle",
+    "prepush": "npm run test:codestyle",
     "commitmsg": "validate-commit-msg",
     "build": "npm run clean && gulp",
     "build:production": "cross-env NODE_ENV=production npm run build",
