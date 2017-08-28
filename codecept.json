@@ -4,7 +4,7 @@
     "Nightmare": {
       "url": "http://localhost:5000",
       "openDevTools": true,
-      "show": false
+      "show": true
     },
     "Test": {
       "require": "./test_helper.js"

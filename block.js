@@ -8,7 +8,7 @@ function onBeforeElChildrenUpdated (fromEl, toEl) {
     return false
   }
 
-  if (fromEl.tagName === 'SLOT' && (fromEl.tagName === toEl.tagName)) {
+  if (fromEl.tagName === 'SLOT' && toEl.tagName === 'SLOT') {
     return false
   }
 }
