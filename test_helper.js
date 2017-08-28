@@ -1,6 +1,7 @@
 const assert = require('assert')
 const pretty = require('pretty')
 const fs = require('fs-extra')
+const path = require('path')
 
 class Test extends Helper {
   // before/after hooks
@@ -19,7 +20,8 @@ class Test extends Helper {
         return codeceptjs.fetchElement(el).outerHTML
       }, els[0])
     }).then(function (outerHTML) {
-      const expectedHtml = fs.readFileSync(`${process.cwd()}/tests/__snapshots__/${locator}.html`, 'utf8')
+      const snapshotPath = path.join(process.cwd(), `/tests/__snapshots__/${locator}.html`)
+      const expectedHtml = fs.readFileSync(snapshotPath, 'utf8')
       assert.equal(pretty(outerHTML, {ocd: true}), pretty(expectedHtml, {ocd: true}), 'html not equal')
     })
   }

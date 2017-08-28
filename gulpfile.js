@@ -11,6 +11,7 @@ const packageJSON = require('./package.json')
 const gulpif = require('gulp-if')
 const babel = require('rollup-plugin-babel')
 const fs = require('fs-extra')
+const slash = require('slash')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -29,7 +30,7 @@ gulp.task('styles', ['resetStyles'], () => {
           const stylesID = path.join(packageJSON.name, stylesPath)
 
           return `//this file was generated automatically. Do not edit it manually.
-import appendStyles from '${appendStylesPath}'
+import appendStyles from '${slash(appendStylesPath)}'
 export default appendStyles(\`<style>${data.contents}</style>\`, '${stylesID}')`
         }))
         .pipe(rename({
@@ -73,7 +74,7 @@ gulp.task('rollup', ['icons', 'styles', 'kit'], () => {
   const rootFiles = ['kit', 'block']
 
   const rollupBlocks = blocks.concat(rootFiles).map(name => rollup.rollup({
-    entry: rootFiles.includes(name) ? `./${name}.js` : `./${name}/index.js`,
+    input: rootFiles.includes(name) ? `./${name}.js` : `./${name}/index.js`,
     plugins: [
       nodeResolve(),
       commonjs(),
@@ -81,9 +82,9 @@ gulp.task('rollup', ['icons', 'styles', 'kit'], () => {
     ]
   }).then(bundle => bundle.write({
     format: 'umd',
-    moduleName: rootFiles.includes(name) ? 'Block' : `Block.${name}`,
-    sourceMap: true,
-    dest: `./dist/${name}.js`
+    name: rootFiles.includes(name) ? 'Block' : `Block.${name}`,
+    sourcemap: true,
+    file: `./dist/${name}.js`
   })))
 
   return Promise.all(rollupBlocks)
