@@ -1,0 +1,20 @@
+{
+  "output": "./output",
+  "helpers": {
+    "Nightmare": {
+      "url": "http://localhost:5000",
+      "openDevTools": true,
+      "show": false
+    },
+    "Test": {
+      "require": "./test_helper.js"
+    }
+  },
+  "mocha": {},
+  "bootstrap": false,
+  "teardown": null,
+  "hooks": [],
+  "tests": "./tests/**/*.test.js",
+  "timeout": 10000,
+  "name": "block"
+}

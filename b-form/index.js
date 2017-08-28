@@ -34,10 +34,6 @@ class Form extends Block {
       const inputName = inputElement.name
       let inputValue = inputElement.value
 
-      if (inputValue && isFinite(inputValue)) {
-        inputValue = Number(inputValue)
-      }
-
       switch (inputElement.type) {
         case 'radio': {
           const property = data[inputName]

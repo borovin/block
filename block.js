@@ -30,7 +30,7 @@ class Block extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return Object.keys(this.reflectedProperties)
+    return Object.keys(this.reflectedProperties).map(propName => propName.toLowerCase())
   }
 
   render () {
@@ -53,10 +53,15 @@ class Block extends window.HTMLElement {
   connectedCallback () {
     for (let propName in this.constructor.reflectedProperties) {
       const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), propName) || {}
-      const defaultValue = this[propName] || this.constructor.reflectedProperties[propName]
+      const defaultValue = this.constructor.reflectedProperties[propName]
+      let defaultAttribute
 
-      if (this.getAttribute(propName) === null && defaultValue !== null && defaultValue !== false) {
-        this.setAttribute(propName, defaultValue === true ? '' : defaultValue)
+      if (typeof defaultValue !== 'string') {
+        defaultAttribute = JSON.stringify(defaultValue)
+      }
+
+      if (this.getAttribute(propName) === null && defaultAttribute !== 'null' && defaultAttribute !== 'false') {
+        this.setAttribute(propName, defaultAttribute === 'true' ? '' : defaultValue)
       }
 
       Object.defineProperty(this, propName, {
