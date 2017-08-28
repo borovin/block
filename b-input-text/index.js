@@ -22,6 +22,18 @@ class Input extends Block {
     return template(this)
   }
 
+  get value () {
+    return this.getAttribute('value') || false
+  }
+
+  set value (value) {
+    if (!value) {
+      this.removeAttribute('value')
+    } else {
+      this.setAttribute('value', value)
+    }
+  }
+
   connectedCallback () {
     super.connectedCallback()
 

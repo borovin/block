@@ -102,3 +102,8 @@ b-button[flat]::before {
 b-button[flat]:hover::before {
     opacity: 0.12;
 }
+
+b-button[disabled] {
+    opacity: 0.4;
+    pointer-events: none;
+}
