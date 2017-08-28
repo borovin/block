@@ -69,11 +69,24 @@ class Block extends window.HTMLElement {
           } else {
             this.setAttribute(propName, JSON.stringify(value))
           }
-
-          this[`__${propName}`] = value
         },
         get: descriptor.get || function () {
-          return this[`__${propName}`]
+          const attrValue = this.getAttribute(propName)
+          let attrJson
+
+          if (attrValue === '') {
+            attrJson = true
+          } else if (attrValue === null) {
+            attrJson = false
+          } else {
+            try {
+              attrJson = JSON.parse(attrValue)
+            } catch (err) {
+              attrJson = attrValue
+            }
+          }
+
+          return attrJson
         }
       })
 
