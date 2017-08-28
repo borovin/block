@@ -9,7 +9,9 @@ class Button extends Block {
 
   static get reflectedProperties () {
     return {
-      color: 'primary'
+      color: 'primary',
+      type: 'submit',
+      disabled: false
     }
   }
 
