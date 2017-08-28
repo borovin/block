@@ -53,50 +53,37 @@ class Block extends window.HTMLElement {
   connectedCallback () {
     for (let propName in this.constructor.reflectedProperties) {
       const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this), propName) || {}
-      const defaultValue = this.constructor.reflectedProperties[propName]
-      let defaultAttribute
-
-      if (typeof defaultValue !== 'string') {
-        defaultAttribute = JSON.stringify(defaultValue)
-      }
-
-      if (this.getAttribute(propName) === null && defaultAttribute !== 'null' && defaultAttribute !== 'false') {
-        this.setAttribute(propName, defaultAttribute === 'true' ? '' : defaultValue)
-      }
+      const initialValue = this.constructor.reflectedProperties[propName]
+      const currentAttribute = this.getAttribute(propName)
 
       Object.defineProperty(this, propName, {
         configurable: true,
         enumerable: false,
         set: descriptor.set || function (value) {
-          if (value === false) {
+          if (value === false || value === null) {
             this.removeAttribute(propName)
+          } else if (value === true) {
+            this.setAttribute(propName, '')
           } else if (typeof value === 'string') {
             this.setAttribute(propName, value)
           } else {
             this.setAttribute(propName, JSON.stringify(value))
           }
+
+          this[`__${propName}`] = value
         },
         get: descriptor.get || function () {
-          const attrValue = this.getAttribute(propName)
-          let attrJson = null
-
-          if (attrValue === '') {
-            return true
-          }
-
-          if (attrValue === null) {
-            return defaultValue
-          }
-
-          try {
-            attrJson = JSON.parse(attrValue)
-          } catch (err) {
-            attrJson = attrValue
-          }
-
-          return attrJson
+          return this[`__${propName}`]
         }
       })
+
+      if (currentAttribute === null) {
+        this[propName] = initialValue
+      } else if (typeof currentAttribute === 'string' && currentAttribute.length === 0) {
+        this[propName] = true
+      } else {
+        this[propName] = currentAttribute
+      }
     }
 
     setTimeout(() => {

@@ -16,8 +16,9 @@
     "build:production": "cross-env NODE_ENV=production npm run build",
     "build:coverage": "cross-env NODE_ENV=coverage npm run build",
     "start": "serve",
-    "test": "codeceptjs run --steps",
-    "test:coverage": "npm run build:coverage && npm test && nyc report",
+    "codecept": "codeceptjs run --steps",
+    "test": "npm run build && npm run codecept",
+    "test:coverage": "npm run build:coverage && npm run codecept && nyc report",
     "test:codestyle": "standard",
     "fix": "standard --fix",
     "semantic-release": "semantic-release pre && npm run build:production && npm publish && semantic-release post"

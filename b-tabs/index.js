@@ -63,11 +63,7 @@ class TabItem extends Block {
   }
 
   get template () {
-    if (this.isExternal) {
-      return `<a href="${this.href}"><slot></slot></a>`
-    } else {
-      return '<slot></slot>'
-    }
+    return this.isExternal ? `<a href="${this.href}"><slot></slot></a>` : '<slot></slot>'
   }
 }
 

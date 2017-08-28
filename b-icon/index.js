@@ -16,17 +16,21 @@ function loadSvg (src) {
 }
 
 function iconType (src) {
-  if (src && src.split('.').pop() === 'svg') {
-    return 'svg'
+  let iconType = 'font'
+
+  if (!src || typeof src !== 'string') {
+    return
+  }
+
+  if (src.split('.').pop() === 'svg') {
+    iconType = 'svg'
   }
 
   if ((src.indexOf('/') === 0) || (src.indexOf('http') === 0)) {
-    return 'external'
+    iconType = 'external'
   }
 
-  if (src) {
-    return 'font'
-  }
+  return iconType
 }
 
 class Icon extends Block {

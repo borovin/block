@@ -1,19 +1,23 @@
 export default (attributesMap = {}) => {
   return Object.keys(attributesMap).map(key => {
     let value = attributesMap[key]
+    let result = ''
 
-    if (value === null || typeof value === 'undefined' || value === false) {
-      return ''
+    switch (typeof value) {
+      case 'string':
+        result = `${key}="${value}"`
+        break
+      case 'boolean':
+        result = value ? key : ''
+        break
+      default:
+        result = `${key}="${JSON.stringify(value)}"`
     }
 
-    if (value === true || value === '') {
-      return key
+    if (!value) {
+      result = ''
     }
 
-    if (typeof value === 'object') {
-      value = JSON.stringify(value)
-    }
-
-    return `${key}="${value}"`
+    return result
   }).join(' ')
 }
