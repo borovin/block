@@ -1,5 +1,6 @@
 import Block from '../block'
 import template from './template'
+import keycode from 'keycode'
 import './styles'
 
 class Input extends Block {
@@ -38,6 +39,10 @@ class Input extends Block {
     super.connectedCallback()
 
     this.addEventListener('keyup', e => {
+      if (keycode(e.keyCode) === 'enter') {
+        return
+      }
+
       const input = e.target
 
       this.removeAttribute('error')
