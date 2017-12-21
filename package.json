@@ -41,7 +41,7 @@
     "cz-conventional-changelog": "^2.0.0",
     "fs-extra": "^4.0.0",
     "gulp": "^3.9.1",
-    "gulp-cli": "^1.2.2",
+    "gulp-cli": "^2.0.0",
     "gulp-csso": "^3.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.2.0",
