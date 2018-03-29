@@ -49,7 +49,7 @@
     "gulp-wrap": "^0.13.0",
     "husky": "^0.14.0",
     "lodash": "^4.17.2",
-    "nightmare": "^2.10.0",
+    "nightmare": "^3.0.1",
     "nightmare-upload": "^0.1.1",
     "nyc": "^11.1.0",
     "pretty": "^2.0.0",
