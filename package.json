@@ -58,7 +58,7 @@
     "rollup-plugin-babel": "^3.0.0",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "semantic-release": "^7.0.0",
+    "semantic-release": "^15.5.1",
     "serve": "^6.0.0",
     "slash": "^1.0.0",
     "standard": "^10.0.2",
