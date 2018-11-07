@@ -39,7 +39,7 @@
     "codeceptjs-nightmare": "^1.1.0",
     "cross-env": "^5.0.0",
     "cz-conventional-changelog": "^2.0.0",
-    "fs-extra": "^4.0.0",
+    "fs-extra": "^7.0.1",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.2.2",
     "gulp-csso": "^3.0.0",
