@@ -29,7 +29,7 @@
     "autosize": "^4.0.0",
     "keycode": "^2.1.9",
     "morphdom": "^2.3.3",
-    "query-string": "^5.0.0"
+    "query-string": "^6.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
