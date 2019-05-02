@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-plugin-istanbul": "^4.1.3",
+    "babel-plugin-istanbul": "^5.1.4",
     "babel-plugin-remove-comments": "^2.0.0",
     "babel-preset-babili": "^0.1.4",
     "codeceptjs-nightmare": "^1.1.0",
