@@ -44,7 +44,7 @@
     "gulp-cli": "^1.2.2",
     "gulp-csso": "^3.0.0",
     "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^3.2.0",
+    "gulp-imagemin": "^6.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-wrap": "^0.13.0",
     "husky": "^0.14.0",
