@@ -61,7 +61,7 @@
     "semantic-release": "^7.0.0",
     "serve": "^6.0.0",
     "slash": "^1.0.0",
-    "standard": "^10.0.2",
+    "standard": "^14.0.2",
     "validate-commit-msg": "^2.12.1"
   },
   "config": {
