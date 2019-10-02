@@ -47,7 +47,7 @@
     "gulp-imagemin": "^3.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-wrap": "^0.13.0",
-    "husky": "^0.14.0",
+    "husky": "^3.0.8",
     "lodash": "^4.17.2",
     "nightmare": "^2.10.0",
     "nightmare-upload": "^0.1.1",
