@@ -42,7 +42,7 @@
     "fs-extra": "^4.0.0",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.2.2",
-    "gulp-csso": "^3.0.0",
+    "gulp-csso": "^4.0.1",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.2.0",
     "gulp-rename": "^1.2.2",
