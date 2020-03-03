@@ -37,7 +37,7 @@
     "babel-plugin-remove-comments": "^2.0.0",
     "babel-preset-babili": "^0.1.4",
     "codeceptjs-nightmare": "^1.1.0",
-    "cross-env": "^5.0.0",
+    "cross-env": "^7.0.1",
     "cz-conventional-changelog": "^2.0.0",
     "fs-extra": "^4.0.0",
     "gulp": "^3.9.1",
